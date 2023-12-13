@@ -1,8 +1,11 @@
+import { config } from "dotenv";
 import { auth } from "express-oauth2-jwt-bearer";
-import secret from "./secret";
+import * as secret from "./secret";
+config();
 const jwtCheck = auth({
-  audience: "movie-database-api-endpoints",
-  issuerBaseURL: "https://dev-n1afgdpjriklak3u.us.auth0.com/",
+  audience: secret.default.audience,
+  issuer: secret.default.issure,
+  jwksUri: secret.default.jwkUri,
   tokenSigningAlg: "RS256",
 });
 

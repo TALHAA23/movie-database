@@ -15,6 +15,7 @@ export default function App() {
       setIsAuth(true);
       return;
     }
+    console.log("gettign token");
     try {
       const response = await fetch("http://localhost:3000/api/auth/login", {
         method: "post",
@@ -33,13 +34,13 @@ export default function App() {
   }
 
   async function fetchData() {
-    const hookToken = await getAccessTokenSilently();
+    // const hookToken = await getAccessTokenSilently();
     try {
       const response = await fetch(
         "http://localhost:3000/api/users/656d6987f0a0abd38142f8d1/protected/recommendations",
         {
           headers: {
-            authorization: `Bearer ${hookToken}`,
+            authorization: `Bearer ${token}`,
           },
         }
       );

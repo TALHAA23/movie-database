@@ -20,6 +20,7 @@ export async function getAccessToken({ username, password }) {
       password,
       realm: "Username-Password-Authentication",
       scope: "openid profile email offline_access",
+      audience: secret.default.audience,
     });
     return data.data.access_token;
   } catch (err) {
