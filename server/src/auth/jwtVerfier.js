@@ -10,8 +10,12 @@ const jwtCheck = auth({
 });
 
 const jwtCheckMiddleware = (req, res, next) => {
-  if (req.path.includes("/protected")) return jwtCheck(req, res, next);
-
+  if (req.path.includes("/protected")) {
+    const token = req.cookies.access_token;
+    if (!token) throw new Error("unauthorized");
+    req.headers["authorization"] = `Bearer ${token}`;
+    return jwtCheck(req, res, next);
+  }
   next();
 };
 

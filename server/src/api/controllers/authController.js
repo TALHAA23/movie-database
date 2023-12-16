@@ -9,13 +9,15 @@ async function signupUser(req, res, next) {
     next(err);
   }
 }
-
 async function loginUser(req, res, next) {
   const creds = req.body;
+  const token = await getAccessToken(creds);
   try {
-    const token = await getAccessToken(creds);
-    console.log(token);
-    res.json({ token });
+    res.cookie("access_token", token, {
+      httpOnly: true,
+      secure: true,
+    });
+    res.send("cookie set");
   } catch (err) {
     next(err);
   }

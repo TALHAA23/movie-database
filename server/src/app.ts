@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import { jwtCheckMiddleware } from "./auth/jwtVerfier";
 import Error from "./utils/Error";
@@ -17,6 +18,7 @@ const corsOptions = {
 
 const app = express();
 app.use(cors(corsOptions)); //always on top
+app.use(cookieParser());
 app.use(jwtCheckMiddleware);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
