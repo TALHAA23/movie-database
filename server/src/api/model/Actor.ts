@@ -1,4 +1,7 @@
+// File: model/Actor.ts
+import mongoose from "mongoose";
 import { MoviesReferece } from "./properties";
+const { Schema } = mongoose;
 
 interface Actor {
   name: string;
@@ -12,4 +15,16 @@ interface Actor {
   };
 }
 
-export type { Actor };
+const ActorSchema = new Schema({
+  name: String,
+  about: String,
+  DOB: String,
+  achievments: [String],
+  knownFor: [Schema.Types.ObjectId],
+  movies: {
+    upcoming: [Schema.Types.ObjectId],
+    previousMovies: [Schema.Types.ObjectId],
+  },
+});
+
+export default mongoose.model("Actor", ActorSchema);

@@ -1,3 +1,6 @@
+import mongoose from "mongoose";
+const { Schema } = mongoose;
+
 interface Reviewer {
   featured?: boolean;
   title: string;
@@ -8,4 +11,14 @@ interface Reviewer {
   unhelpful: number;
 }
 
-export type { Reviewer };
+const ReviewerSchema = new Schema({
+  featured: Boolean,
+  title: String,
+  review: String,
+  rating: Number,
+  reviewDate: String,
+  helpful: Number,
+  unhelpful: Number,
+});
+
+export default mongoose.model("Reviewer", ReviewerSchema);

@@ -1,14 +1,22 @@
 // q6c2NxAIFFAUz0Yv
+import { config } from "dotenv";
+config();
 import { Request, Response, NextFunction } from "express";
 import { MongoClient, Collection, Db } from "mongodb";
+import mongoose from "mongoose";
+
 const uri =
   "mongodb+srv://moviedb:q6c2NxAIFFAUz0Yv@atlascluster.wbs3s6w.mongodb.net/?retryWrites=true&w=majority";
+
 interface Database {
-  isConnected: boolean;
+  isConnected: 0 | 1;
   client: Db | null;
 }
 const DATABASE_NAME = "moviedb";
-const db: Database = { client: null, isConnected: false };
+const db: Database = {
+  client: null,
+  isConnected: 0,
+};
 
 const client = new MongoClient(uri);
 
@@ -18,11 +26,19 @@ export const connectDatabase = async (
   next: NextFunction
 ) => {
   if (!db.isConnected) {
+    console.log("trying", "+++++++++++++++");
     try {
-      await client.connect().then((res) => {
-        db.client = res.db();
-        db.isConnected = true;
-      });
+      // await client.connect().then((res) => {
+      //   db.client = res.db();
+      //   db.isConnected = true;
+      // });
+      await mongoose
+        .connect(uri, {
+          dbName: "moviedb",
+        })
+        .then((res) => {
+          db.isConnected = res.ConnectionStates.connected;
+        });
     } catch (err) {
       next(err);
     }

@@ -3,6 +3,8 @@ import { useCookies } from "react-cookie";
 
 export default function App() {
   const cookies = useCookies(["access_token"]);
+  const [isAuth, setIsAuth] = useState(false);
+  const [token, setToken] = useState(false);
 
   console.log(cookies);
 
