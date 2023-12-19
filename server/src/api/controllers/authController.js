@@ -1,10 +1,13 @@
 import createUser from "../../auth/createUser";
 import { getAccessToken, getRefreshToken } from "../../auth/getAccessToken";
 import getUserInfo from "../../auth/userInfo";
+import addUserToDb from "../services/users/addUserToDb";
 async function signupUser(req, res, next) {
+  const creds = req.body;
   try {
-    const newUser = await createUser();
-    res.json(newUser);
+    const newUser = await createUser(creds);
+    const insertedUser = await addUserToDb(newUser);
+    res.json(insertedUser);
   } catch (err) {
     next(err);
   }

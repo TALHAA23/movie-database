@@ -1,51 +1,44 @@
-import { useState } from "react";
-import { useCookies } from "react-cookie";
-
+import * as validator from "../../shared/validator";
 export default function App() {
-  const cookies = useCookies(["access_token"]);
-  const [isAuth, setIsAuth] = useState(false);
-  const [token, setToken] = useState(false);
-
-  console.log(cookies);
-
-  const user = { username: "mycooluser@moviedb.com", password: "Testuser1" };
-  async function login() {
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const creds = {
+      username: formData.get("username"),
+      email: formData.get("email"),
+      password: formData.get("password"),
+    };
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      if (!creds.email) throw new Error("Email Required");
+      if (!creds.password) throw new Error("password Required");
+
+      // validator.emailValidator(creds.email as string);
+      // validator.passwordValidator(creds.password as string);
+
+      await fetch("http://localhost:3000/api/auth/signup", {
         method: "post",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
-        body: JSON.stringify(user),
-      });
-      if (!response.ok) throw new Error(await response.text());
-    } catch (err) {
-      console.log(err);
-    }
-  }
-
-  async function fetchData() {
-    try {
-      const response = await fetch(
-        "http://localhost:3000/api/users/656d6987f0a0abd38142f8d1/protected/recommendations",
-        {
-          credentials: "include",
+        body: JSON.stringify(creds),
+      }).then((res) => {
+        if (!res.ok) {
+          console.log(res.status);
+          console.log(res.statusText);
+          res.text().then((t) => console.log(t));
         }
-      );
-      const data = await response.json();
-      console.log(data);
+      });
     } catch (err) {
       console.log(err);
     }
   }
 
   return (
-    <section>
-      <h1>Movie DB</h1>
-      <p>{isAuth ? "You are logged in" : "Please Log iN"}</p>
-      <button onClick={login}>login</button>
-      <button onClick={fetchData}>fetch data</button>
-    </section>
+    <form onSubmit={(e) => handleSubmit(e)}>
+      <input type="text" name="username" />
+      <input type="email" name="email" />
+      <input type="password" name="password" />
+      <button>submit</button>
+    </form>
   );
 }

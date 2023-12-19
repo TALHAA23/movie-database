@@ -1,5 +1,5 @@
 import { AuthenticationClient } from "auth0";
-import * as secret from "../auth/secret";
+import * as secret from "./secret";
 
 const [domain, clientId, clientSecret] = [
   secret.default.domain,

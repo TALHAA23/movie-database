@@ -13,12 +13,12 @@ interface Reviewer {
 
 const ReviewerSchema = new Schema({
   featured: Boolean,
-  title: String,
-  review: String,
+  title: { type: String, required: true, maxLength: 50 },
+  review: { type: String, required: true, maxLength: 500 },
   rating: Number,
-  reviewDate: String,
+  reviewDate: { type: String, required: true },
   helpful: Number,
   unhelpful: Number,
 });
 
-export default mongoose.model("Reviewer", ReviewerSchema);
+export { ReviewerSchema };

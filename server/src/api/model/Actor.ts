@@ -16,7 +16,7 @@ interface Actor {
 }
 
 const ActorSchema = new Schema({
-  name: String,
+  name: { type: String, required: true },
   about: String,
   DOB: String,
   achievments: [String],

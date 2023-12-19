@@ -2,10 +2,10 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 import Actor from "../Actor";
-import Reviewer from "../Reviewer";
+import { ReviewerSchema } from "../Reviewer";
 
 const MovieSchema = new Schema({
-  title: String,
+  title: { type: String, required: true },
   releaseYear: Number,
   releaseDate: String,
   runTime: Number,
@@ -13,7 +13,7 @@ const MovieSchema = new Schema({
   desc: String,
   genre: [String],
   cast: [Actor.schema],
-  reviews: [Reviewer.schema],
+  reviews: [ReviewerSchema],
   hasMore: Boolean,
 });
 

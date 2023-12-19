@@ -3,8 +3,12 @@ import { Types } from "mongoose";
 import Movie from "../../model/collections/Movie";
 
 export async function getMovieById(id: Types.ObjectId) {
-  const result = await Movie.findById(id).exec();
-  return result;
+  try {
+    const result = await Movie.findById(id).exec();
+    return result;
+  } catch (err) {
+    throw err;
+  }
 }
 
 // import { ObjectId } from "mongodb";

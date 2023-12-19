@@ -2,13 +2,18 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import { jwtCheckMiddleware } from "./auth/jwtVerfier";
-import Error from "./utils/Error";
+import Error from "./error/Error";
 import { connectDatabase } from "./db/mongo.js";
 import { router as userRoutes } from "./api/routes/user.js";
 import { router as searchRoutes } from "./api/routes/find.js";
 import { router as movieRoutes } from "./api/routes/movie.js";
 import { router as signupRoutes } from "./api/routes/auth";
 import { config } from "dotenv";
+import Movie from "./api/model/collections/Movie";
+import User from "./api/model/collections/User";
+import mongoose from "mongoose";
+import errorThrower from "../../shared/errorThrower";
+import HttpError from "../../shared/httpErrorsEnum";
 config();
 const corsOptions = {
   origin: "http://localhost:5173",
@@ -27,11 +32,11 @@ app.use("/api/users/:userId", userRoutes);
 app.use("/api/movies", movieRoutes);
 app.use("/api/auth", signupRoutes);
 app.use("/find", searchRoutes);
-app.use(Error); //always at bottom
 
-app.get("/", (req, res) => {
+app.get("/", (req, res, next) => {
   res.end("running");
 });
+app.use(Error); //always at bottom
 
 app.get("*", (req, res) => {
   res.end("Route not found");
