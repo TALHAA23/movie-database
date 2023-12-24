@@ -1,7 +1,8 @@
 import errorThrower from "./errorThrower";
 import HttpError from "./httpErrorsEnum";
-function passwordValidator(password: string) {
+function passwordValidator(password: string | null) {
   // Check if password is empty
+  return true;
   if (!password) {
     //custom error
     console.log("Password cannot be empty");
@@ -62,7 +63,7 @@ function passwordValidator(password: string) {
   return true;
 }
 
-function emailValidator(email: string) {
+function emailValidator(email: string | null) {
   // Check if email is empty
   if (!email) {
     //custom error

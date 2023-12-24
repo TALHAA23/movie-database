@@ -28,10 +28,6 @@ export const connectDatabase = async (
   if (!db.isConnected) {
     console.log("trying", "+++++++++++++++");
     try {
-      // await client.connect().then((res) => {
-      //   db.client = res.db();
-      //   db.isConnected = true;
-      // });
       await mongoose
         .connect(uri, {
           dbName: "moviedb",

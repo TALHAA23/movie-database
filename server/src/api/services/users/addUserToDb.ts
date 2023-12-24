@@ -1,10 +1,12 @@
+import { GetUsers200ResponseOneOfInnerCreatedAt } from "auth0";
+
 import User from "../../model/collections/User";
 
 interface Creds {
   email: string;
   user_id: string;
   username: string;
-  created_at: string;
+  created_at: GetUsers200ResponseOneOfInnerCreatedAt;
 }
 
 export default async function addUserToDb({

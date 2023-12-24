@@ -1,15 +1,16 @@
 import { useRoutes } from "react-router-dom";
-import LoginRoutes from "./LoginRoutes";
+import AuthRoutes from "./AuthRoutes";
+import Home from "../components/Home/Home";
 
 export default function Routes() {
   return useRoutes([
     {
       path: "/",
-      element: <h1 className=" text-red-500 font-bold">Home page goes here</h1>,
+      element: <Home />,
     },
     {
-      path: "/login/*",
-      element: <LoginRoutes />,
+      path: "/auth/*",
+      element: <AuthRoutes />,
     },
   ]);
 }
