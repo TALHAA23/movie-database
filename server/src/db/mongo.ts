@@ -19,22 +19,18 @@ const db: Database = {
 };
 
 const client = new MongoClient(uri);
-
 export const connectDatabase = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  if (!db.isConnected) {
+  if (mongoose.connection.readyState == 0) {
+    //if disconnected
     console.log("trying", "+++++++++++++++");
     try {
-      await mongoose
-        .connect(uri, {
-          dbName: "moviedb",
-        })
-        .then((res) => {
-          db.isConnected = res.ConnectionStates.connected;
-        });
+      await mongoose.connect(uri, {
+        dbName: "moviedb",
+      });
     } catch (err) {
       next(err);
     }

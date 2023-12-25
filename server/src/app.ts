@@ -31,7 +31,7 @@ app.use(connectDatabase);
 app.use("/api/users/", userRoutes);
 app.use("/api/movies", movieRoutes);
 app.use("/api/auth", authRoutes);
-app.use("/find", searchRoutes);
+app.use("/api/find", searchRoutes);
 app.use(Error); //always at bottom
 
 app.get("/", (req, res) => {
