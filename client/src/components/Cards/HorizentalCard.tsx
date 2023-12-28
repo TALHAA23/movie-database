@@ -1,20 +1,28 @@
+import testImages from "../../testimages";
+
 export default function HorizentalCard() {
   return (
-    <div className="flex items-center shadow-sm hover:shadow-lg shadow-gray-800/70">
+    <div className="bg-black rounded  h-[28%] flex  shadow-sm hover:shadow-lg shadow-gray-800/70">
       <img
-        className=" w-[30%] object-center"
-        src="../../../public/portrail-test-image.jpg"
+        className="h-full w-[30%] object-center rounded-tl rounded-bl"
+        src={testImages.protrait}
         alt="img"
       />
-      <div>
-        <h1 className="text-lg font-semibold">The harry potter movie</h1>
-        <p className=" leading-tight text-sm text-gray-700">
-          this is a short desc about the current
-        </p>
-        {/* <div className="flex items-center">
-          <img src="../../../public/star-solid.svg" alt="star" />
-          <h3 className="text-xl font-semibold">4.0</h3>
-        </div> */}
+      <div className=" flex flex-col justify-between p-2 ">
+        <div>
+          <h1 className="text-xl font-semibold">The harry potter movie</h1>
+          <p className="leading-tight font-light text-sm text-[#797878]">
+            This is a short desc about the current
+          </p>
+        </div>
+        <div className="ml-auto w-1/3 h-[30px] rounded bg-[#d9d9d964] text-white flex items-center">
+          <img
+            src="../../../public/search-icon.svg"
+            className=" bg-white object-contain w-[20%] h-full rounded-tl rounded-bl"
+            alt=""
+          />
+          <div className="grow text-sm font-semibold text-center">Save</div>
+        </div>
       </div>
     </div>
   );

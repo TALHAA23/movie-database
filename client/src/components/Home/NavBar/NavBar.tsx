@@ -5,7 +5,7 @@ import Profile from "./Profile";
 export default function NavBar() {
   return (
     <nav
-      className={`sticky z-50 bg-white top-0 flex justify-between items-stretch p-2`}
+      className={`sticky z-50 bg-black/90 text-white top-0 flex justify-between items-stretch p-2`}
     >
       <Logo />
       <SearchBar />

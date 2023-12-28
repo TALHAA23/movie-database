@@ -1,5 +1,5 @@
 import Image from "./Image";
-import PaginationButton from "./PaginationButton";
+import PaginationButton from "../../../PaginationButton";
 import Bookmark from "./Bookmark";
 import Title from "./Title";
 export default function SlideBar() {

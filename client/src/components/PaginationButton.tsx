@@ -1,3 +1,4 @@
+import { MouseEvent } from "react";
 type Diraction = "prev" | "next";
 
 export default function PaginationButton({
@@ -5,13 +6,26 @@ export default function PaginationButton({
 }: {
   diraction: Diraction;
 }) {
+  function move(event: MouseEvent<HTMLButtonElement>) {
+    const { parentElement } = event.currentTarget;
+    if (!parentElement) return;
+    const dir = event.currentTarget.value as Diraction;
+    const scrollableWidth = isPrev(dir)
+      ? -parentElement.clientWidth
+      : parentElement.clientWidth;
+    parentElement?.scrollBy(scrollableWidth, 0);
+  }
   return (
     <button
+      value={diraction}
+      onClick={move}
       className={`absolute ${
         isPrev(diraction)
           ? "left-3 hover:-translate-x-2"
           : "right-3 hover:translate-x-2"
-      }  top-1/2 -translate-y-1/2 transition-transform duration-150 `}
+      }  top-1/2 -translate-y-1/2 transition-transform duration-150
+       disabled:opacity-15
+      `}
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
