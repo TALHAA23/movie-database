@@ -1,5 +1,10 @@
+import * as Interfaces from "../api/model/Interfaces";
 import { ReactNode, createContext, useContext } from "react";
-import { UseQueryResult, useQuery } from "@tanstack/react-query";
+import {
+  UseMutationResult,
+  UseQueryResult,
+  useQuery,
+} from "@tanstack/react-query";
 import recommendationsApi from "../api/recommendationsApi";
 import topRated from "../api/topRatedApi";
 // perPersonalized Recommendations
@@ -12,6 +17,7 @@ import topRated from "../api/topRatedApi";
 const testData = () => new Promise((res) => setTimeout(() => res(2 + 2), 5000));
 
 type QueryResult = UseQueryResult;
+type MutatationResult = UseMutationResult<[Interfaces.MovieInterface]>;
 
 interface DataContextType {
   recommendations: QueryResult;
@@ -43,7 +49,10 @@ export default function HomeDataProvider({ children }: Children) {
 
   return (
     <DataContext.Provider
-      value={{ recommendations: recommendationsQuery, topRated: topRatedQuery }}
+      value={{
+        recommendations: recommendationsQuery,
+        topRated: topRatedQuery,
+      }}
     >
       {children}
     </DataContext.Provider>

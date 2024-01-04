@@ -18,7 +18,7 @@ const MovieSchema = new Schema({
       title: { type: String, required: true, maxLength: 50 },
       review: { type: String, required: true, maxLength: 500 },
       rating: Number,
-      reviewDate: { type: String, required: true },
+      reviewDate: Date,
       helpful: Number,
       unhelpful: Number,
     },
