@@ -1,7 +1,7 @@
 // Importing Movie schema from Movie.ts
 import Movie from "../../model/collections/Movie";
 
-export async function getTopRatedMovie(rating: number = 4) {
+export async function getTopRatedMovie(rating: number = 8) {
   const movies = await Movie.find(
     {
       rating: {
@@ -9,7 +9,9 @@ export async function getTopRatedMovie(rating: number = 4) {
       },
     },
     "rating" // This is the projection
-  ).exec();
+  )
+    .limit(10)
+    .exec();
 
   return movies;
 }

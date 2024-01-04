@@ -1,7 +1,9 @@
 import { Response } from "express";
 import HttpError from "../../../shared/httpErrorsEnum";
+
 export default function customErrorhandler(err: Error, res: Response) {
   const status = HttpError[err.name as keyof typeof HttpError];
+  console.log(status);
   if (status) {
     const message = err.message;
     return res.status(status).send(message);

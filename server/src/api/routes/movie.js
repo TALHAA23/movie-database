@@ -8,4 +8,6 @@ router.get("/top-rated", movieController.topRatedMovies);
 
 router.get("/random", movieController.randomMovies);
 
+router.get("/new-releases", movieController.newReleases);
+
 export { router };

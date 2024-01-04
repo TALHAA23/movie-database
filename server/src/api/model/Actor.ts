@@ -1,29 +1,16 @@
 // File: model/Actor.ts
 import mongoose from "mongoose";
-import { MoviesReferece } from "./properties";
 const { Schema } = mongoose;
-
-interface Actor {
-  name: string;
-  about: string;
-  DOB: string;
-  achievments: string[];
-  knownFor: MoviesReferece;
-  movies: {
-    upcoming: MoviesReferece;
-    previousMovies: MoviesReferece;
-  };
-}
 
 const ActorSchema = new Schema({
   name: { type: String, required: true },
   about: String,
-  DOB: String,
+  DOB: Date,
   achievments: [String],
-  knownFor: [Schema.Types.ObjectId],
+  knownFor: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
   movies: {
-    upcoming: [Schema.Types.ObjectId],
-    previousMovies: [Schema.Types.ObjectId],
+    upcoming: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
+    previousMovies: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
   },
 });
 

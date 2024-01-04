@@ -1,11 +1,11 @@
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useEffect, useRef, useState } from "react";
 import * as validator from "../../../../shared/validator";
 import authFormSubmission from "../../api/services/authFormSubmission";
 import "./authForm.css";
 import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";
 import { useMutation } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const DEBOUNCE_TIME = 500; //ms
 
@@ -21,6 +21,7 @@ const isEmail = (name: string) => name == "email";
 const isSignupPage = () => location.pathname.split("/").pop() == "signup";
 
 export default function AuthForm() {
+  const navigate = useNavigate();
   const timeoutId = useRef<undefined | number>();
   const [error, setError] = useState<FeildError>(false);
   const [authState, setAuthState] = useState({
@@ -33,6 +34,10 @@ export default function AuthForm() {
     mutationKey: ["login"],
     mutationFn: authFormSubmission,
   });
+
+  useEffect(() => {
+    if (loginMutation.isSuccess) navigate("/", { state: loginMutation.data });
+  }, [loginMutation.isSuccess]);
 
   function changeAuthState(key: AuthStates, value: boolean) {
     setAuthState((prevState) => ({
@@ -110,6 +115,7 @@ export default function AuthForm() {
 
   return (
     <form className="form absolute" onSubmit={loginMutation.mutate}>
+      ,
       <h1 className=" text-center font-semibold text-gray-600 text-2xl">
         {isSignupPage() ? "Signup" : "Login"}
       </h1>
@@ -147,7 +153,6 @@ export default function AuthForm() {
           </span>
         </label>
       )}
-
       <label>
         <input
           onChange={handleChange}
@@ -165,7 +170,6 @@ export default function AuthForm() {
           email
         </span>
       </label>
-
       <label>
         <input
           required
@@ -206,7 +210,6 @@ export default function AuthForm() {
           </span>
         </label>
       )}
-
       <button
         type="submit"
         className="fancy disabled:cursor-no-drop"

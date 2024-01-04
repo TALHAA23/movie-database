@@ -9,23 +9,9 @@ const UserSchema = new Schema({
     username: { type: String, required: true },
     created_at: { type: String, required: true },
   },
-  watchList: [Schema.Types.ObjectId],
-  favoriteList: [Schema.Types.ObjectId],
-  myReviewsRef: [Schema.Types.ObjectId],
+  watchList: [{ type: Schema.Types.ObjectId, ref: "movies" }],
+  favoriteList: [{ type: Schema.Types.ObjectId, ref: "movies" }],
+  myReviewsRef: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 });
 
 export default mongoose.model("User", UserSchema);
-
-// import { ObjectId } from "mongodb";
-// import { MoviesReferece } from "../properties";
-
-// interface User {
-//   uid: string;
-//   username: string;
-//   email: string;
-//   watchList: MoviesReferece;
-//   favoriteList: MoviesReferece;
-//   myReviewsRef: ObjectId[];
-// }
-
-// export type { User };

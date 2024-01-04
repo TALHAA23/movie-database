@@ -9,11 +9,8 @@ import { router as searchRoutes } from "./api/routes/find.js";
 import { router as movieRoutes } from "./api/routes/movie.js";
 import { router as authRoutes } from "./api/routes/auth";
 import { config } from "dotenv";
-import Movie from "./api/model/collections/Movie";
-import User from "./api/model/collections/User";
 import mongoose from "mongoose";
-import errorThrower from "../../shared/errorThrower";
-import HttpError from "../../shared/httpErrorsEnum";
+import Movie from "./api/model/collections/Movie";
 config();
 const corsOptions = {
   origin: "http://localhost:5173",

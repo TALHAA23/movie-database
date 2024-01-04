@@ -2,7 +2,7 @@ import testImages from "../../testimages";
 
 export default function HorizentalCard() {
   return (
-    <div className="bg-black rounded  h-[28%] flex  shadow-sm hover:shadow-lg shadow-gray-800/70">
+    <div className="bg-black rounded  h-[28%] flex  shadow-sm hover:shadow-lg shadow-slate-700">
       <img
         className="h-full w-[30%] object-center rounded-tl rounded-bl"
         src={testImages.protrait}
@@ -15,13 +15,15 @@ export default function HorizentalCard() {
             This is a short desc about the current
           </p>
         </div>
-        <div className="ml-auto w-1/3 h-[30px] rounded bg-[#d9d9d964] text-white flex items-center">
+        <div className="group ml-auto w-1/3 h-[30px] rounded border border-white/25 bg-[#FDE047] text-black flex items-center cursor-pointer hover:scale-90">
           <img
-            src="../../../public/search-icon.svg"
-            className=" bg-white object-contain w-[20%] h-full rounded-tl rounded-bl"
+            src="../../../public/search-icon-sm.svg"
+            className=" group-hover:w-0 transition-all duration-500 bg-yellow-800 object-scale-down w-[30%] h-full rounded-tl rounded-bl"
             alt=""
           />
-          <div className="grow text-sm font-semibold text-center">Save</div>
+          <div className="grow text-sm font-semibold text-center group-hover:text-slate-700">
+            Save
+          </div>
         </div>
       </div>
     </div>
