@@ -7,7 +7,7 @@ export default function PaginationButton({
   diraction: Diraction;
 }) {
   function move(event: MouseEvent<HTMLButtonElement>) {
-    const { parentElement } = event.currentTarget;
+    const parentElement = document.querySelector(".scrollableDiv");
     if (!parentElement) return;
     const dir = event.currentTarget.value as Diraction;
     const scrollableWidth = isPrev(dir)
@@ -19,7 +19,7 @@ export default function PaginationButton({
     <button
       value={diraction}
       onClick={move}
-      className={`absolute ${
+      className={` absolute ${
         isPrev(diraction)
           ? "left-3 hover:-translate-x-2"
           : "right-3 hover:translate-x-2"

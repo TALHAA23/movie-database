@@ -4,13 +4,14 @@ import testImages from "../../testimages";
 
 export default function FindResult() {
   const findResult = useLocation().state as [Interfaces.MovieInterface];
+  console.log(findResult);
+  if (!findResult || !findResult?.length) return <h1>No Result Found</h1>;
 
-  if (!findResult.length) return <h1>No Result Found</h1>;
   return (
     <div className=" max-w-[1200px] mx-auto rounded border flex flex-col gap-1 p-2">
       {findResult.map((movie) => (
         <Link
-          to={`./${movie._id}`}
+          to={`/title/${movie._id}`}
           className=" border-b-2 h-[3.5cm] flex items-center"
         >
           <img

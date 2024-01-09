@@ -8,17 +8,30 @@ interface MovieInterface {
   desc: string;
   genre: [string];
   cast: [any]; //! change require
-  reviews?: [
-    {
-      featured: boolean;
-      title: string;
-      review: string;
-      rating: number;
-      reviewDate: Date;
-      helpful: number;
-      unhelpful: number;
-    }
-  ];
+  reviews?: [Review];
   hasMore?: boolean;
 }
-export type { MovieInterface };
+
+interface Review {
+  featured: boolean;
+  title: string;
+  review: string;
+  rating: number;
+  reviewDate: Date;
+  helpful: number;
+  unhelpful: number;
+}
+
+interface ActorInterface {
+  name: string;
+  about: string;
+  DOB: Date;
+  achievments: [String];
+  knownFor: [MovieInterface];
+  movies: {
+    upcoming: [MovieInterface];
+    previousMovies: [MovieInterface];
+  };
+}
+
+export type { MovieInterface, Review, ActorInterface };

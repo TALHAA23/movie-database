@@ -2,12 +2,16 @@ import * as Interfaces from "../../../api/model/Interfaces";
 import { useMutation } from "@tanstack/react-query";
 import searchParamsFormSubmission from "../../../api/services/searchParamFormSubmission";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FormEvent } from "react";
 
 export default function SearchBar() {
   const navigate = useNavigate();
   const searchParamsRef = useRef<null | HTMLInputElement>(null);
-  const searchQuery = useMutation<Interfaces.MovieInterface>({
+  const searchQuery = useMutation<
+    Interfaces.MovieInterface,
+    Error,
+    FormEvent<HTMLFormElement>
+  >({
     mutationKey: ["search-query"],
     mutationFn: searchParamsFormSubmission,
   });
@@ -24,14 +28,14 @@ export default function SearchBar() {
   return (
     <form
       onSubmit={searchQuery?.mutate}
-      className={`w-[70%] h-full  bg-slate-900 rounded-full flex gap-0`}
+      className={`w-[70%] h-full bg-slate-900 rounded-full flex gap-0`}
     >
       <input
         ref={searchParamsRef}
         required
         type="search"
         name="search"
-        className={`grow  bg-transparent indent-7  focus:outline-none`}
+        className={`grow bg-transparent indent-7  focus:outline-none`}
       />
       <button className={`px-4 m-1 rounded-full bg-black  hover:bg-black/20 `}>
         <img src="../../../../public/search-icon.svg" alt="" />

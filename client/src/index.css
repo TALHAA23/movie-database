@@ -9,6 +9,9 @@ body {
   position: relative;
   min-height: 100vh;
 }
+.hideScrollBar {
+  @apply scroll-smooth;
+}
 
 .hideScrollBar::-webkit-scrollbar {
   display: none;

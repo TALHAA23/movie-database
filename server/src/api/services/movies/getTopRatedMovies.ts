@@ -2,14 +2,11 @@
 import Movie from "../../model/collections/Movie";
 
 export async function getTopRatedMovie(rating: number = 8) {
-  const movies = await Movie.find(
-    {
-      rating: {
-        $gte: rating,
-      },
+  const movies = await Movie.find({
+    rating: {
+      $gte: rating,
     },
-    "rating" // This is the projection
-  )
+  })
     .limit(10)
     .exec();
 

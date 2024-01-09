@@ -7,12 +7,6 @@ import {
 } from "../../../Contexts/HomeDataProvider";
 
 export default function Hero() {
-  const provider = useTopRated();
-
-  if (provider?.isPending) console.log("loading...");
-  if (provider?.isError) console.error(provider.error);
-  if (provider?.isSuccess) console.log(provider.data);
-
   return (
     <section
       className={`

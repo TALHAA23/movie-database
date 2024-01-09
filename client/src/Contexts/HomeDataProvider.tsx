@@ -7,6 +7,7 @@ import {
 } from "@tanstack/react-query";
 import recommendationsApi from "../api/recommendationsApi";
 import topRated from "../api/topRatedApi";
+import recommendationsOrTopRatedApi from "../api/recommendationsOrTopratedApi";
 // perPersonalized Recommendations
 // Trending Now
 // New Releases
@@ -16,12 +17,12 @@ import topRated from "../api/topRatedApi";
 
 const testData = () => new Promise((res) => setTimeout(() => res(2 + 2), 5000));
 
-type QueryResult = UseQueryResult;
+type QueryResult<T> = UseQueryResult<T>;
 type MutatationResult = UseMutationResult<[Interfaces.MovieInterface]>;
 
 interface DataContextType {
-  recommendations: QueryResult;
-  topRated: QueryResult;
+  recommendations: QueryResult<[Interfaces.MovieInterface]>;
+  topRated: QueryResult<[Interfaces.MovieInterface]>;
 }
 
 const DataContext = createContext<DataContextType | null>(null);
@@ -34,17 +35,20 @@ interface Children {
   children: ReactNode;
 }
 export default function HomeDataProvider({ children }: Children) {
-  const recommendationsQuery = useQuery({
+  const recommendationsQuery = useQuery<[Interfaces.MovieInterface], Error>({
+    staleTime: 1000 * 60 * 60,
     queryKey: ["recommendations"],
-    // queryFn: recommendationsApi,
-    queryFn: testData,
+    queryFn: () => recommendationsOrTopRatedApi("recommendations"),
+    // queryFn: testData,
     retry: 1,
   });
 
   const topRatedQuery = useQuery({
+    staleTime: 1000 * 60 * 60,
     queryKey: ["top-rated"],
-    // queryFn: topRated,
-    queryFn: testData,
+    queryFn: () => recommendationsOrTopRatedApi("top-rated"),
+    // queryFn: testData,
+    retry: 1,
   });
 
   return (

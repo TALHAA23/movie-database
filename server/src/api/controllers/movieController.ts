@@ -6,6 +6,7 @@ import { Types } from "mongoose";
 import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";
 import getRecentReleases from "../services/movies/getRecentReleases";
+import getRelated from "../services/movies/getRelated";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   const mongodbObjectId = new Types.ObjectId(id);
@@ -43,4 +44,15 @@ const newReleases: Middleware = async (req, res, next) => {
   res.end("Done");
 };
 
-export { movieById, topRatedMovies, randomMovies, newReleases };
+const related: Middleware = async (req, res, next) => {
+  const id = req.params.id;
+  const mongodbObjectId = new Types.ObjectId(id);
+  try {
+    const result = await getRelated(mongodbObjectId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { movieById, topRatedMovies, randomMovies, newReleases, related };

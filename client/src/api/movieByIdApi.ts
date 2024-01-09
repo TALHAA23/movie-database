@@ -1,17 +1,11 @@
 import errorThrower from "../../../shared/errorThrower";
-import HttpError from "../../../shared/httpErrorsEnum";
 
-export default async function recommendationsApi() {
-  const response = await fetch(
-    "http://localhost:3000/api/users/protected/recommendations",
-    {
-      credentials: "include",
-    }
-  );
+export default async function movieByIdApi(id: string) {
+  console.log(id);
+  const response = await fetch(`http://localhost:3000/api/movies/movie/${id}`);
 
   if (!response.ok) {
     const status = response.status;
-    console.log(status);
     const message = await response.text().then((text) => text);
     throw errorThrower(message, status);
   }

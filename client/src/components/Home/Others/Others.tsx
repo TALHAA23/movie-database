@@ -1,14 +1,15 @@
-import MovieCard from "../../Cards/MovieCard";
-import Frame from "./Frame";
+import { useQuery } from "@tanstack/react-query";
+import PageLoader from "../../Loaders/PageLoader";
+import NotFound from "../../NotFound/NotFound";
+import Recommendations from "./Recommendations";
+import recommendationsApi from "../../../api/recommendationsApi";
+import HttpError from "../../../../../shared/httpErrorsEnum";
 
 export default function Others() {
   return (
     <section>
-      <Frame frameTitle="Dummy section">
-        <MovieCard />
-        <MovieCard />
-        <MovieCard />
-      </Frame>
+      <Recommendations sectionName="recommendations" />
+      <Recommendations sectionName="topRated" />
     </section>
     // TODO
     // perPersonalized Recommendations

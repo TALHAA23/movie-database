@@ -115,7 +115,6 @@ export default function AuthForm() {
 
   return (
     <form className="form absolute" onSubmit={loginMutation.mutate}>
-      ,
       <h1 className=" text-center font-semibold text-gray-600 text-2xl">
         {isSignupPage() ? "Signup" : "Login"}
       </h1>

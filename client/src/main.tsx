@@ -5,6 +5,11 @@ import App from "./App.tsx";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Auth0Provider } from "@auth0/auth0-react";
 
+const auth0Domain = import.meta.env.VITE_DOMAIN;
+const auth0ClientId = import.meta.env.VITE_CLIENT_ID;
+const auth0Scope = import.meta.env.VITE_SCOPE;
+const auth0Audience = import.meta.env.VITE_AUDIENCE;
+
 const client = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
@@ -12,12 +17,12 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <BrowserRouter>
       <QueryClientProvider client={client}>
         <Auth0Provider
-          domain="dev-n1afgdpjriklak3u.us.auth0.com"
-          clientId="tVMAL9iyCztcELxwMBVs5SWvK4Xu1myH"
+          domain={auth0Domain}
+          clientId={auth0ClientId}
           authorizationParams={{
             redirect_uri: window.location.origin,
-            scope: "openid profile email",
-            audience: "movie-database-api-endpoints",
+            scope: { auth0Scope },
+            audience: { auth0Audience },
           }}
         >
           <App />

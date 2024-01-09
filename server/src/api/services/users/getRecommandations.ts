@@ -5,7 +5,6 @@ import extractGener from "../../../db/extractGener";
 import { getRandomMovies } from "../movies/getRandomMovies";
 
 export async function getRecommandationsForUser(userId: string) {
-  console.log("Hy", userId);
   try {
     const documents = await getUsersFavrtList(userId);
     if (!documents?.length) {
@@ -21,7 +20,6 @@ export async function getRecommandationsForUser(userId: string) {
     result.map((document, index) => {
       document.hasMore = index == result.length - 1 ? false : true;
     });
-    console.log(result);
     return result;
   } catch (err) {
     console.log(err);
