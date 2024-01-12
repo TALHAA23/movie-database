@@ -9,14 +9,26 @@ import { MovieInterface, Review } from "../../api/model/Interfaces";
 import PageLoader from "../Loaders/PageLoader";
 import NotFound from "../NotFound/NotFound";
 import { useEffect, useRef, useState } from "react";
+import movieListApi from "../../api/movieListApi";
+import MovieList from "../Home/Others/MovieList";
 export default function Title() {
   const { id } = useParams();
   const [featuredReview, setFeaturedReview] = useState<Review | undefined>();
   if (!id) return <h1>Something went wrong</h1>;
-  const { isPending, data, isError, error } = useQuery<MovieInterface>({
+
+  const { isPending, data, isError, error, isFetching } =
+    useQuery<MovieInterface>({
+      retry: 1,
+      queryKey: ["movie-by-id", id],
+      queryFn: () => movieByIdApi(id),
+      staleTime: 1000 * 60 * 60,
+    });
+
+  const relatedMoviesQuery = useQuery<[MovieInterface]>({
     retry: 1,
-    queryKey: ["movie-by-id", id],
-    queryFn: () => movieByIdApi(id),
+    queryKey: [`related-for-${id}`],
+    queryFn: () => movieListApi("related", id),
+    enabled: !!data,
     staleTime: 1000 * 60 * 60,
   });
 
@@ -43,7 +55,7 @@ export default function Title() {
         reviewsCount={data.reviews?.length || 0}
       />
       <Casts casts={data.cast} />
-      {/* <MoreLikeThis /> */}
+      <MovieList title="Related" query={relatedMoviesQuery} />
       {featuredReview && <FeaturedReview {...featuredReview} />}
     </section>
   );

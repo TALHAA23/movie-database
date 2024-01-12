@@ -6,9 +6,8 @@
 body {
   font-family: "inter";
   box-sizing: border-box;
-  position: relative;
-  min-height: 100vh;
 }
+
 .hideScrollBar {
   @apply scroll-smooth;
 }

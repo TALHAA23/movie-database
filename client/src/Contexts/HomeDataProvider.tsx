@@ -5,9 +5,7 @@ import {
   UseQueryResult,
   useQuery,
 } from "@tanstack/react-query";
-import recommendationsApi from "../api/recommendationsApi";
-import topRated from "../api/topRatedApi";
-import recommendationsOrTopRatedApi from "../api/recommendationsOrTopratedApi";
+import movieListApi from "../api/movieListApi";
 // perPersonalized Recommendations
 // Trending Now
 // New Releases
@@ -38,7 +36,7 @@ export default function HomeDataProvider({ children }: Children) {
   const recommendationsQuery = useQuery<[Interfaces.MovieInterface], Error>({
     staleTime: 1000 * 60 * 60,
     queryKey: ["recommendations"],
-    queryFn: () => recommendationsOrTopRatedApi("recommendations"),
+    queryFn: () => movieListApi("recommendations"),
     // queryFn: testData,
     retry: 1,
   });
@@ -46,7 +44,7 @@ export default function HomeDataProvider({ children }: Children) {
   const topRatedQuery = useQuery({
     staleTime: 1000 * 60 * 60,
     queryKey: ["top-rated"],
-    queryFn: () => recommendationsOrTopRatedApi("top-rated"),
+    queryFn: () => movieListApi("top-rated"),
     // queryFn: testData,
     retry: 1,
   });

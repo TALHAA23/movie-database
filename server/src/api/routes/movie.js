@@ -10,6 +10,6 @@ router.get("/random", movieController.randomMovies);
 
 router.get("/new-releases", movieController.newReleases);
 
-router.get("/related", movieController.related);
+router.get("/related/:id", movieController.related);
 
 export { router };

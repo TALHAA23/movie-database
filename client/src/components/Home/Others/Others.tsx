@@ -1,15 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
-import PageLoader from "../../Loaders/PageLoader";
-import NotFound from "../../NotFound/NotFound";
-import Recommendations from "./Recommendations";
-import recommendationsApi from "../../../api/recommendationsApi";
-import HttpError from "../../../../../shared/httpErrorsEnum";
+import MovieList from "./MovieList";
+import {
+  useRecommendations,
+  useTopRated,
+} from "../../../Contexts/HomeDataProvider";
 
 export default function Others() {
+  const recommendations = useRecommendations();
+  const topRated = useTopRated();
   return (
     <section>
-      <Recommendations sectionName="recommendations" />
-      <Recommendations sectionName="topRated" />
+      <MovieList title="recommendations" query={recommendations} />
+      <MovieList title="top rated" query={topRated} />
     </section>
     // TODO
     // perPersonalized Recommendations
