@@ -6,7 +6,7 @@ export default function Home() {
       className={`w-full  grid landscape:grid-rows-[110vh_auto_50vh] portrait:grid-rows-[calc(100vh-60px)_auto_50vh]`}
     >
       <Hero />
-      <Others />
+      {/* <Others /> */}
       <h1 className="border-4  border-black">footer</h1>
     </div>
   );
