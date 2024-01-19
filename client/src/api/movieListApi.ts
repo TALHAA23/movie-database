@@ -21,7 +21,6 @@ export default async function movieListApi(
 ) {
   const url = createUrl(requestFor, id);
 
-  console.log(url);
   const response = await fetch(url, {
     credentials: "include",
   });

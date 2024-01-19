@@ -4,7 +4,7 @@ import {
   useTopRated,
 } from "../../../Contexts/HomeDataProvider";
 import MovieCard from "../../Cards/MovieCard";
-import ErrorCard from "../../Error/ErrorCard";
+import ErrorCard from "../../Error/SectionError";
 import Unauthorized from "../../Error/Unauthorized";
 import SectionLoader from "../../Loaders/SectionLoader";
 import Frame from "./Frame";

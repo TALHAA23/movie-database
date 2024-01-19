@@ -7,7 +7,7 @@ export async function getTopRatedMovie(rating: number = 8) {
       $gte: rating,
     },
   })
-    .limit(10)
+    .limit(4)
     .exec();
 
   return movies;
