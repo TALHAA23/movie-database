@@ -22,12 +22,11 @@ export default async function movieListApi(
   const url = createUrl(requestFor, id);
 
   const response = await fetch(url, {
-    credentials: "include",
+    credentials: requestFor == "recommendations" ? "include" : "omit",
   });
 
   if (!response.ok) {
     const status = response.status;
-    console.log(status);
     const message = await response.text().then((text) => text);
     throw errorThrower(message, status);
   }

@@ -41,7 +41,7 @@
   border: 2px solid gray;
 }
 
-.form label .input + span {
+.form label .input+span {
   position: absolute;
   left: 10px;
   top: 15px;
@@ -51,13 +51,13 @@
   transition: 0.3s ease;
 }
 
-.form label .input:placeholder-shown + span {
+.form label .input:placeholder-shown+span {
   top: 15px;
   font-size: 0.9em;
 }
 
-.form label .input:focus + span,
-.form label .input:valid + span {
+.form label .input:focus+span,
+.form label .input:valid+span {
   top: 30px;
   font-size: 0.7em;
   font-weight: 600;
@@ -75,7 +75,7 @@
   border-radius: 5px;
 }
 
-.form label .input01 + span {
+.form label .input01+span {
   position: absolute;
   left: 10px;
   top: 50px;
@@ -85,13 +85,13 @@
   transition: 0.3s ease;
 }
 
-.form label .input01:placeholder-shown + span {
+.form label .input01:placeholder-shown+span {
   top: 40px;
   font-size: 0.9em;
 }
 
-.form label .input01:focus + span,
-.form label .input01:valid + span {
+.form label .input01:focus+span,
+.form label .input01:valid+span {
   top: 50px;
   font-size: 0.7em;
   font-weight: 600;

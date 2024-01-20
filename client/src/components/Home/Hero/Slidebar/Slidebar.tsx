@@ -18,15 +18,14 @@ export default function SlideBar() {
 
   if (query.isPending) return <SectionLoader />;
   if (query.isError) return <SectionError error={query.error} />;
-  if (query.isSuccess) console.log(query.data);
 
   return (
     <div className={`relative bg-black/90 text-white`}>
       <div
         ref={titleRef}
-        className=" bg-black/40 px-2 py-1 rounded absolute w-[40%] z-30 top-1/2 -translate-y-1/2 left-4"
+        className=" bg-black/40 mx-2  px-2 py-1 rounded absolute  w-[calc(100-(8px+8px))]  md:w-[40%] z-30 top-3 sm:top-1/2 sm:-translate-y-1/2 "
       >
-        <h1 className="font-bold text-4xl">
+        <h1 className="font-bold text-lg sm:text-4xl">
           {query.data[currentMovieIndex].title}
         </h1>
         <p>{query.data[currentMovieIndex].desc}</p>

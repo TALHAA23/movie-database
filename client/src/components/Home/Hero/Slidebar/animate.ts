@@ -1,6 +1,7 @@
 function show(el: HTMLLIElement) {
   el.classList.add("isShown");
   el.classList.replace("relative", "absolute");
+  el.classList.remove("hidden");
   const prop: Keyframe = {
     width: "100%",
     height: "100%",
@@ -17,10 +18,11 @@ function show(el: HTMLLIElement) {
 function shrink(el: HTMLLIElement) {
   el.classList.remove("isShown");
   el.classList.replace("absolute", "relative");
+  el.classList.add("hidden");
 
   const prop: Keyframe = {
-    width: "200px",
-    height: "300px",
+    width: "100px",
+    height: "200px",
     zIndex: "20",
   };
   const options: KeyframeAnimationOptions = {
