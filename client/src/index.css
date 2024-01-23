@@ -15,3 +15,20 @@ body {
 .hideScrollBar::-webkit-scrollbar {
   display: none;
 }
+
+.narrow-scrollbar::-webkit-scrollbar {
+  height: 3px;
+  width: 3px;
+}
+
+.narrow-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+.narrow-scrollbar::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+.narrow-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
