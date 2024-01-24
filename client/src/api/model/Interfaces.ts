@@ -1,16 +1,32 @@
 interface MovieInterface {
   _id: string;
   title: string;
-  releaseYear: number;
-  releaseDate: Date;
-  runTime: number;
-  rating: number;
   desc: string;
-  genre: [string];
-  cast: [any]; //! change require
-  reviews?: [Review];
-  hasMore?: boolean;
+  cast: string[] | [];
+  genre: string[] | [];
+  banner?: File;
+  awards?: string[] | [];
+  releaseYear?: number;
+  releaseDate?: Date;
+  runTime: number;
+  tagline?: string;
+  creator?: string;
+  language?: string;
+  countryOfOrigin?: string;
 }
+// interface MovieInterface {
+//   _id: string;
+//   title: string;
+//   releaseYear: number;
+//   releaseDate: Date;
+//   runTime: number;
+//   rating: number;
+//   desc: string;
+//   genre: [string];
+//   cast: [any]; //! change require
+//   reviews?: [Review];
+//   hasMore?: boolean;
+// }
 
 interface Review {
   featured: boolean;

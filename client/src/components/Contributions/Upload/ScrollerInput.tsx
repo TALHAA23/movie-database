@@ -2,7 +2,11 @@ import { MouseEvent } from "react";
 interface InputInterface {
   scrollerFor: string;
   values: string[];
-  stateUpdater: (key: string, valueToRemove: string) => void;
+  stateUpdater: (
+    action: "add" | "remove",
+    key: string,
+    valueToRemove: string
+  ) => void;
 }
 const ScrollerInput = ({
   values,
@@ -10,13 +14,9 @@ const ScrollerInput = ({
   stateUpdater,
 }: InputInterface) => {
   const sendUpdates = (event: MouseEvent<HTMLSpanElement>) => {
-    // const targetEl = event.currentTarget.parentElement?.querySelector(
-    //   ".input"
-    // ) as HTMLSelectElement | HTMLInputElement;
-    // stateUpdater()
     const key = scrollerFor;
     const value = event.currentTarget.parentElement?.innerText as string;
-    stateUpdater(key, value);
+    stateUpdater("remove", key, value);
   };
   return (
     <div className="narrow-scrollbar rounded col-span-full border px-3 h-11 overflow-x-scroll flex items-center flex-nowrap">

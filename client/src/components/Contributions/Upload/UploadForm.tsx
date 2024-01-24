@@ -6,24 +6,11 @@ import { validateData, validateFile } from "./validateData";
 import { DataValidationInterface, Key } from "./DataInterface";
 import validateAll from "./validateAll";
 import upload from "./upload";
+import genresList from "../../../utils/genresList";
+import awardsList from "../../../utils/awardsList";
 
 const DEBOUNCE_TIME = 200;
-interface DataInterface {
-  title: string;
-  desc: string;
-  cast: string[] | [];
-  genre: string[] | [];
-  banner?: File;
-  awards?: string[] | [];
-  releaseYear?: number;
-  releaseDate?: Date;
-  runTime?: number;
-  tagline?: string;
-  creator?: string;
-  language?: string;
-  countryOfOrigin?: string;
-  [key: string]: any;
-}
+const MIN_GENRE_CAST_AWARDS = 3;
 
 type StringOrArray = string[] | [];
 interface GenreCastAwardsInterface {
@@ -33,32 +20,37 @@ interface GenreCastAwardsInterface {
   [key: string]: any;
 }
 
+const addIsValidtoKey = (key: string) =>
+  `is${key[0].toUpperCase().concat(key.slice(1))}Valid`;
+
+const initGenreCastAwards = () => ({
+  genre: [],
+  cast: [],
+  awards: [],
+});
+
+const initDataValidation = (): DataValidationInterface => ({
+  isTitleValid: false,
+  isDescValid: false,
+  isCastValid: false,
+  isGenreValid: false,
+  isReleaseYearValid: false,
+  isRunTimeValid: false,
+  isBannerValid: false,
+});
+
 export default function UploadForm() {
   const timeoutId = useRef<undefined | number>();
   const [genreCastAwards, setGenreCastAwards] =
-    useState<GenreCastAwardsInterface>({
-      genre: [],
-      cast: [],
-      awards: [],
-    });
+    useState<GenreCastAwardsInterface>(initGenreCastAwards());
 
   const [error, setError] = useState<false | string>(false);
   const [absoluteError, setAbsoluteError] = useState<string | false>("");
   const [dataValidation, setDataValidation] = useState<DataValidationInterface>(
-    {
-      isTitleValid: false,
-      isDescValid: false,
-      isCastValid: false,
-      isGenreValid: false,
-      isReleaseYearValid: true,
-      isReleaseDateValid: true,
-      isRunTimeValid: false,
-      isBannerValid: false,
-    }
+    initDataValidation()
   );
 
   useEffect(() => {
-    console.log(dataValidation);
     setAbsoluteError(validateAll(dataValidation));
   }, [dataValidation]);
 
@@ -68,19 +60,14 @@ export default function UploadForm() {
     clearTimeout(timeoutId.current);
     timeoutId.current = setTimeout(() => {
       const { name, value } = event.target;
-      const keyForValidation = `is${name[0]
-        .toUpperCase()
-        .concat(name.slice(1))}Valid`;
-
-      const valueForValidation = validateData(keyForValidation as Key, value);
-
+      const keyForValidation = addIsValidtoKey(name);
+      const valueAfterValidation = validateData(keyForValidation as Key, value);
       setDataValidation((prevValidation) => ({
         ...prevValidation,
-        [keyForValidation]: valueForValidation,
+        [keyForValidation]: valueAfterValidation,
       }));
-
       setError(
-        typeof valueForValidation == "boolean" ? false : valueForValidation
+        typeof valueAfterValidation == "boolean" ? false : valueAfterValidation
       );
     }, DEBOUNCE_TIME);
   }
@@ -96,38 +83,35 @@ export default function UploadForm() {
     }));
   }
 
-  function validateGenreCastAwards(key: string) {
-    const error =
-      genreCastAwards[key].length < 3 ? `Add atleast 3 ${key}s` : false;
-    setError(error);
-  }
-
-  function addGenreCastAwards(key: string, newGenre: string) {
+  function addOrRemoveGenreCastAwards(
+    action: "add" | "remove",
+    key: string,
+    value: string
+  ) {
     if (!(key in genreCastAwards)) throw new Error("Invalid Key");
-    if (!newGenre || genreCastAwards[key].includes(newGenre)) return;
-    const keyForValidation = `is${key[0]
-      .toUpperCase()
-      .concat(key.slice(1))}Valid`;
-    setGenreCastAwards((prevState) => ({
-      ...prevState,
-      [key]: [...prevState[key], newGenre],
-    }));
-    setDataValidation((prevValidation) => ({
-      ...prevValidation,
-      [keyForValidation]: genreCastAwards[key].length > 3,
-    }));
-    validateGenreCastAwards(key);
-  }
-
-  function removeGenreCastAwards(key: string, valueToRemove: string) {
-    if (!(key in genreCastAwards)) throw new Error("Invalid Key");
+    if (!value || (action == "add" && genreCastAwards[key].includes(value)))
+      return;
+    const keyForValidation = addIsValidtoKey(key);
     setGenreCastAwards((prevState) => {
-      const newArray = prevState[key].filter(
-        (item: string) => item !== valueToRemove
+      const updatedField =
+        action == "add"
+          ? [...prevState[key], value]
+          : prevState[key].filter((item: string) => item !== value);
+      const updatedState = {
+        ...prevState,
+        [key]: updatedField,
+      };
+      setDataValidation((prevValidation) => ({
+        ...prevValidation,
+        [keyForValidation]: updatedState[key].length >= MIN_GENRE_CAST_AWARDS,
+      }));
+      setError(
+        updatedState[key].length < MIN_GENRE_CAST_AWARDS
+          ? `Add atleast 3 ${key}`
+          : false
       );
-      return { ...prevState, [key]: newArray };
+      return updatedState;
     });
-    validateGenreCastAwards(key);
   }
 
   return (
@@ -139,7 +123,7 @@ export default function UploadForm() {
       <label className="col-span-full">
         <input
           onChange={updateData}
-          // required
+          required
           placeholder=""
           type="text"
           name="title"
@@ -151,10 +135,11 @@ export default function UploadForm() {
       {["releaseYear", "releaseDate"].map((name) => (
         <label className="col-span-3">
           <input
+            required={name == "releaseYear" ? true : false}
             onChange={updateData}
             type={name == "releaseYear" ? "number" : "date"}
             min={1990}
-            max={new Date().getFullYear()}
+            max={new Date().getFullYear() + 20}
             placeholder=""
             name={name}
             className="peer input"
@@ -171,7 +156,7 @@ export default function UploadForm() {
         <textarea
           onChange={updateData}
           maxLength={350}
-          // required
+          required
           placeholder=""
           className="input resize-none "
           name="desc"
@@ -182,9 +167,10 @@ export default function UploadForm() {
       {["runTime", "tagline", "creator"].map((name) => (
         <label className="col-span-2 text-xs">
           <input
+            required={name == "runTime" ? true : false}
             onChange={updateData}
             type={name == "runTime" ? "number" : "text"}
-            min={0}
+            min={10}
             max={200}
             placeholder=""
             className="input"
@@ -221,21 +207,19 @@ export default function UploadForm() {
       <label className="relative col-span-3">
         <select name="genre" id="genre" className="input peer">
           <option value="" selected disabled hidden>
-            genre
+            Select Genre
           </option>
-          <option value="action" className=" input">
-            action
-          </option>
-          <option value="action1">action1</option>
-          <option value="action2">action2</option>
+          {genresList.map((genre) => (
+            <option value={genre}>{genre}</option>
+          ))}
         </select>
-        <MiniAddButton stateUpdater={addGenreCastAwards} />
+        <MiniAddButton stateUpdater={addOrRemoveGenreCastAwards} />
       </label>
 
       <label className="col-span-3">
         <input placeholder="" name="cast" className="peer input" />
         <span>cast</span>
-        <MiniAddButton stateUpdater={addGenreCastAwards} />
+        <MiniAddButton stateUpdater={addOrRemoveGenreCastAwards} />
       </label>
 
       {[genreCastAwards.genre, genreCastAwards.cast].map(
@@ -243,7 +227,7 @@ export default function UploadForm() {
           values.length > 0 && (
             <ScrollerInput
               values={values}
-              stateUpdater={removeGenreCastAwards}
+              stateUpdater={addOrRemoveGenreCastAwards}
               scrollerFor={index == 0 ? "genre" : "cast"}
             />
           )
@@ -252,20 +236,18 @@ export default function UploadForm() {
       <label className="col-span-full">
         <select name="awards" id="awards" className="input peer">
           <option value="" selected disabled hidden>
-            awards
+            Select Awards
           </option>
-          <option value="action" className=" input">
-            action
-          </option>
-          <option value="action2">action2</option>
-          <option value="action3">action3</option>
+          {awardsList.map((award) => (
+            <option value={award}>{award}</option>
+          ))}
         </select>
-        <MiniAddButton stateUpdater={addGenreCastAwards} />
+        <MiniAddButton stateUpdater={addOrRemoveGenreCastAwards} />
       </label>
       {genreCastAwards.awards && genreCastAwards?.awards?.length > 0 && (
         <ScrollerInput
           values={genreCastAwards.awards}
-          stateUpdater={removeGenreCastAwards}
+          stateUpdater={addOrRemoveGenreCastAwards}
           scrollerFor="awards"
         />
       )}
@@ -276,6 +258,7 @@ export default function UploadForm() {
           placeholder=""
           type="file"
           name="file"
+          required
           className={`input text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
          file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700
        hover:file:bg-yellow-100`}
@@ -287,7 +270,7 @@ export default function UploadForm() {
       <button
         type="submit"
         className="peer relative col-span-full fancy disabled:cursor-no-drop"
-        // disabled={!Object.values(dataValidation).every((el) => el == true)}
+        disabled={!Object.values(dataValidation).every((el) => el == true)}
       >
         <span className="top-key"></span>
         <span className="text">submit</span>

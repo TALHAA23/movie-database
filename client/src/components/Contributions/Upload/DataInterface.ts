@@ -15,7 +15,7 @@ type Key =
   | "isTitleValid"
   | "isDescValid"
   | "isCastValid"
-  | "isGenre"
+  | "isGenreValid"
   | "isReleaseYearValid"
   | "isReleaseDateValid"
   | "isRunTimeValid";
@@ -26,7 +26,6 @@ interface DataValidationInterface {
   isCastValid: boolean | string;
   isGenreValid: boolean | string;
   isReleaseYearValid: boolean | string;
-  isReleaseDateValid: boolean | string;
   isRunTimeValid: boolean | string;
   isBannerValid: boolean | string;
 }

@@ -2,14 +2,15 @@ import { MouseEvent } from "react";
 const MiniAddButton = ({
   stateUpdater,
 }: {
-  stateUpdater: (key: string, value: string) => void;
+  stateUpdater: (action: "add" | "remove", key: string, value: string) => void;
 }) => {
   const sendUpdates = (event: MouseEvent<HTMLSpanElement>) => {
     const targetEl = event.currentTarget.parentElement?.querySelector(
       ".input"
     ) as HTMLSelectElement | HTMLInputElement;
     const { name, value } = targetEl;
-    stateUpdater(name, value);
+    stateUpdater("add", name, value);
+    targetEl.value = "";
   };
   return (
     <button

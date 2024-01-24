@@ -22,12 +22,20 @@
     gap: 6px;
 }
 
+.contribution-new-form label .input,
+textarea {
+    width: 100%;
+    padding: 10px 10px 20px 10px;
+    outline: 0;
+    border: 1px solid rgba(105, 105, 105, 0.397);
+    border-radius: 5px;
+}
+
 .contribution-new-form label {
     position: relative;
 }
 
-.contribution-new-form label .input,
-textarea {
+.contribution-new-form label .input {
     width: 100%;
     padding: 10px 10px 20px 10px;
     outline: 0;
@@ -39,19 +47,11 @@ textarea {
     border: 2px solid gray;
 }
 
-.contribution-new-form .input+span.valid-input {
-    color: green;
-}
-
-.contribution-new-form .input+span.invalid-input {
-    color: red;
-}
-
 .contribution-new-form label .input+span {
     position: absolute;
     left: 10px;
     top: 15px;
-    color: grey;
+    /* color: grey; */
     font-size: 0.9em;
     cursor: text;
     transition: 0.3s ease;
@@ -66,7 +66,7 @@ textarea {
 .contribution-new-form label .input:valid+span {
     top: 30px;
     font-size: 0.7em;
-    font-weight: normal;
+    font-weight: 600;
 }
 
 .contribution-new-form label textarea:focus+span,
