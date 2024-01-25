@@ -33,7 +33,6 @@ export const connectDatabase = async (
       });
     } catch (err) {
       console.log(err);
-      return res.status(500).send("Internal server error");
     }
   }
 

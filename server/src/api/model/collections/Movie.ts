@@ -1,16 +1,49 @@
 // File: model/collection/Movie.ts
 import mongoose, { Types } from "mongoose";
 const { Schema } = mongoose;
-import Actor from "../Actor";
+interface Review {
+  featured: boolean;
+  title: string;
+  review: string;
+  rating: number;
+  reviewDate: Date;
+  helpful: number;
+  unhelpful: number;
+}
+interface MovieInterface {
+  _id?: string;
+  title: string;
+  desc: string;
+  cast: string[] | [];
+  genre: string[] | [];
+  banner?: File;
+  awards?: string[] | [];
+  rating?: number;
+  releaseYear?: number;
+  releaseDate?: Date;
+  runTime: number;
+  tagline?: string;
+  creator?: string;
+  language?: string;
+  countryOfOrigin?: string;
+  reviews: Review[];
+  hasMore: boolean;
+}
 
 const MovieSchema = new Schema({
   title: { type: String, required: true },
-  releaseYear: Number,
-  releaseDate: { type: Date },
-  runTime: Number,
-  rating: Number,
-  desc: String,
-  genre: [String],
+  desc: { type: String, required: true },
+  genre: { type: [String], required: true },
+  awards: { type: [String], required: false },
+  banner: { type: String, required: true },
+  releaseYear: { type: Number, required: true },
+  releaseDate: { type: Date, required: false },
+  runTime: { type: Number, required: false },
+  rating: { type: Number, default: 0 },
+  tagline: { type: String, required: false },
+  creator: { type: String, required: false },
+  language: { type: String, required: false },
+  countryOfOrigin: { type: String, required: false },
   cast: [{ type: Schema.Types.ObjectId, ref: "actors" }],
   reviews: [
     {

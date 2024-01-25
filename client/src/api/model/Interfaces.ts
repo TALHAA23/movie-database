@@ -1,5 +1,5 @@
 interface MovieInterface {
-  _id: string;
+  _id?: string;
   title: string;
   desc: string;
   cast: string[] | [];

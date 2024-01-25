@@ -8,6 +8,8 @@ import validateAll from "./validateAll";
 import upload from "./upload";
 import genresList from "../../../utils/genresList";
 import awardsList from "../../../utils/awardsList";
+import { useMutation } from "@tanstack/react-query";
+import readFile from "./readFile";
 
 const DEBOUNCE_TIME = 200;
 const MIN_GENRE_CAST_AWARDS = 3;
@@ -50,6 +52,15 @@ export default function UploadForm() {
     initDataValidation()
   );
 
+  const uploadMutation = useMutation({
+    mutationKey: ["new-movie"],
+    mutationFn: upload,
+  });
+
+  if (uploadMutation.isPending) console.log("loading...");
+  if (uploadMutation.isError) console.log(uploadMutation.error);
+  if (uploadMutation.isSuccess) console.log(uploadMutation.data);
+
   useEffect(() => {
     setAbsoluteError(validateAll(dataValidation));
   }, [dataValidation]);
@@ -74,8 +85,6 @@ export default function UploadForm() {
 
   function validateBanner(event: ChangeEvent<HTMLInputElement>) {
     const validation = validateFile(event);
-    console.log(validation);
-
     setError(typeof validation == "boolean" ? false : validation);
     setDataValidation((prevData) => ({
       ...prevData,
@@ -115,15 +124,22 @@ export default function UploadForm() {
   }
 
   return (
-    <form onSubmit={upload} className="contribution-new-form grid grid-cols-6">
+    <form
+      onSubmit={uploadMutation.mutate}
+      className="contribution-new-form grid grid-cols-6"
+    >
       <h1 className=" col-span-full text-center font-semibold text-gray-600 text-2xl">
         Upload New Movie
       </h1>
-      {error && <small className="col-span-full text-center">{error}</small>}
+      {(error || uploadMutation.isError || uploadMutation.isPending) && (
+        <small className="col-span-full text-center">
+          {uploadMutation.error?.message || error || "Uploading..."}
+        </small>
+      )}
       <label className="col-span-full">
         <input
           onChange={updateData}
-          required
+          // required
           placeholder=""
           type="text"
           name="title"
@@ -135,7 +151,7 @@ export default function UploadForm() {
       {["releaseYear", "releaseDate"].map((name) => (
         <label className="col-span-3">
           <input
-            required={name == "releaseYear" ? true : false}
+            // required={name == "releaseYear" ? true : false}
             onChange={updateData}
             type={name == "releaseYear" ? "number" : "date"}
             min={1990}
@@ -156,7 +172,7 @@ export default function UploadForm() {
         <textarea
           onChange={updateData}
           maxLength={350}
-          required
+          // required
           placeholder=""
           className="input resize-none "
           name="desc"
@@ -167,7 +183,7 @@ export default function UploadForm() {
       {["runTime", "tagline", "creator"].map((name) => (
         <label className="col-span-2 text-xs">
           <input
-            required={name == "runTime" ? true : false}
+            // required={name == "runTime" ? true : false}
             onChange={updateData}
             type={name == "runTime" ? "number" : "text"}
             min={10}
@@ -258,7 +274,7 @@ export default function UploadForm() {
           placeholder=""
           type="file"
           name="file"
-          required
+          // required
           className={`input text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
          file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700
        hover:file:bg-yellow-100`}
@@ -270,7 +286,7 @@ export default function UploadForm() {
       <button
         type="submit"
         className="peer relative col-span-full fancy disabled:cursor-no-drop"
-        disabled={!Object.values(dataValidation).every((el) => el == true)}
+        // disabled={!Object.values(dataValidation).every((el) => el == true)}
       >
         <span className="top-key"></span>
         <span className="text">submit</span>

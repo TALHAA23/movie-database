@@ -12,4 +12,6 @@ router.get("/new-releases", movieController.newReleases);
 
 router.get("/related/:id", movieController.related);
 
+router.post("/protected/new", movieController.newMovie);
+
 export { router };

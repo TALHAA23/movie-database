@@ -15,7 +15,8 @@ export default function Error(
 
   try {
     if (err instanceof mongoose.Error) return mongooseErroHandler(err, res);
-    else if (err.hasOwnProperty("body")) return auth0ErrorHandler(err, res);
+    else if (err.hasOwnProperty("body") || err.hasOwnProperty("code"))
+      return auth0ErrorHandler(err, res);
     else return customErrorhandler(err, res);
   } catch (err) {
     console.log("RESPONSE WITH 500");

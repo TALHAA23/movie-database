@@ -2,7 +2,6 @@ import { DataInterface, DataValidationInterface } from "./DataInterface";
 export default function validateAll(
   data: DataValidationInterface
 ): false | string {
-  console.log("bsodfdf", data);
   if (!data.isTitleValid || typeof data.isTitleValid == "string") {
     return "Title is required.";
   }

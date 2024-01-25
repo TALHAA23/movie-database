@@ -7,6 +7,8 @@ import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";
 import getRecentReleases from "../services/movies/getRecentReleases";
 import getRelated from "../services/movies/getRelated";
+import uploadBanner from "../services/movies/uploadBanner";
+import addNewMovie from "../services/movies/addNewMovie";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   const mongodbObjectId = new Types.ObjectId(id);
@@ -55,4 +57,24 @@ const related: Middleware = async (req, res, next) => {
   }
 };
 
-export { movieById, topRatedMovies, randomMovies, newReleases, related };
+const newMovie: Middleware = async (req, res, next) => {
+  const body = req.body;
+  const { banner } = req.body;
+  try {
+    const fileDownloadURL = await uploadBanner(banner.fileName, banner.url);
+    const updatedData = { ...body, file: fileDownloadURL };
+    const result = await addNewMovie(updatedData);
+    res.json({ success: true });
+  } catch (err) {
+    next(err);
+  }
+};
+
+export {
+  movieById,
+  topRatedMovies,
+  randomMovies,
+  newReleases,
+  related,
+  newMovie,
+};
