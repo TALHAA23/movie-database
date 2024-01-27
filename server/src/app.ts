@@ -11,6 +11,7 @@ import { router as authRoutes } from "./api/routes/auth";
 import { config } from "dotenv";
 import mongoose from "mongoose";
 import Movie from "./api/model/collections/Movie";
+import findActors from "./api/services/movies/castToCastRef";
 config();
 const corsOptions = {
   origin: "http://localhost:5173",

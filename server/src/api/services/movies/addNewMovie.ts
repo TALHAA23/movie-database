@@ -1,9 +1,11 @@
+import { Types } from "mongoose";
 import Movie from "../../model/collections/Movie";
+import addMovieRefToCorrospondingActor from "./addMovieRefToCorrospondingActor";
 
 interface MovieInterface {
   title: string;
   desc: string;
-  cast: string[] | [];
+  cast: Types.ObjectId[];
   genre: string[] | [];
   banner?: File;
   awards?: string[] | [];
@@ -19,7 +21,8 @@ interface MovieInterface {
 export default async function addNewMovie(data: MovieInterface) {
   const doc = new Movie(data);
   try {
-    const result = doc.save();
+    const result = await doc.save();
+    await addMovieRefToCorrospondingActor(result._id, data.cast);
     return result;
   } catch (err) {
     throw err;

@@ -11,7 +11,7 @@ export default function Error(
   next: NextFunction
 ) {
   console.log("ERROR HANDLING_____________");
-  // console.log(err);
+  console.log(err);
 
   try {
     if (err instanceof mongoose.Error) return mongooseErroHandler(err, res);

@@ -8,7 +8,8 @@ import HttpError from "../../../../shared/httpErrorsEnum";
 import getRecentReleases from "../services/movies/getRecentReleases";
 import getRelated from "../services/movies/getRelated";
 import uploadBanner from "../services/movies/uploadBanner";
-import addNewMovie from "../services/movies/addNewMovie";
+import castToCastRef from "../services/movies/addNewMovie";
+import findActors from "../services/movies/castToCastRef";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   const mongodbObjectId = new Types.ObjectId(id);
@@ -59,11 +60,16 @@ const related: Middleware = async (req, res, next) => {
 
 const newMovie: Middleware = async (req, res, next) => {
   const body = req.body;
-  const { banner } = req.body;
+  const { banner, cast } = req.body;
   try {
-    const fileDownloadURL = await uploadBanner(banner.fileName, banner.url);
-    const updatedData = { ...body, file: fileDownloadURL };
-    const result = await addNewMovie(updatedData);
+    // const fileDownloadURL = await uploadBanner(banner.fileName, banner.url);
+    const actorNamesToDocRef = await findActors(cast);
+    const updatedData = {
+      ...body,
+      banner: "fileDownloadURL",
+      cast: actorNamesToDocRef,
+    };
+    const result = await castToCastRef(updatedData);
     res.json({ success: true });
   } catch (err) {
     next(err);

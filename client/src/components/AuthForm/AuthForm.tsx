@@ -6,6 +6,7 @@ import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";
 import { useMutation } from "@tanstack/react-query";
 import { Link, useNavigate } from "react-router-dom";
+import { useMessageUpdater } from "../../Contexts/MessageProvider";
 
 const DEBOUNCE_TIME = 500; //ms
 
@@ -21,6 +22,8 @@ const isEmail = (name: string) => name == "email";
 const isSignupPage = () => location.pathname.split("/").pop() == "signup";
 
 export default function AuthForm() {
+  const updateHomeMessage = useMessageUpdater();
+  console.log(updateHomeMessage);
   const navigate = useNavigate();
   const timeoutId = useRef<undefined | number>();
   const [error, setError] = useState<FeildError>(false);
@@ -36,7 +39,10 @@ export default function AuthForm() {
   });
 
   useEffect(() => {
-    if (loginMutation.isSuccess) navigate("/", { state: loginMutation.data });
+    if (!loginMutation.isSuccess) return;
+    console.log(loginMutation.data);
+    updateHomeMessage(`Logged in as ${loginMutation.data.nickname}`, "success");
+    navigate("/", { state: loginMutation.data });
   }, [loginMutation.isSuccess]);
 
   function changeAuthState(key: AuthStates, value: boolean) {

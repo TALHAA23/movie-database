@@ -5,11 +5,12 @@ import MiniAddButton from "./MiniAddButton";
 import { validateData, validateFile } from "./validateData";
 import { DataValidationInterface, Key } from "./DataInterface";
 import validateAll from "./validateAll";
-import upload from "./upload";
+import upload from "../../../api/services/newMovieFormSubmission";
 import genresList from "../../../utils/genresList";
 import awardsList from "../../../utils/awardsList";
 import { useMutation } from "@tanstack/react-query";
-import readFile from "./readFile";
+import { useNavigate } from "react-router-dom";
+import { useMessageUpdater } from "../../../Contexts/MessageProvider";
 
 const DEBOUNCE_TIME = 200;
 const MIN_GENRE_CAST_AWARDS = 3;
@@ -42,7 +43,9 @@ const initDataValidation = (): DataValidationInterface => ({
 });
 
 export default function UploadForm() {
+  const updateMessage = useMessageUpdater();
   const timeoutId = useRef<undefined | number>();
+  const navigate = useNavigate();
   const [genreCastAwards, setGenreCastAwards] =
     useState<GenreCastAwardsInterface>(initGenreCastAwards());
 
@@ -64,6 +67,12 @@ export default function UploadForm() {
   useEffect(() => {
     setAbsoluteError(validateAll(dataValidation));
   }, [dataValidation]);
+
+  useEffect(() => {
+    if (!uploadMutation.isSuccess) return;
+    updateMessage("Movie added successfully", "success");
+    navigate("/");
+  }, [uploadMutation.isSuccess]);
 
   function updateData(
     event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -273,7 +282,7 @@ export default function UploadForm() {
           onChange={validateBanner}
           placeholder=""
           type="file"
-          name="file"
+          name="banner"
           // required
           className={`input text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
          file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700
