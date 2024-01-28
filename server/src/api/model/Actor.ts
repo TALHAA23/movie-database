@@ -7,11 +7,11 @@ const ActorSchema = new Schema({
   about: String,
   DOB: Date,
   achievments: [String],
-  knownFor: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
+  knownFor: [{ type: Schema.Types.ObjectId, ref: "movie" }],
   movies: {
-    upcoming: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
-    previousMovies: [{ type: Schema.Types.ObjectId, ref: "Movie" }],
+    upcoming: [{ type: Schema.Types.ObjectId, ref: "movie" }],
+    previousMovies: [{ type: Schema.Types.ObjectId, ref: "movie" }],
   },
 });
 
-export default mongoose.model("Actor", ActorSchema);
+export default mongoose.model("actor", ActorSchema);

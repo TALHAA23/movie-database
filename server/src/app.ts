@@ -8,10 +8,12 @@ import { router as userRoutes } from "./api/routes/user.js";
 import { router as searchRoutes } from "./api/routes/find.js";
 import { router as movieRoutes } from "./api/routes/movie.js";
 import { router as authRoutes } from "./api/routes/auth";
+import { router as reviewRoutes } from "./api/routes/review";
 import { config } from "dotenv";
-import mongoose from "mongoose";
+import mongoose, { Types } from "mongoose";
 import Movie from "./api/model/collections/Movie";
 import findActors from "./api/services/movies/castToCastRef";
+import { getMovieById } from "./api/services/movies/getMovieById";
 config();
 const corsOptions = {
   origin: "http://localhost:5173",
@@ -30,6 +32,7 @@ app.use("/api/users/", userRoutes);
 app.use("/api/movies", movieRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/find", searchRoutes);
+app.use("/api/review", reviewRoutes);
 app.use(Error); //always at bottom
 
 app.get("/", (req, res) => {

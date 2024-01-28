@@ -15,7 +15,6 @@ const jwtCheck = auth({
 const jwtCheckMiddleware: Middleware = (req, res, next) => {
   if (req.path.includes("/protected")) {
     const token = req?.cookies?.access_token;
-
     if (!token) throw errorThrower("unauthorized", HttpError.Unauthorized);
     req.headers["authorization"] = `Bearer ${token}`;
     return jwtCheck(req, res, next);

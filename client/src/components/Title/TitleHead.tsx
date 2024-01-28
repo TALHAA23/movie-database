@@ -6,11 +6,14 @@ one strange little girl.`;
 interface TitleHeadData {
   title: string;
   desc: string;
-  genre: [string];
+  genre: string[];
   releaseYear: number;
   runTime: number;
   reviewsCount: number;
   rating: number;
+  banner: string;
+  language?: string;
+  countryOfOrigin?: string;
 }
 
 export default function TitleHead({
@@ -21,18 +24,28 @@ export default function TitleHead({
   reviewsCount,
   rating,
   desc,
+  banner,
+  language,
+  countryOfOrigin,
 }: TitleHeadData) {
   return (
     <div
       className={`h-auto flex flex-col lg:flex-row gap-0 bg-black/90 text-white`}
     >
       <img
-        src={testImages.protrait}
+        loading="lazy"
+        src={banner}
         alt="img"
         className="w-full h-[300px] lg:h-auto lg:w-1/3 object-cover"
       />
       <div className="grow relative  flex flex-col p-6">
-        <Title title={title} releaseYear={releaseYear} runTime={runTime} />
+        <Title
+          title={title}
+          releaseYear={releaseYear}
+          runTime={runTime}
+          language={language}
+          countryOfOrigin={countryOfOrigin}
+        />
         <Genres genres={genre} />
         <p className="w-full text-sm mb-10 sm:mb-0 lg:text-lg md:w-[70%]">
           {desc}
@@ -53,8 +66,16 @@ interface Title {
   title: string;
   releaseYear: number;
   runTime: number;
+  language?: string;
+  countryOfOrigin?: string;
 }
-function Title({ title, releaseYear, runTime }: Title) {
+function Title({
+  title,
+  releaseYear,
+  runTime,
+  language,
+  countryOfOrigin,
+}: Title) {
   return (
     <div className=" lg:space-y-2">
       <small className=" font-semibold text-[#FDE047]">TRENDING</small>
@@ -62,21 +83,20 @@ function Title({ title, releaseYear, runTime }: Title) {
         {title}
       </h1>
       <div className="flex gap-x-4">
-        <small className=" relative  after:absolute after:w-2 after:h-2 after:bg-fuchsia-600 after:rounded-full after:top-1/2 after:-translate-y-1/2 after:ml-1">
-          Movie
-        </small>
-        <small className=" relative after:absolute after:w-2 after:h-2 after:bg-fuchsia-600 after:rounded-full after:top-1/2 after:-translate-y-1/2 after:ml-1">
-          {releaseYear}
-        </small>
-        <small className=" relative [&(:last-child)::after]:bg-transparent after:absolute after:w-2 after:h-2 after:bg-fuchsia-600 after:rounded-full after:top-1/2 after:-translate-y-1/2 after:ml-1">
-          {runTime}
-        </small>
+        {["Movie", releaseYear, runTime, language, countryOfOrigin].map(
+          (el) =>
+            el && (
+              <small className=" relative last:after:bg-transparent after:absolute after:w-2 after:h-2 after:bg-fuchsia-600 after:rounded-full after:top-1/2 after:-translate-y-1/2 after:ml-1">
+                {el}
+              </small>
+            )
+        )}
       </div>
     </div>
   );
 }
 
-function Genres({ genres }: { genres: [string] }) {
+function Genres({ genres }: { genres: string[] }) {
   return (
     <div className="flex my-2">
       {genres.map((genre) => (

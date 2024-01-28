@@ -2,17 +2,19 @@ interface MovieInterface {
   _id?: string;
   title: string;
   desc: string;
-  cast: string[] | [];
+  cast: ActorInterface[];
   genre: string[] | [];
-  banner?: File;
+  banner?: string;
   awards?: string[] | [];
-  releaseYear?: number;
-  releaseDate?: Date;
+  releaseYear: number;
+  releaseDate?: string;
   runTime: number;
   tagline?: string;
   creator?: string;
   language?: string;
   countryOfOrigin?: string;
+  reviews?: [Review];
+  rating?: number;
 }
 // interface MovieInterface {
 //   _id: string;
@@ -39,6 +41,7 @@ interface Review {
 }
 
 interface ActorInterface {
+  _id?: string;
   name: string;
   about: string;
   DOB: Date;

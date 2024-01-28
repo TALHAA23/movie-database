@@ -1,7 +1,6 @@
 import errorThrower from "../../../shared/errorThrower";
 
 export default async function movieByIdApi(id: string) {
-  console.log(id);
   const response = await fetch(`http://localhost:3000/api/movies/movie/${id}`);
 
   if (!response.ok) {

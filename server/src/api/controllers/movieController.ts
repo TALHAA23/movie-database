@@ -62,11 +62,11 @@ const newMovie: Middleware = async (req, res, next) => {
   const body = req.body;
   const { banner, cast } = req.body;
   try {
-    // const fileDownloadURL = await uploadBanner(banner.fileName, banner.url);
+    const fileDownloadURL = await uploadBanner(banner.fileName, banner.url);
     const actorNamesToDocRef = await findActors(cast);
     const updatedData = {
       ...body,
-      banner: "fileDownloadURL",
+      banner: fileDownloadURL,
       cast: actorNamesToDocRef,
     };
     const result = await castToCastRef(updatedData);

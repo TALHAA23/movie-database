@@ -29,7 +29,6 @@ export default function MovieList({
       <ErrorCard error={query.error} />
     );
   if (!query?.data) return <h1>not found</h1>;
-  console.log(query.data);
 
   return (
     <Frame frameTitle={title}>

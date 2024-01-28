@@ -17,7 +17,14 @@ interface MessageContextInterface {
   information: Information | null;
 }
 
-const MessageContext = createContext<null | MessageContextInterface>(null);
+const MessageContext = createContext<MessageContextInterface>({
+  information: null,
+  updateMessage: () => {
+    throw new Error(
+      "updateMessage function should not be called before the provider is rendered"
+    );
+  },
+});
 export const useMessageUpdater = () =>
   useContext(MessageContext)?.updateMessage;
 export const useMessage = () => useContext(MessageContext)?.information;

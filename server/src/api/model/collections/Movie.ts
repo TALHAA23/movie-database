@@ -44,19 +44,19 @@ const MovieSchema = new Schema({
   creator: { type: String, required: false },
   language: { type: String, required: false },
   countryOfOrigin: { type: String, required: false },
-  cast: [{ type: Schema.Types.ObjectId, ref: "actors" }],
+  cast: [{ type: Schema.Types.ObjectId, ref: "actor" }],
   reviews: [
     {
       featured: Boolean,
       title: { type: String, required: true, maxLength: 50 },
       review: { type: String, required: true, maxLength: 500 },
-      rating: Number,
-      reviewDate: Date,
-      helpful: Number,
-      unhelpful: Number,
+      rating: { type: Number, default: 0 },
+      reviewDate: { type: Date, default: new Date() },
+      helpful: { type: Number, default: 0 },
+      unhelpful: { type: Number, default: 0 },
     },
   ],
   hasMore: { type: Boolean, require: false },
 });
 
-export default mongoose.model("Movie", MovieSchema);
+export default mongoose.model("movie", MovieSchema);
