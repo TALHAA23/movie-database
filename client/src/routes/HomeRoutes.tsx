@@ -3,6 +3,7 @@ import Home from "../components/Home/Home";
 import Find from "../components/Find/Find";
 import Layout from "../components/Home/Layout";
 import Title from "../components/Title/Title";
+import Reviews from "../components/Review/Reviews";
 
 export default function HomeRoutes() {
   return useRoutes([
@@ -21,6 +22,10 @@ export default function HomeRoutes() {
         {
           path: "title/:id",
           element: <Title />,
+        },
+        {
+          path: "title/:id/reviews",
+          element: <Reviews />,
         },
       ],
     },

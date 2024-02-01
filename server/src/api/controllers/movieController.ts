@@ -10,6 +10,10 @@ import getRelated from "../services/movies/getRelated";
 import uploadBanner from "../services/movies/uploadBanner";
 import castToCastRef from "../services/movies/addNewMovie";
 import findActors from "../services/movies/castToCastRef";
+import getMovieReviews from "../services/movies/getMovieReviews";
+import addReviewRating from "../services/movies/addReviewRating";
+import addReviewToMovie from "../services/movies/addReviewToMovie";
+import addMovieRating from "../services/movies/addMovieRating";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   const mongodbObjectId = new Types.ObjectId(id);
@@ -76,6 +80,34 @@ const newMovie: Middleware = async (req, res, next) => {
   }
 };
 
+const movieReviews: Middleware = async (req, res, next) => {
+  const id = req.params.id;
+  try {
+    const result = await getMovieReviews(id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const publishRating: Middleware = async (req, res, next) => {
+  const id = req.params.id;
+  const { action, rating, reviewRef } = req.body;
+  try {
+    const result =
+      action == "publish-rating-on-review"
+        ? await addReviewRating({
+            parentDocId: id,
+            subDocRef: reviewRef,
+            rating,
+          })
+        : addMovieRating();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export {
   movieById,
   topRatedMovies,
@@ -83,4 +115,6 @@ export {
   newReleases,
   related,
   newMovie,
+  movieReviews,
+  publishRating,
 };

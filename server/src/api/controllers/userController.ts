@@ -16,9 +16,9 @@ const recommendations: Middleware = async (req, res, next) => {
 };
 
 const userInfo: Middleware = async (req, res, next) => {
+  console.log("Getting user!");
   try {
     const token = req?.cookies?.access_token;
-    console.log(token);
     const info = await getUserInfo(token);
     res.json(info);
   } catch (err) {

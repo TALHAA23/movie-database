@@ -39,7 +39,6 @@ const MovieSchema = new Schema({
   releaseYear: { type: Number, required: true },
   releaseDate: { type: Date, required: false },
   runTime: { type: Number, required: false },
-  rating: { type: Number, default: 0 },
   tagline: { type: String, required: false },
   creator: { type: String, required: false },
   language: { type: String, required: false },
@@ -47,15 +46,16 @@ const MovieSchema = new Schema({
   cast: [{ type: Schema.Types.ObjectId, ref: "actor" }],
   reviews: [
     {
-      featured: Boolean,
+      featured: { type: Boolean, require: false },
       title: { type: String, required: true, maxLength: 50 },
       review: { type: String, required: true, maxLength: 500 },
-      rating: { type: Number, default: 0 },
       reviewDate: { type: Date, default: new Date() },
       helpful: { type: Number, default: 0 },
       unhelpful: { type: Number, default: 0 },
+      ratings: { type: [Number], default: [0] },
     },
   ],
+  numberofReviews: { type: Number, require: false },
   hasMore: { type: Boolean, require: false },
 });
 

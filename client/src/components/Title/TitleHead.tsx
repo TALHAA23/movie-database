@@ -1,15 +1,16 @@
+import { Link } from "react-router-dom";
 import testImages from "../../testimages";
 const testDesc = `When a young boy vanishes, a small town uncovers a mystery
 involving secret experiments, terrifying supernatural forces and
 one strange little girl.`;
 
 interface TitleHeadData {
-  title: string;
+  title?: string;
   desc: string;
   genre: string[];
   releaseYear: number;
   runTime: number;
-  reviewsCount: number;
+  numberofReviews?: number;
   rating: number;
   banner: string;
   language?: string;
@@ -17,11 +18,11 @@ interface TitleHeadData {
 }
 
 export default function TitleHead({
-  title,
+  title = "Unknow Titles",
   genre,
   releaseYear,
   runTime,
-  reviewsCount,
+  numberofReviews = 0,
   rating,
   desc,
   banner,
@@ -50,12 +51,12 @@ export default function TitleHead({
         <p className="w-full text-sm mb-10 sm:mb-0 lg:text-lg md:w-[70%]">
           {desc}
         </p>
-        <Table />
+        {/* <Table /> */}
         <Highlights
           yourRating={2.0}
           rating={rating}
           numberOfRatings={200}
-          reviewsCount={reviewsCount}
+          numberofReviews={numberofReviews}
         />
       </div>
     </div>
@@ -135,12 +136,12 @@ interface HighlightsData {
   numberOfRatings: number;
   rating: number;
   yourRating: number;
-  reviewsCount: number;
+  numberofReviews: number;
 }
 function Highlights({
   rating,
   yourRating,
-  reviewsCount,
+  numberofReviews,
   numberOfRatings,
 }: HighlightsData) {
   return (
@@ -156,28 +157,31 @@ function Highlights({
           </p>
         </div>
       ))}
-      <div className="bg-[#FDE047] hover:bg-[#fddf47e0] leading-tight w-full rounded sm:px-4 lg:px-9 sm:py-1 text-center">
-        <p className=" font-semibold">{reviewsCount}</p>
+      <Link
+        to="./reviews"
+        className="bg-[#FDE047] hover:bg-[#fddf47e0] leading-tight w-full rounded sm:px-4 lg:px-9 sm:py-1 text-center"
+      >
+        <p className=" font-semibold">{numberofReviews}</p>
         <p className=" text-xs">Reviews</p>
-      </div>
+      </Link>
     </div>
   );
 }
 
-function Table() {
-  const content = [
-    ["Creators", "Duffer brother and others"],
-    ["Stars", "Millie, Bobbie and Brown"],
-    ["Awards", "Oscar and  5 more"],
-  ];
-  return (
-    <div className=" hidden lg:block w-1/2 mt-auto">
-      {content.map(([key, value]) => (
-        <div className="flex  text-center border-b text-sm lg:text-base">
-          <p className="w-1/3 font-semibold">{key}</p>
-          <p className="grow">{value}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
+// function Table() {
+//   const content = [
+//     ["Creators", "Duffer brother and others"],
+//     ["Stars", "Millie, Bobbie and Brown"],
+//     ["Awards", "Oscar and  5 more"],
+//   ];
+//   return (
+//     <div className=" hidden lg:block w-1/2 mt-auto">
+//       {content.map(([key, value]) => (
+//         <div className="flex  text-center border-b text-sm lg:text-base">
+//           <p className="w-1/3 font-semibold">{key}</p>
+//           <p className="grow">{value}</p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }

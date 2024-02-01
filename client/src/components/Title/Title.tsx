@@ -17,7 +17,7 @@ import Tagline from "./Tagline";
 import Details from "./Details";
 import AddReview from "./AddReview";
 import Information from "../Information/Information";
-import { useMessageUpdater } from "../../Contexts/MessageProvider";
+import RatingStars from "../Review/RatingStars";
 export default function Title() {
   const { id } = useParams();
   const [featuredReview, setFeaturedReview] = useState<Review | undefined>();
@@ -25,12 +25,12 @@ export default function Title() {
 
   const { isPending, data, isError, error } = useQuery<MovieInterface>({
     retry: 1,
-    queryKey: ["movie-by-id", id],
+    queryKey: [id],
     queryFn: () => movieByIdApi(id),
     staleTime: 1000 * 60 * 60,
   });
 
-  const relatedMoviesQuery = useQuery<[MovieInterface]>({
+  const relatedMoviesQuery = useQuery<MovieInterface[]>({
     retry: 1,
     queryKey: [`related-for-${id}`],
     queryFn: () => movieListApi("related", id),
@@ -54,7 +54,7 @@ export default function Title() {
       <Information />
       <AddReview movieRef={data._id as string} />
       <TitleHead
-        title={data?.title || "Unknown Title"}
+        title={data?.title}
         banner={data.banner || testImages.landscape}
         desc={data.desc}
         language={data.language}
@@ -63,12 +63,15 @@ export default function Title() {
         genre={data?.genre || []}
         runTime={data.runTime}
         releaseYear={data.releaseYear}
-        reviewsCount={data.reviews?.length || 0}
+        numberofReviews={data.numberofReviews}
       />
       {data.tagline && <Tagline tagline={data.tagline} />}
+      <div className=" bg-white/10 flex justify-center items-center">
+        <h1>Rate the Movie:</h1>
+        <RatingStars action="publish-rating-on-movie" />
+      </div>
       <Casts casts={data.cast} />
       <MovieList title="Related" query={relatedMoviesQuery} />
-      {featuredReview && <FeaturedReview {...featuredReview} />}
       {data.awards?.length && <Awards awards={data.awards} />}
       <Details
         runTime={data.runTime}
@@ -78,15 +81,13 @@ export default function Title() {
         language={data.language}
         creator={data.creator}
       />
-      <FeaturedReview
-        title="Amazing comment"
-        reviewDate={new Date()}
-        helpful={20}
-        unhelpful={30}
-        rating={4}
-        featured={true}
-        review="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod ultrices massa, et feugiat ipsum consequat id. Nulla facilisi. Proin pellentesque, lorem sed semper varius, enim mauris iaculis tortor, eu dapibus urna orci et velit. Quisque commodo, sapien a aliquet bibendum, leo sem pharetra dui, non ullamcorper nisl diam vitae mauris. Donec at"
-      />
+      {data.reviews.length && (
+        <FeaturedReview
+          {...data.reviews?.[0]}
+          numberofRatings={data.reviews?.[0].ratings.length}
+          numberofReviews={data.numberofReviews}
+        />
+      )}
     </section>
   );
 }

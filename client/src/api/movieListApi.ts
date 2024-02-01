@@ -26,9 +26,8 @@ export default async function movieListApi(
   });
 
   if (!response.ok) {
-    const status = response.status;
     const message = await response.text().then((text) => text);
-    throw errorThrower(message, status);
+    throw new Error(message);
   }
 
   const data = await response.json();

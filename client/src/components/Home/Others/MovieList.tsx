@@ -5,14 +5,10 @@ import {
 } from "../../../Contexts/HomeDataProvider";
 import MovieCard from "../../Cards/MovieCard";
 import ErrorCard from "../../Error/SectionError";
-import Unauthorized from "../../Error/Unauthorized";
 import SectionLoader from "../../Loaders/SectionLoader";
 import Frame from "./Frame";
 import { MovieInterface } from "../../../api/model/Interfaces";
-
-// type SectionNameType = "recommendations" | "topRated";
-// const isRecommendations = (value: SectionNameType) =>
-//   value == "recommendations";
+import SignupAppeal from "../../Information/SiginupAppeal";
 
 export default function MovieList({
   title,
@@ -23,8 +19,11 @@ export default function MovieList({
 }) {
   if (query?.isPending) return <SectionLoader />;
   if (query?.isError)
-    return query.error.name == "Unauthorized" ? (
-      <Unauthorized />
+    return query.error.message == "unauthorized" ? (
+      <SignupAppeal
+        text="Sign In to see recommendations"
+        subtext=" The section have movies just for you, Sign In 👇"
+      />
     ) : (
       <ErrorCard error={query.error} />
     );

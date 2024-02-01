@@ -4,6 +4,10 @@ const router = express.Router();
 
 router.get("/movie/:id", movieController.movieById);
 
+router.get("/movie/:id/reviews", movieController.movieReviews);
+
+router.post("/movie/:id/reviews/publish/rating", movieController.publishRating);
+
 router.get("/top-rated", movieController.topRatedMovies);
 
 router.get("/random", movieController.randomMovies);

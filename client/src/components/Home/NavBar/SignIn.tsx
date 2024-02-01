@@ -4,8 +4,8 @@ export default function SignIn() {
     <Link to="auth/login">
       <button
         className={`h-full
-      bg-yellow-300 text-black font-semibold rounded px-3
-      hover:bg-yellow-300/75 transition-colors duration-200 
+      bg-yellow-300 text-black font-semibold rounded px-3 py-2
+      hover:bg-yellow-300/75 transition-colors duration-100 active:scale-95 
       `}
       >
         Sign In

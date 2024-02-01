@@ -1,5 +1,5 @@
 interface MovieInterface {
-  _id?: string;
+  _id: string;
   title: string;
   desc: string;
   cast: ActorInterface[];
@@ -13,28 +13,16 @@ interface MovieInterface {
   creator?: string;
   language?: string;
   countryOfOrigin?: string;
-  reviews?: [Review];
+  reviews: Review[];
+  numberofReviews?: number;
   rating?: number;
 }
-// interface MovieInterface {
-//   _id: string;
-//   title: string;
-//   releaseYear: number;
-//   releaseDate: Date;
-//   runTime: number;
-//   rating: number;
-//   desc: string;
-//   genre: [string];
-//   cast: [any]; //! change require
-//   reviews?: [Review];
-//   hasMore?: boolean;
-// }
 
 interface Review {
-  featured: boolean;
+  _id: string;
   title: string;
   review: string;
-  rating: number;
+  ratings: number[];
   reviewDate: Date;
   helpful: number;
   unhelpful: number;
@@ -45,12 +33,20 @@ interface ActorInterface {
   name: string;
   about: string;
   DOB: Date;
-  achievments: [String];
-  knownFor: [MovieInterface];
+  achievments: String[];
+  knownFor: MovieInterface[];
   movies: {
-    upcoming: [MovieInterface];
-    previousMovies: [MovieInterface];
+    upcoming: MovieInterface[];
+    previousMovies: MovieInterface[];
   };
 }
+type Action = "publish-rating-on-review" | "publish-rating-on-movie";
 
-export type { MovieInterface, Review, ActorInterface };
+interface RatingPayload {
+  action: Action;
+  movieRef: string;
+  reviewRef?: string;
+  rating: number;
+}
+
+export type { MovieInterface, Review, ActorInterface, RatingPayload, Action };

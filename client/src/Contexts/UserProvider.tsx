@@ -1,5 +1,6 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { ReactNode, createContext, useContext } from "react";
+import getUserInfo from "../api/userInfoApi";
 
 interface UserInfo {
   email: string;
@@ -9,40 +10,28 @@ interface UserInfo {
   picture: string;
   sub: string;
   updated_at: string;
-  readonly isLoggedin: boolean;
 }
 
 interface UserContext {
-  userInfo: UseQueryResult<UserInfo>;
+  userInfoQuery: UseQueryResult<UserInfo>;
 }
 
 const UserContext = createContext<null | UserContext>(null);
 
-export const useUserInfo = () => useContext(UserContext)?.userInfo;
-
-const userInfoFromLocalStorage = localStorage.getItem("userinfo");
+export const useUserInfo = () => useContext(UserContext)?.userInfoQuery;
+export const useIsUserLoggedIn = () =>
+  useContext(UserContext)?.userInfoQuery.data ? true : false;
 
 export default function UserProvider({ children }: { children: ReactNode }) {
   const userInfoQuery = useQuery({
     queryKey: ["userinfo"],
     queryFn: getUserInfo,
-    staleTime: 60 * 60,
+    staleTime: 1000 * 60 * 60,
     retry: 1,
   });
 
-  async function getUserInfo() {
-    const response = await fetch(
-      "http://localhost:3000/api/users/protected/userinfo",
-      {
-        credentials: "include",
-      }
-    );
-    if (!response.ok) return null;
-    const data = await response.json();
-    return data;
-  }
   return (
-    <UserContext.Provider value={{ userInfo: userInfoQuery }}>
+    <UserContext.Provider value={{ userInfoQuery }}>
       {children}
     </UserContext.Provider>
   );

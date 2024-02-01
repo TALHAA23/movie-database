@@ -4,8 +4,8 @@ import authFormSubmission from "../../api/services/authFormSubmission";
 import "./authForm.css";
 import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";
-import { useMutation } from "@tanstack/react-query";
-import { Link, useNavigate } from "react-router-dom";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useMessageUpdater } from "../../Contexts/MessageProvider";
 
 const DEBOUNCE_TIME = 500; //ms
@@ -22,9 +22,10 @@ const isEmail = (name: string) => name == "email";
 const isSignupPage = () => location.pathname.split("/").pop() == "signup";
 
 export default function AuthForm() {
+  const { redirect } = useLocation().state;
   const updateHomeMessage = useMessageUpdater();
-  console.log(updateHomeMessage);
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const timeoutId = useRef<undefined | number>();
   const [error, setError] = useState<FeildError>(false);
   const [authState, setAuthState] = useState({
@@ -40,9 +41,9 @@ export default function AuthForm() {
 
   useEffect(() => {
     if (!loginMutation.isSuccess) return;
-    console.log(loginMutation.data);
+    queryClient.invalidateQueries({ queryKey: ["userinfo"] });
     updateHomeMessage(`Logged in as ${loginMutation.data.nickname}`, "success");
-    navigate("/", { state: loginMutation.data });
+    navigate(redirect || "/");
   }, [loginMutation.isSuccess]);
 
   function changeAuthState(key: AuthStates, value: boolean) {

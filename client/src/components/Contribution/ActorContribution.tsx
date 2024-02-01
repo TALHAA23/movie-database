@@ -1,7 +1,7 @@
 export default function ActorContribution() {
   return (
     <div className=" h-[40vh] bg-black/90 text-white flex flex-col items-center justify-center">
-      <h1 className="font-bold text-2xl">The section requir contribution</h1>
+      <h1 className="font-bold text-2xl">The section require contribution</h1>
       <small className="text-sm font-light">
         Help us to grow, contribute to the section!
       </small>
