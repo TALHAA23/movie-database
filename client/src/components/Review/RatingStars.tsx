@@ -32,9 +32,13 @@ const RatingStars = ({
 
   useEffect(() => {
     if (!ratingMutation.isSuccess) return;
-    queryClient.invalidateQueries({
-      queryKey: [`${id}-reviews`],
-    });
+    action == "publish-rating-on-review"
+      ? queryClient.invalidateQueries({
+          queryKey: [`${id}-reviews`],
+        })
+      : queryClient.invalidateQueries({
+          queryKey: [id],
+        });
     updateMessage(`${capturedRating} star(s) rating published!`, "success");
   }, [ratingMutation.isSuccess]);
 

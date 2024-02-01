@@ -1,17 +1,22 @@
 import { Link } from "react-router-dom";
 import testImages from "../../testimages";
+import takeAvg from "../../utils/takeAvg";
 
 interface MovieCardInterface {
   title: string;
-  rating: number;
+  ratings: number[];
   id: string;
 }
 
-export default function MovieCard({ title, rating, id }: MovieCardInterface) {
+export default function MovieCard({
+  title,
+  ratings = [0],
+  id,
+}: MovieCardInterface) {
   return (
     <div className="group shrink-0 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex flex-col gap-0 rounded">
       <Image />
-      <MovieCardInformation title={title} rating={rating} id={id} />
+      <MovieCardInformation title={title} rating={takeAvg(ratings)} id={id} />
     </div>
   );
 }
@@ -26,7 +31,7 @@ const Image = () => (
 
 interface MovieCardInformationInterface {
   title: string;
-  rating: number;
+  rating: string;
   id: string;
 }
 
@@ -35,7 +40,6 @@ const MovieCardInformation = ({
   rating,
   id,
 }: MovieCardInformationInterface) => {
-  const name = "fsddsf";
   return (
     <div className="relative h-[30%] flex flex-col justify-around px-1 bg-slate-900/30 text-white rounded-b">
       <div className=" flex justify-between">

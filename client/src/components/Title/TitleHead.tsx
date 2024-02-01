@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import testImages from "../../testimages";
+import takeAvg from "../../utils/takeAvg";
 const testDesc = `When a young boy vanishes, a small town uncovers a mystery
 involving secret experiments, terrifying supernatural forces and
 one strange little girl.`;
@@ -11,7 +12,7 @@ interface TitleHeadData {
   releaseYear: number;
   runTime: number;
   numberofReviews?: number;
-  rating: number;
+  ratings: number[];
   banner: string;
   language?: string;
   countryOfOrigin?: string;
@@ -23,7 +24,7 @@ export default function TitleHead({
   releaseYear,
   runTime,
   numberofReviews = 0,
-  rating,
+  ratings,
   desc,
   banner,
   language,
@@ -52,12 +53,7 @@ export default function TitleHead({
           {desc}
         </p>
         {/* <Table /> */}
-        <Highlights
-          yourRating={2.0}
-          rating={rating}
-          numberOfRatings={200}
-          numberofReviews={numberofReviews}
-        />
+        <Highlights ratings={ratings} numberofReviews={numberofReviews} />
       </div>
     </div>
   );
@@ -133,30 +129,19 @@ function DuoHighlight() {
 }
 
 interface HighlightsData {
-  numberOfRatings: number;
-  rating: number;
-  yourRating: number;
+  ratings: number[];
   numberofReviews: number;
 }
-function Highlights({
-  rating,
-  yourRating,
-  numberofReviews,
-  numberOfRatings,
-}: HighlightsData) {
+function Highlights({ ratings, numberofReviews }: HighlightsData) {
   return (
     <div className="relative my-2 md:absolute md:bottom-2 md:right-2 grid grid-cols-3 md:grid-cols-1 gap-1 w-full md:w-[6cm] text-sm sm:text-base text-black lg:font-bold">
-      {[rating, yourRating].map((rate) => (
-        <div className="bg-[#FDE047] hover:bg-[#fddf47e0] rounded flex w-full  ">
-          <div className="w-1/3 font-xs flex flex-col justify-center items-center gap-0 leading-tight bg-[#C3AD33] text-white/80 rounded-l sm:py-1 ">
-            <p>{rate}</p>
-            <small>{numberOfRatings}</small>
-          </div>
-          <p className=" grow self-center sm:font-semibold text-xs sm:text-base ">
-            Rating
-          </p>
-        </div>
-      ))}
+      <div className="bg-[#FDE047] hover:bg-[#fddf47e0] leading-tight w-full rounded sm:px-4 lg:px-9 sm:py-1 text-center">
+        <p className=" font-semibold">
+          {takeAvg(ratings)}{" "}
+          <span className="font-normal text-xs">({ratings.length})</span>{" "}
+        </p>
+        <p className=" text-xs">Rating</p>
+      </div>
       <Link
         to="./reviews"
         className="bg-[#FDE047] hover:bg-[#fddf47e0] leading-tight w-full rounded sm:px-4 lg:px-9 sm:py-1 text-center"
@@ -167,21 +152,3 @@ function Highlights({
     </div>
   );
 }
-
-// function Table() {
-//   const content = [
-//     ["Creators", "Duffer brother and others"],
-//     ["Stars", "Millie, Bobbie and Brown"],
-//     ["Awards", "Oscar and  5 more"],
-//   ];
-//   return (
-//     <div className=" hidden lg:block w-1/2 mt-auto">
-//       {content.map(([key, value]) => (
-//         <div className="flex  text-center border-b text-sm lg:text-base">
-//           <p className="w-1/3 font-semibold">{key}</p>
-//           <p className="grow">{value}</p>
-//         </div>
-//       ))}
-//     </div>
-//   );
-// }

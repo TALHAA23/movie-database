@@ -92,16 +92,21 @@ const movieReviews: Middleware = async (req, res, next) => {
 
 const publishRating: Middleware = async (req, res, next) => {
   const id = req.params.id;
+  const query = req.query.on;
+  console.log(req.query);
+  if (!query || !/movie|review/g.test(query.toString()))
+    throw errorThrower("Invalid URL", HttpError.UnprocessableEntity);
   const { action, rating, reviewRef } = req.body;
+  console.log(action);
   try {
     const result =
       action == "publish-rating-on-review"
         ? await addReviewRating({
-            parentDocId: id,
-            subDocRef: reviewRef,
+            movieRef: id,
+            reviewRef,
             rating,
           })
-        : addMovieRating();
+        : addMovieRating({ movieRef: id, rating });
     res.json(result);
   } catch (err) {
     next(err);

@@ -15,7 +15,7 @@ export default function MovieList({
   query,
 }: {
   title: string;
-  query: UseQueryResult<[MovieInterface]> | undefined;
+  query: UseQueryResult<MovieInterface[]> | undefined;
 }) {
   if (query?.isPending) return <SectionLoader />;
   if (query?.isError)
@@ -32,7 +32,7 @@ export default function MovieList({
   return (
     <Frame frameTitle={title}>
       {query.data.map((movie) => (
-        <MovieCard title={movie.title} rating={movie.rating} id={movie._id} />
+        <MovieCard title={movie.title} ratings={movie.ratings} id={movie._id} />
       ))}
     </Frame>
   );

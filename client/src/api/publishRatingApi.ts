@@ -1,10 +1,12 @@
 import { RatingPayload } from "./model/Interfaces";
 
 export default async function publishRatingApi(payload: RatingPayload) {
-  const url =
-    payload.action == "publish-rating-on-review"
-      ? `http://localhost:3000/api/movies/movie/${payload.movieRef}/reviews/publish/rating`
-      : "";
+  const url = `http://localhost:3000/api/movies/movie/${
+    payload.movieRef
+  }/reviews/publish/rating?on=${
+    payload.action == "publish-rating-on-review" ? "review" : "movie"
+  }`;
+
   try {
     const response = await fetch(url, {
       method: "post",

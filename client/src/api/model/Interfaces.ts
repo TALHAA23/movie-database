@@ -16,6 +16,7 @@ interface MovieInterface {
   reviews: Review[];
   numberofReviews?: number;
   rating?: number;
+  ratings: number[];
 }
 
 interface Review {

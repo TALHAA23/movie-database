@@ -43,6 +43,7 @@ const MovieSchema = new Schema({
   creator: { type: String, required: false },
   language: { type: String, required: false },
   countryOfOrigin: { type: String, required: false },
+  ratings: { type: [Number], default: [0] },
   cast: [{ type: Schema.Types.ObjectId, ref: "actor" }],
   reviews: [
     {

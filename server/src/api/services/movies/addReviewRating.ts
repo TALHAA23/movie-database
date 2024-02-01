@@ -1,15 +1,10 @@
 import getMovieReviews from "./getMovieReviews";
-
-interface Rating {
-  parentDocId: string;
-  subDocRef: string;
-  rating: number;
-}
-export default async function (rating: Rating) {
+import { RatingPayload } from "../../../../../shared/shared.interfaces";
+export default async function (rating: RatingPayload) {
   try {
-    const reviews = await getMovieReviews(rating.parentDocId);
+    const reviews = await getMovieReviews(rating.movieRef);
     if (!reviews) throw new Error("Field not exist");
-    const targetReview = reviews.reviews.id(rating.subDocRef);
+    const targetReview = reviews.reviews.id(rating.reviewRef);
     if (targetReview) {
       targetReview.ratings.push(rating.rating);
       reviews.markModified("reviews");

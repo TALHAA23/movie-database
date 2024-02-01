@@ -1,14 +1,12 @@
 import { useQuery } from "@tanstack/react-query";
 import Casts from "./Casts";
 import FeaturedReview from "./FeaturedReveiw";
-import MoreLikeThis from "./MoreLikeThis";
 import TitleHead from "./TitleHead";
 import movieByIdApi from "../../api/movieByIdApi";
-import { useFetcher, useParams } from "react-router-dom";
-import { MovieInterface, Review } from "../../api/model/Interfaces";
+import { useParams } from "react-router-dom";
+import { MovieInterface } from "../../api/model/Interfaces";
 import PageLoader from "../Loaders/PageLoader";
 import NotFound from "../NotFound/NotFound";
-import { createRef, useEffect, useRef, useState } from "react";
 import movieListApi from "../../api/movieListApi";
 import MovieList from "../Home/Others/MovieList";
 import testImages from "../../testimages";
@@ -20,7 +18,6 @@ import Information from "../Information/Information";
 import RatingStars from "../Review/RatingStars";
 export default function Title() {
   const { id } = useParams();
-  const [featuredReview, setFeaturedReview] = useState<Review | undefined>();
   if (!id) return <h1>Something went wrong</h1>;
 
   const { isPending, data, isError, error } = useQuery<MovieInterface>({
@@ -38,13 +35,6 @@ export default function Title() {
     staleTime: 1000 * 60 * 60,
   });
 
-  useEffect(
-    () =>
-      data &&
-      setFeaturedReview(data.reviews?.find((review) => review.featured)),
-    [data]
-  );
-
   if (isPending) return <PageLoader />;
   if (isError) return <h1>{error.message}</h1>;
   if (!data) return <NotFound />;
@@ -59,7 +49,7 @@ export default function Title() {
         desc={data.desc}
         language={data.language}
         countryOfOrigin={data.countryOfOrigin}
-        rating={data.rating || 0}
+        ratings={data.ratings}
         genre={data?.genre || []}
         runTime={data.runTime}
         releaseYear={data.releaseYear}
