@@ -14,6 +14,7 @@ import getMovieReviews from "../services/movies/getMovieReviews";
 import addReviewRating from "../services/movies/addReviewRating";
 import addReviewToMovie from "../services/movies/addReviewToMovie";
 import addMovieRating from "../services/movies/addMovieRating";
+import { error } from "console";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   const mongodbObjectId = new Types.ObjectId(id);
@@ -91,22 +92,23 @@ const movieReviews: Middleware = async (req, res, next) => {
 };
 
 const publishRating: Middleware = async (req, res, next) => {
+  const userId = req?.cookies?.user_id;
   const id = req.params.id;
   const query = req.query.on;
-  console.log(req.query);
+  if (!userId) throw errorThrower("UserId not provided", HttpError.BadRequest);
   if (!query || !/movie|review/g.test(query.toString()))
     throw errorThrower("Invalid URL", HttpError.UnprocessableEntity);
   const { action, rating, reviewRef } = req.body;
-  console.log(action);
   try {
     const result =
       action == "publish-rating-on-review"
         ? await addReviewRating({
+            userId,
             movieRef: id,
             reviewRef,
             rating,
           })
-        : addMovieRating({ movieRef: id, rating });
+        : addMovieRating({ movieRef: id, rating, userId });
     res.json(result);
   } catch (err) {
     next(err);

@@ -20,9 +20,9 @@ export async function getRecommandationsForUser(userId: string) {
     result.map((document, index) => {
       document.hasMore = index == result.length - 1 ? false : true;
     });
+
     return result;
   } catch (err) {
-    console.log(err);
     throw err;
   }
 }

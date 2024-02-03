@@ -11,7 +11,7 @@ const UserSchema = new Schema({
   },
   watchList: [{ type: Schema.Types.ObjectId, ref: "movies" }],
   favoriteList: [{ type: Schema.Types.ObjectId, ref: "movies" }],
-  myReviewsRef: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+  // myReviewsRef: [{ type: Schema.Types.ObjectId, ref: "Review" }],
 });
 
-export default mongoose.model("User", UserSchema);
+export default mongoose.model("user", UserSchema);

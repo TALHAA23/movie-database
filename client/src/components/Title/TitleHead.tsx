@@ -1,9 +1,6 @@
 import { Link } from "react-router-dom";
-import testImages from "../../testimages";
 import takeAvg from "../../utils/takeAvg";
-const testDesc = `When a young boy vanishes, a small town uncovers a mystery
-involving secret experiments, terrifying supernatural forces and
-one strange little girl.`;
+import testImages from "../../testimages";
 
 interface TitleHeadData {
   title?: string;
@@ -13,7 +10,7 @@ interface TitleHeadData {
   runTime: number;
   numberofReviews?: number;
   ratings: number[];
-  banner: string;
+  banner?: string;
   language?: string;
   countryOfOrigin?: string;
 }
@@ -26,7 +23,7 @@ export default function TitleHead({
   numberofReviews = 0,
   ratings,
   desc,
-  banner,
+  banner = testImages.noImage,
   language,
   countryOfOrigin,
 }: TitleHeadData) {
@@ -101,29 +98,6 @@ function Genres({ genres }: { genres: string[] }) {
           {genre}
         </div>
       ))}
-    </div>
-  );
-}
-
-function SingleHightlight() {
-  return (
-    <div className="bg-[#FDE047] hover:bg-[#fddf47e0] leading-tight w-full rounded sm:px-4 lg:px-9 sm:py-1 text-center">
-      <p className=" font-semibold">23000</p>
-      <p className=" text-xs">Reviews</p>
-    </div>
-  );
-}
-
-function DuoHighlight() {
-  return (
-    <div className="bg-[#FDE047] hover:bg-[#fddf47e0] rounded flex w-full  ">
-      <div className="w-1/3 font-xs flex flex-col justify-center items-center gap-0 leading-tight bg-[#C3AD33] text-white/80 rounded-l sm:py-1 ">
-        <p>4.5</p>
-        <small>100k</small>
-      </div>
-      <p className=" grow self-center sm:font-semibold text-xs sm:text-base ">
-        Rating
-      </p>
     </div>
   );
 }

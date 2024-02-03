@@ -77,7 +77,7 @@ const RatingStars = ({
 
   return (
     <div className=" flex flex-col sm:flex-row w-fit items-center">
-      <p className=" tracking-wider font-semibold after:content-['10'] after:font-normal">
+      <p className=" tracking-wider text-xs font-semibold after:content-['10'] after:font-normal">
         {showTempRating ? rating : capturedRating}/
       </p>
       <div

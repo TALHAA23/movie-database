@@ -13,9 +13,10 @@ import testImages from "../../testimages";
 import Awards from "./Awards";
 import Tagline from "./Tagline";
 import Details from "./Details";
-import AddReview from "./AddReview";
+import ReviewWriter from "./ReviewWriter";
 import Information from "../Information/Information";
 import RatingStars from "../Review/RatingStars";
+import RatingAndReview from "./RatingAndReview";
 export default function Title() {
   const { id } = useParams();
   if (!id) return <h1>Something went wrong</h1>;
@@ -38,31 +39,25 @@ export default function Title() {
   if (isPending) return <PageLoader />;
   if (isError) return <h1>{error.message}</h1>;
   if (!data) return <NotFound />;
+  console.log(data);
 
   return (
     <section className="w-full h-auto bg-black text-white">
       <Information />
-      <AddReview movieRef={data._id as string} />
+      <ReviewWriter movieRef={data._id as string} />
       <TitleHead
-        title={data?.title}
-        banner={data.banner || testImages.landscape}
-        desc={data.desc}
-        language={data.language}
-        countryOfOrigin={data.countryOfOrigin}
-        ratings={data.ratings}
-        genre={data?.genre || []}
-        runTime={data.runTime}
-        releaseYear={data.releaseYear}
+        {...data}
+        ratings={data.ratings.map((rating) => rating.rating)}
         numberofReviews={data.numberofReviews}
       />
       {data.tagline && <Tagline tagline={data.tagline} />}
-      <div className=" bg-white/10 flex justify-center items-center">
-        <h1>Rate the Movie:</h1>
-        <RatingStars action="publish-rating-on-movie" />
-      </div>
+      <RatingAndReview />
       <Casts casts={data.cast} />
       <MovieList title="Related" query={relatedMoviesQuery} />
-      {data.awards?.length && <Awards awards={data.awards} />}
+      {data.awards?.length && data.awards?.length > 0 && (
+        // TODO: disable 0 form being displayed
+        <Awards awards={data.awards} />
+      )}
       <Details
         runTime={data.runTime}
         releaseYear={data.releaseYear}
@@ -71,7 +66,7 @@ export default function Title() {
         language={data.language}
         creator={data.creator}
       />
-      {data.reviews.length && (
+      {data.reviews.length > 0 && (
         <FeaturedReview
           {...data.reviews?.[0]}
           numberofRatings={data.reviews?.[0].ratings.length}

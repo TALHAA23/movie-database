@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { MovieInterface } from "../../../../api/model/Interfaces";
 import testImages from "../../../../testimages";
-const List = ({ movies }: { movies: [MovieInterface] }) => (
+const List = ({ movies }: { movies: MovieInterface[] }) => (
   <ul className="relative h-full flex flex-row-reverse justify-start items-end">
     {movies.map((movie, index) => {
       return (
@@ -15,13 +15,7 @@ const List = ({ movies }: { movies: [MovieInterface] }) => (
         >
           <img
             className="w-full h-full object-cover rounded"
-            src={
-              index == 0
-                ? testImages.landscape
-                : index == 1
-                ? testImages.protrait_sm
-                : testImages.landscape
-            }
+            src={movie.banner || testImages.noImage}
             alt={movie.title}
           />
         </Link>

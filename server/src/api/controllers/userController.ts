@@ -8,7 +8,6 @@ const recommendations: Middleware = async (req, res, next) => {
       req?.cookies?.user_id ||
       (await getUserInfo(req?.cookies?.access_token)).sub;
     const result = await getRecommandationsForUser(userUid);
-    console.log(result);
     res.json(result);
   } catch (err) {
     next(err);
@@ -16,7 +15,6 @@ const recommendations: Middleware = async (req, res, next) => {
 };
 
 const userInfo: Middleware = async (req, res, next) => {
-  console.log("Getting user!");
   try {
     const token = req?.cookies?.access_token;
     const info = await getUserInfo(token);

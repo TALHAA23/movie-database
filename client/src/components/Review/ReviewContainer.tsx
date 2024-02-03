@@ -13,7 +13,7 @@ export default function ReviewContainer({
       <ReviewBody
         title={title}
         review={review}
-        avg={takeAvg(ratings)}
+        avg={takeAvg(ratings.map((rating) => rating.rating))}
         numberOfRatings={ratings.length}
       />
       <div className=" text-sm flex flex-col sm:flex-row items-center justify-center sm:justify-between px-3">

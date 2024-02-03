@@ -2,6 +2,7 @@ import { Types } from "mongoose";
 import { getMovieById } from "./getMovieById";
 
 interface Review {
+  userId: string;
   to: string;
   title: string;
   review: string;
@@ -11,6 +12,7 @@ export default async function (review: Review) {
     const movieRef = new Types.ObjectId(review.to);
     const movieDoc = await getMovieById(movieRef);
     const reviewToPush = {
+      reviewedBy: review.userId,
       title: review.title,
       review: review.review,
     };

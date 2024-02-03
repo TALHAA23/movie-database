@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Review } from "../../api/model/Interfaces";
 import takeAvg from "../../utils/takeAvg";
 import RatingStars from "../Review/RatingStars";
+import showReviewWriter from "../../utils/showReviewWriter";
 
 interface FeatureReview extends Review {
   numberofReviews?: number;
@@ -17,14 +18,13 @@ export default function FeaturedReview({
   numberofReviews = 0,
   numberofRatings = 0,
 }: FeatureReview) {
-  console.log(title);
   return (
     <div className="w-full bg-slate-950 max-w-[800px] rounded-md mx-auto my-4 py-3 px-2 border-2 border-white/10">
       <ReviewHead numberofReviews={numberofReviews} />
       <ReviewBody
         title={title}
         review={review}
-        rating={takeAvg(ratings)}
+        rating={takeAvg(ratings.map((rating) => rating.rating))}
         numberofRatings={numberofRatings}
       />
       <div className=" text-sm flex flex-col sm:flex-row items-center justify-center sm:justify-between px-3">
@@ -32,20 +32,13 @@ export default function FeaturedReview({
           <span>{new Date(reviewDate).toLocaleString()} by </span>
           <span className="text-blue-600">Ammile aniee</span>
         </div>
-        <RatingStars reviewRef={_id} />
+        <RatingStars action="publish-rating-on-review" reviewRef={_id} />
       </div>
     </div>
   );
 }
 
 const ReviewHead = ({ numberofReviews }: { numberofReviews: number }) => {
-  const addReview = () => {
-    const dialogBox = document.querySelector(
-      ".add-review"
-    ) as HTMLDialogElement;
-    dialogBox.showModal();
-  };
-
   return (
     <div className="flex flex-col items-center leading-tight gap-1 tracking-wide">
       <Link className="text-center" to={"./reviews"}>
@@ -57,7 +50,7 @@ const ReviewHead = ({ numberofReviews }: { numberofReviews: number }) => {
         )}
       </Link>
       <button
-        onClick={addReview}
+        onClick={showReviewWriter}
         className=" bg-blue-500 rounded justify-center px-3 py-1 font-semibold hover:bg-blue-400 transition-all duration-100 active:scale-95"
       >
         Add a review

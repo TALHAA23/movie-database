@@ -9,7 +9,7 @@ import Paginator from "./Paginator";
 export default function SlideBar() {
   const titleRef = useRef(null);
   const [currentMovieIndex, setCurrentMovieIndex] = useState<number>(0);
-  const query = useQuery<[MovieInterface]>({
+  const query = useQuery<MovieInterface[]>({
     retry: 1,
     staleTime: 1000 * 60 * 60,
     queryKey: ["slide-show-data"],

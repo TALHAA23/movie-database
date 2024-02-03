@@ -6,7 +6,7 @@ import MiniError from "../Error/MiniError";
 import { useMessageUpdater } from "../../Contexts/MessageProvider";
 import SignupAppeal from "../Information/SiginupAppeal";
 import { useIsUserLoggedIn } from "../../Contexts/UserProvider";
-export default function AddReview({ movieRef }: { movieRef: string }) {
+export default function ReviewWriter({ movieRef }: { movieRef: string }) {
   if (!movieRef) return;
   const isUserLoggedIn = useIsUserLoggedIn();
   const updateMessage = useMessageUpdater();

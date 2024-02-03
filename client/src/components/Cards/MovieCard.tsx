@@ -4,34 +4,36 @@ import takeAvg from "../../utils/takeAvg";
 
 interface MovieCardInterface {
   title: string;
-  ratings: number[];
+  ratings?: number;
   id: string;
+  bannerURL?: string;
 }
 
 export default function MovieCard({
   title,
-  ratings = [0],
+  ratings = 0,
   id,
+  bannerURL = testImages.noImage,
 }: MovieCardInterface) {
   return (
-    <div className="group shrink-0 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex flex-col gap-0 rounded">
-      <Image />
-      <MovieCardInformation title={title} rating={takeAvg(ratings)} id={id} />
+    <div className="shrink-0 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex flex-col gap-0 rounded">
+      <Image bannerURL={bannerURL} />
+      <MovieCardInformation title={title} rating={ratings} id={id} />
     </div>
   );
 }
 
-const Image = () => (
+const Image = ({ bannerURL }: { bannerURL: string }) => (
   <img
-    className="h-[70%] object-cover rounded-t"
-    src={testImages.protrait_sm}
+    className="h-[60%] object-cover rounded-t"
+    src={bannerURL || testImages.noImage}
     alt="banner"
   />
 );
 
 interface MovieCardInformationInterface {
   title: string;
-  rating: string;
+  rating: number;
   id: string;
 }
 
@@ -41,7 +43,7 @@ const MovieCardInformation = ({
   id,
 }: MovieCardInformationInterface) => {
   return (
-    <div className="relative h-[30%] flex flex-col justify-around px-1 bg-slate-900/30 text-white rounded-b">
+    <div className="relative h-[40%] flex flex-col justify-around px-1 bg-slate-900/30 text-white rounded-b">
       <div className=" flex justify-between">
         <div className=" flex items-center">
           <img src="../../../public/star-solid-sm.svg" alt="star" />

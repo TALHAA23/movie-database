@@ -16,14 +16,15 @@ interface MovieInterface {
   reviews: Review[];
   numberofReviews?: number;
   rating?: number;
-  ratings: number[];
+  ratings: [{ rateBy: string; rating: 0 }];
 }
 
 interface Review {
+  reviewedBy: string;
   _id: string;
   title: string;
   review: string;
-  ratings: number[];
+  ratings: [{ rateBy: string; rating: number }];
   reviewDate: Date;
   helpful: number;
   unhelpful: number;

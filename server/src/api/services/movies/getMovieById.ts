@@ -6,9 +6,12 @@ export async function getMovieById(id: Types.ObjectId) {
     Math.floor(Math.random() * 3)
   ];
   try {
-    const movie = await Movie.findById(id).populate("cast", "_id name").exec();
+    const movie = await Movie.findById(id)
+      .populate("cast", "_id name")
+      .populate("reviews.reviewedBy", "_id userinfo")
+      .exec();
     if (!movie) throw new Error("Movie not found");
-
+    if (!movie.reviews.length) return movie; //no featured review
     let selectedReview;
     if (featureBasedOn === "number_of_ratings") {
       selectedReview = movie.reviews.reduce((prev, current) =>
@@ -16,7 +19,7 @@ export async function getMovieById(id: Types.ObjectId) {
       );
     } else if (featureBasedOn === "highest_rating") {
       selectedReview = movie.reviews.reduce((prev, current) =>
-        averageRating(prev.ratings) > averageRating(current.ratings)
+        averageRating(prev?.ratings) > averageRating(current.ratings)
           ? prev
           : current
       );
@@ -34,6 +37,6 @@ export async function getMovieById(id: Types.ObjectId) {
   }
 }
 
-function averageRating(ratings: number[]) {
-  return ratings.reduce((a, b) => a + b, 0) / ratings.length;
+function averageRating(ratings: { user: Types.ObjectId; rating: number }[]) {
+  return ratings.reduce((a, b) => a + b.rating, 0) / ratings.length;
 }
