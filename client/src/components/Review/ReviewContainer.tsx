@@ -7,6 +7,7 @@ export default function ReviewContainer({
   review,
   ratings,
   reviewDate,
+  reviewedBy,
 }: Review) {
   return (
     <div className="w-full  max-w-[800px] rounded-md mx-auto my-4 py-3 px-2 border-2">
@@ -19,7 +20,9 @@ export default function ReviewContainer({
       <div className=" text-sm flex flex-col sm:flex-row items-center justify-center sm:justify-between px-3">
         <div>
           <span>{new Date(reviewDate).toLocaleString()} by </span>
-          <span className="text-blue-600">Ammile aniee</span>
+          <span className="text-blue-600">
+            {reviewedBy?.userInfo?.username || "anonymous"}
+          </span>
         </div>
         <RatingStars action="publish-rating-on-review" reviewRef={_id} />
       </div>

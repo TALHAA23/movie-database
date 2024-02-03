@@ -20,7 +20,7 @@ interface MovieInterface {
 }
 
 interface Review {
-  reviewedBy: string;
+  reviewedBy: { userInfo: { username: string } };
   _id: string;
   title: string;
   review: string;

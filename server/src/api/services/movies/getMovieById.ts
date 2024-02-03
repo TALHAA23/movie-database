@@ -8,7 +8,8 @@ export async function getMovieById(id: Types.ObjectId) {
   try {
     const movie = await Movie.findById(id)
       .populate("cast", "_id name")
-      .populate("reviews.reviewedBy", "_id userinfo")
+      .populate("reviews.reviewedBy", "_id userInfo.username")
+      .populate("ratings.rateBy", "_id userInfo.username")
       .exec();
     if (!movie) throw new Error("Movie not found");
     if (!movie.reviews.length) return movie; //no featured review

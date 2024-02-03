@@ -17,6 +17,7 @@ export default function FeaturedReview({
   reviewDate,
   numberofReviews = 0,
   numberofRatings = 0,
+  reviewedBy,
 }: FeatureReview) {
   return (
     <div className="w-full bg-slate-950 max-w-[800px] rounded-md mx-auto my-4 py-3 px-2 border-2 border-white/10">
@@ -30,7 +31,9 @@ export default function FeaturedReview({
       <div className=" text-sm flex flex-col sm:flex-row items-center justify-center sm:justify-between px-3">
         <div>
           <span>{new Date(reviewDate).toLocaleString()} by </span>
-          <span className="text-blue-600">Ammile aniee</span>
+          <span className="text-blue-600">
+            {reviewedBy?.userInfo?.username || "anonymous"}
+          </span>
         </div>
         <RatingStars action="publish-rating-on-review" reviewRef={_id} />
       </div>

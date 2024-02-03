@@ -22,7 +22,7 @@ const isEmail = (name: string) => name == "email";
 const isSignupPage = () => location.pathname.split("/").pop() == "signup";
 
 export default function AuthForm() {
-  const { redirect } = useLocation().state;
+  const location = useLocation()?.state;
   const updateHomeMessage = useMessageUpdater();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -43,7 +43,7 @@ export default function AuthForm() {
     if (!loginMutation.isSuccess) return;
     queryClient.invalidateQueries({ queryKey: ["userinfo"] });
     updateHomeMessage(`Logged in as ${loginMutation.data.nickname}`, "success");
-    navigate(redirect || "/");
+    navigate(location?.redirect || "/");
   }, [loginMutation.isSuccess]);
 
   function changeAuthState(key: AuthStates, value: boolean) {
