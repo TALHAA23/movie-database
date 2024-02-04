@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom";
 import testImages from "../../testimages";
-import takeAvg from "../../utils/takeAvg";
 
-interface MovieCardInterface {
+interface Props {
   title: string;
   ratings?: number;
   id: string;
@@ -14,9 +13,9 @@ export default function MovieCard({
   ratings = 0,
   id,
   bannerURL = testImages.noImage,
-}: MovieCardInterface) {
+}: Props) {
   return (
-    <div className="shrink-0 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 flex flex-col gap-0 rounded">
+    <div className="shrink-0 group border border-white/10 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-[13.66%] flex flex-col gap-0 rounded">
       <Image bannerURL={bannerURL} />
       <MovieCardInformation title={title} rating={ratings} id={id} />
     </div>
@@ -51,10 +50,10 @@ const MovieCardInformation = ({
         </div>
         <img src="../../../public/star-solid-sm.svg" alt="rating star" />
       </div>
-      <h1 className="  font-semibold text-lg lg:text-xl">
-        {title.length < 35 ? title : title.substring(0, 35) + "..."}
-        {title.length > 35 && (
-          <small className=" absolute opacity-0 group-hover:opacity-100 bg-slate-600 text-white text-sm font-light left-0 top-0  w-full px-2 py-1 rounded transition-all duration-100">
+      <h1 className="font-semibold text-base lg:text-lg grow flex items-center">
+        {title.length < 50 ? title : title.substring(0, 50) + "..."}
+        {title.length > 50 && (
+          <small className=" absolute opacity-0 group-hover:opacity-100 bg-slate-900 text-white text-sm font-light left-0 top-0  w-full px-2 py-1 rounded transition-all duration-100">
             {title}
           </small>
         )}
@@ -62,7 +61,7 @@ const MovieCardInformation = ({
       <div className=" space-y-1 font-semibold">
         <Link
           to={`/title/${id}`}
-          className="w-full block text-center border-2 border-[#FDE047] rounded py-1 font-semibold text-sm hover:bg-[#fddf4765] transition-colors duration-200"
+          className="w-full block text-center border border-[#FDE047] rounded py-1 font-semibold text-sm hover:bg-[#FDE047] hover:text-black transition-colors duration-200"
         >
           More
         </Link>

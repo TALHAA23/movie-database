@@ -12,7 +12,6 @@ export default async function addReviewRating(rating: RatingPayload) {
     const index = targetReview.ratings.findIndex(
       (doc) => doc.rateBy == rating.userId
     );
-    console.log(index);
     // if index update
     if (index !== -1) targetReview.ratings[index].rating = rating.rating;
     // else push

@@ -17,10 +17,6 @@ export async function getRecommandationsForUser(userId: string) {
     })
       .limit(10)
       .exec();
-    result.map((document, index) => {
-      document.hasMore = index == result.length - 1 ? false : true;
-    });
-
     return result;
   } catch (err) {
     throw err;

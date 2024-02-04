@@ -1,4 +1,4 @@
-import slideChanger from "./SlideChanger";
+import slideChanger from "./slideChanger";
 import { MovieInterface } from "../../../../api/model/Interfaces";
 import { Dispatch, RefObject, SetStateAction } from "react";
 interface SlideChanger {

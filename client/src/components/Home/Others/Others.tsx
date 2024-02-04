@@ -8,7 +8,7 @@ export default function Others() {
   const recommendations = useRecommendations();
   const topRated = useTopRated();
   return (
-    <section>
+    <section className="flex flex-col gap-0 w-full overflow-x-hidden">
       <MovieList title="recommendations" query={recommendations} />
       <MovieList title="top rated" query={topRated} />
     </section>

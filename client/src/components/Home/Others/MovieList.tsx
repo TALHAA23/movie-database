@@ -28,7 +28,6 @@ export default function MovieList({
       <ErrorCard error={query.error} />
     );
   if (!query?.data) return <h1>not found</h1>;
-
   return (
     <Frame frameTitle={title}>
       {query.data.map((movie) => (
