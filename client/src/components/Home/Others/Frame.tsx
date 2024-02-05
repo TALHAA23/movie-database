@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import PaginationButton from "../../PaginationButton";
 
 interface Children {
@@ -15,6 +15,20 @@ export default function Frame({
   frameHight = "h-[90vh]",
   hasPagination = true,
 }: Children) {
+  const scrollableAreaRef = useRef<null | HTMLDivElement>(null);
+  useEffect(() => {
+    if (!scrollableAreaRef.current) return;
+    const { scrollWidth } = scrollableAreaRef.current;
+    const { clientWidth } = document.body;
+
+    if (scrollWidth > clientWidth) return;
+    const paginationButtons =
+      scrollableAreaRef.current?.previousElementSibling?.querySelectorAll(
+        "button"
+      );
+    paginationButtons?.forEach((button) => button.classList.add("hidden"));
+  });
+
   return (
     <div
       className={`relative ${frameHight} w-full px-2 py-3 flex flex-col bg-black/90 text-white`}
@@ -34,6 +48,7 @@ export default function Frame({
             ))}
         </div>
         <div
+          ref={scrollableAreaRef}
           id={frameTitle}
           className="h-full hideScrollBar flex overflow-x-scroll"
         >

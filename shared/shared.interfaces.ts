@@ -1,3 +1,5 @@
+type MovieStatus = "mark-as-watched" | "mark-as-watch-later" | "mark-as-favrt";
+
 interface RatingPayload {
   userId: string;
   movieRef: string;
@@ -5,4 +7,4 @@ interface RatingPayload {
   rating: number;
 }
 
-export type { RatingPayload };
+export type { RatingPayload, MovieStatus };

@@ -1,6 +1,9 @@
-export default function Profile() {
+import { Link } from "react-router-dom";
+
+export default function Avatar() {
   return (
-    <div
+    <Link
+      to="./profile"
       className={`relative w-fit 
      before:content-['your_account'] before:bg-slate-900 before:absolute
      before:rounded before:px-2 before:py-1 before:text-xs before:opacity-0
@@ -9,6 +12,6 @@ export default function Profile() {
     `}
     >
       <img src="../../../../public/user-solid.svg" alt="" />
-    </div>
+    </Link>
   );
 }

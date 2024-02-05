@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom";
 import takeAvg from "../../utils/takeAvg";
 import testImages from "../../testimages";
+import CardUtils from "../Cards/CardUtils";
 
 interface TitleHeadData {
+  _id: string;
   title?: string;
   desc: string;
   genre: string[];
@@ -16,6 +18,7 @@ interface TitleHeadData {
 }
 
 export default function TitleHead({
+  _id,
   title = "Unknow Titles",
   genre,
   releaseYear,
@@ -29,8 +32,9 @@ export default function TitleHead({
 }: TitleHeadData) {
   return (
     <div
-      className={`h-auto flex flex-col lg:flex-row gap-0 bg-black/90 text-white`}
+      className={`relative group h-auto flex flex-col lg:flex-row gap-0 bg-black/90 text-white`}
     >
+      <CardUtils movieId={_id} />
       <img
         loading="lazy"
         src={banner}

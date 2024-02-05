@@ -1,10 +1,12 @@
 import errorThrower from "../../../shared/errorThrower";
 
-type RequestFor = "recommendations" | "top-rated" | "related";
+type RequestFor = "recommendations" | "top-rated" | "related" | "my-favrts";
 
 const createUrl = (requestFor: RequestFor, id?: string): string => {
   let url: string;
   if (requestFor == "recommendations")
+    url = "http://localhost:3000/api/users/protected/recommendations";
+  else if (requestFor == "my-favrts")
     url = "http://localhost:3000/api/users/protected/recommendations";
   else if (requestFor == "top-rated")
     url = "http://localhost:3000/api/movies/top-rated?rating=4";

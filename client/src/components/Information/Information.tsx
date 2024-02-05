@@ -1,4 +1,4 @@
-import { useMessage, useMessageUpdater } from "../../Contexts/MessageProvider";
+import { useMessage } from "../../Contexts/MessageProvider";
 import "./information.css";
 type MessageType = "warning" | "success" | "failure" | "general";
 interface StyleAttributes {
@@ -50,7 +50,7 @@ export default function Information() {
   const styleAttributes = styles[message?.messageType];
   return (
     <div
-      className={`info ${styleAttributes.bg} border-2  ${styleAttributes.border}  fixed top-[70px] right-3 opacity-100  transition-opacity duration-500`}
+      className={`info ${styleAttributes.bg} border-2  ${styleAttributes.border}  fixed z-50 top-[70px] right-3 opacity-100  transition-opacity duration-500`}
     >
       <div className="info__icon">
         <svg

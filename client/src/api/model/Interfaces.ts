@@ -43,6 +43,7 @@ interface ActorInterface {
   };
 }
 type Action = "publish-rating-on-review" | "publish-rating-on-movie";
+type MovieStatus = "mark-as-watched" | "mark-as-watch-later" | "mark-as-favrt";
 
 interface RatingPayload {
   action: Action;
@@ -51,4 +52,11 @@ interface RatingPayload {
   rating: number;
 }
 
-export type { MovieInterface, Review, ActorInterface, RatingPayload, Action };
+export type {
+  MovieInterface,
+  Review,
+  ActorInterface,
+  RatingPayload,
+  Action,
+  MovieStatus,
+};

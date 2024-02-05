@@ -8,7 +8,6 @@ export default function Hero() {
     `}
     >
       <SlideBar />
-      {/* <UpNextSidebar /> */}
       <Featured />
     </section>
   );

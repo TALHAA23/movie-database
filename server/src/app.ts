@@ -10,6 +10,7 @@ import { router as movieRoutes } from "./api/routes/movie.js";
 import { router as authRoutes } from "./api/routes/auth";
 import { router as reviewRoutes } from "./api/routes/review";
 import { config } from "dotenv";
+import User, { UserSchema } from "./api/model/collections/User";
 config();
 const corsOptions = {
   origin: "http://localhost:5173",

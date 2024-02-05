@@ -1,7 +1,7 @@
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
 import SignIn from "./SignIn";
-import Profile from "./Profile";
+import Avatar from "./Avatar";
 import { useUserInfo } from "../../../Contexts/UserProvider";
 import ElementLoader from "../../Loaders/ElementLoader";
 export default function NavBar() {
@@ -18,7 +18,7 @@ export default function NavBar() {
       ) : user?.isError ? (
         <SignIn />
       ) : (
-        <Profile />
+        <Avatar />
       )}
     </nav>
   );
