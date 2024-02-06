@@ -1,6 +1,6 @@
 import { useRoutes } from "react-router-dom";
 import ProfileLayout from "../components/Profile/ProfileLayout";
-import MyFavorites from "../components/Profile/MyFavorites";
+import MyMovies from "../components/Profile/MyMovies";
 export default function ProfileRoutes() {
   return useRoutes([
     {
@@ -13,7 +13,15 @@ export default function ProfileRoutes() {
         },
         {
           path: "my-favorites",
-          element: <MyFavorites />,
+          element: <MyMovies show="favoriteList" />,
+        },
+        {
+          path: "my-watchlist",
+          element: <MyMovies show="watchList" />,
+        },
+        {
+          path: "watched",
+          element: <MyMovies show="watched" />,
         },
       ],
     },

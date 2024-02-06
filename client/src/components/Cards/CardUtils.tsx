@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { MovieStatus } from "../../api/model/Interfaces";
 import manageMovieStatus from "../../api/manageMovieStatusApi";
 import { useEffect } from "react";
@@ -24,6 +24,7 @@ const utilsTitleToMovieStatus = (title: string): MovieStatus => {
 
 export default function CardUtils({ movieId }: { movieId: string }) {
   const updateMessage = useMessageUpdater();
+  const queryClient = useQueryClient();
   const { mutate, isError, isSuccess } = useMutation({
     mutationKey: ["movie-status"],
     mutationFn: (payload: MutationData) =>
@@ -31,7 +32,12 @@ export default function CardUtils({ movieId }: { movieId: string }) {
   });
 
   useEffect(() => {
-    if (isSuccess) updateMessage("Successfully Added!", "success");
+    if (isSuccess) {
+      updateMessage("Successfully Added!", "success");
+      queryClient.invalidateQueries({
+        queryKey: ["watchList", "watched", "favoriteList"],
+      });
+    }
     if (isError) updateMessage("Something went wrong, try later", "failure");
   }, [isError, isSuccess]);
 

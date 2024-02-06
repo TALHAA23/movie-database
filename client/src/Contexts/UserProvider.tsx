@@ -1,16 +1,7 @@
 import { useQuery, UseQueryResult } from "@tanstack/react-query";
 import { ReactNode, createContext, useContext } from "react";
 import getUserInfo from "../api/userInfoApi";
-
-interface UserInfo {
-  email: string;
-  email_verified: boolean;
-  nickname: string;
-  name: string;
-  picture: string;
-  sub: string;
-  updated_at: string;
-}
+import { UserInfo } from "../api/model/Interfaces";
 
 interface UserContext {
   userInfoQuery: UseQueryResult<UserInfo>;

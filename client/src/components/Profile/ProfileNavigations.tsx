@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import shrinkorExpandNavigations from "./profileAnimation";
-import { Link, useLocation, NavLink } from "react-router-dom";
+import { useLocation, NavLink } from "react-router-dom";
 const navigations = [
   {
     icon: "../../../public/gear-solid.svg",
@@ -9,13 +9,13 @@ const navigations = [
   },
   {
     icon: "../../../public/bookmark-solid.svg",
-    title: "watch later",
-    link: "./settings",
+    title: "watch list",
+    link: "./my-watchlist",
   },
   {
     icon: "../../../public/eye-regular.svg",
     title: "watched",
-    link: "./settings",
+    link: "./watched",
   },
   {
     icon: "../../../public/pen-solid.svg",
@@ -31,6 +31,11 @@ const navigations = [
     icon: "../../../public/handshake-angle-solid.svg",
     title: "contributions",
     link: "./settings",
+  },
+  {
+    icon: "../../../public/arrow-left-solid.svg",
+    title: "Back",
+    link: "/profile",
   },
 ];
 
@@ -53,14 +58,18 @@ export default function ProfileNavigations() {
     <>
       <ul
         ref={listRef}
-        className="relative sm:absolute z-20 bg-white space-y-1  w-1/3 top-1/2 left-1/2 "
+        className="relative sm:absolute z-20 bg-white space-y-1 w-1/3 top-1/2 left-1/2 "
       >
         {navigations.map((el) => (
           <NavLink
+            end
             to={el.link}
             className={({ isActive }) => `
-            h-12 w-full border rounded px-2 py-2 flex items-center text-slate-700 ring-4 ring-transparent hover:ring-slate-800/45 hover:bg-slate-700/50 hover:text-white transition-all duration-100
-            ${isActive && "shadow-md shadow-black/50"} 
+            h-12 w-full border rounded px-2 py-2 flex items-center text-slate-700 ring-4 ring-transparent
+          hover:ring-slate-800/45 hover:bg-slate-700/50 hover:text-white transition-all
+            duration-100
+            ${isActive && "shadow-md shadow-black/50 skew-y-6"} 
+            ${isTitleShown ? "last:hidden" : "last:visible"}
           `}
           >
             <img className="h-[80%] aspect-square" src={el.icon} alt="" />

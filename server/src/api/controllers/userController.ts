@@ -6,6 +6,7 @@ import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";
 import manageUserMovies from "../services/users/manageUserMovies";
 import { error } from "console";
+import getMyProfileMovies from "../services/users/getMyProfileMovies";
 
 const recommendations: Middleware = async (req, res, next) => {
   try {
@@ -49,4 +50,16 @@ const manageMyMovies: Middleware = async (req, res, next) => {
   }
 };
 
-export { recommendations, userInfo, manageMyMovies };
+const myProfileMovies: Middleware = async (req, res, next) => {
+  const { type } = req.params;
+  const userId = req.cookies.user_id;
+  try {
+    if (!userId) throw errorThrower("UnAuthorized", HttpError.Unauthorized);
+    const result = await getMyProfileMovies(userId, type);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { recommendations, userInfo, manageMyMovies, myProfileMovies };

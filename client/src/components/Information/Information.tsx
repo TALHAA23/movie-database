@@ -1,6 +1,5 @@
 import { useMessage } from "../../Contexts/MessageProvider";
 import "./information.css";
-type MessageType = "warning" | "success" | "failure" | "general";
 interface StyleAttributes {
   bg: string;
   text: string;
@@ -41,9 +40,6 @@ const styles: Style = {
   },
 };
 
-const bg = (type: MessageType) => {
-  if (type == "failure") return;
-};
 export default function Information() {
   const message = useMessage();
   if (!message) return;

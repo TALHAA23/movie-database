@@ -42,8 +42,20 @@ interface ActorInterface {
     previousMovies: MovieInterface[];
   };
 }
+
+interface UserInfo {
+  email: string;
+  email_verified: boolean;
+  nickname: string;
+  name: string;
+  picture: string;
+  sub: string;
+  updated_at: string;
+}
+
 type Action = "publish-rating-on-review" | "publish-rating-on-movie";
 type MovieStatus = "mark-as-watched" | "mark-as-watch-later" | "mark-as-favrt";
+type MyMoviesType = "watchList" | "watched" | "favoriteList";
 
 interface RatingPayload {
   action: Action;
@@ -59,4 +71,6 @@ export type {
   RatingPayload,
   Action,
   MovieStatus,
+  MyMoviesType,
+  UserInfo,
 };

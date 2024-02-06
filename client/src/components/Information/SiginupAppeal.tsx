@@ -3,12 +3,18 @@ import { Link } from "react-router-dom";
 export default function SignupAppeal({
   text,
   subtext,
+  coverPage = false,
 }: {
   text: string;
   subtext?: string;
+  coverPage?: boolean;
 }) {
   return (
-    <div className=" h-[40vh] px-10 bg-black/90 text-white border-4 border-white flex flex-col items-center justify-center">
+    <div
+      className={`${
+        coverPage ? "h-[calc(100vh-60px)]" : "h-[40vh]"
+      } px-10 bg-black/90 text-white border-4 border-white flex flex-col items-center justify-center`}
+    >
       <h1 className="font-bold text-2xl">{text}</h1>
       {subtext && <small className="text-sm font-light">{subtext}</small>}
       <Link
