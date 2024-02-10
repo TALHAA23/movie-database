@@ -15,11 +15,23 @@ import addReviewRating from "../services/movies/addReviewRating";
 import addReviewToMovie from "../services/movies/addReviewToMovie";
 import addMovieRating from "../services/movies/addMovieRating";
 import { error } from "console";
+import getCastById from "../services/movies/getCastById";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   const mongodbObjectId = new Types.ObjectId(id);
   try {
     const result = await getMovieById(mongodbObjectId);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const castById: Middleware = async (req, res, next) => {
+  const { id } = req.params;
+  console.log(id);
+  try {
+    const result = await getCastById(id);
     res.json(result);
   } catch (err) {
     next(err);
@@ -117,6 +129,7 @@ const publishRating: Middleware = async (req, res, next) => {
 
 export {
   movieById,
+  castById,
   topRatedMovies,
   randomMovies,
   newReleases,

@@ -1,5 +1,5 @@
 import { useSearchParams } from "react-router-dom";
-import FindResult from "./findResult";
+import FindResult from "./FindResult";
 export default function Find() {
   const [searchParam, setSearchParam] = useSearchParams();
 

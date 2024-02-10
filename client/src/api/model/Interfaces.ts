@@ -35,7 +35,7 @@ interface ActorInterface {
   name: string;
   about: string;
   DOB: Date;
-  achievments: String[];
+  achievments: string[];
   knownFor: MovieInterface[];
   movies: {
     upcoming: MovieInterface[];

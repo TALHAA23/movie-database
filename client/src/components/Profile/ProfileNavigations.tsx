@@ -30,7 +30,7 @@ const navigations = [
   {
     icon: "../../../public/handshake-angle-solid.svg",
     title: "contributions",
-    link: "./settings",
+    link: "/contribution",
   },
   {
     icon: "../../../public/arrow-left-solid.svg",

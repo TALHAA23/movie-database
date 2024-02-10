@@ -1,33 +1,19 @@
-import * as Interfaces from "../../../api/model/Interfaces";
-import { useMutation } from "@tanstack/react-query";
-import searchParamsFormSubmission from "../../../api/services/searchParamFormSubmission";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, FormEvent } from "react";
+import { useRef, FormEvent } from "react";
 
 export default function SearchBar() {
   const navigate = useNavigate();
   const searchParamsRef = useRef<null | HTMLInputElement>(null);
-  const searchQuery = useMutation<
-    Interfaces.MovieInterface,
-    Error,
-    FormEvent<HTMLFormElement>
-  >({
-    mutationKey: ["search-query"],
-    mutationFn: searchParamsFormSubmission,
-  });
 
-  useEffect(() => {
-    if (searchQuery.isError || searchQuery.isSuccess) {
-      const q = searchParamsRef.current?.value;
-      navigate(`find?q=${q}`, {
-        state: searchQuery.data,
-      });
-    }
-  }, [searchQuery?.isSuccess, searchQuery?.isError]);
+  function handleFormSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    navigate(`find?q=${searchParamsRef.current?.value}`);
+    event.currentTarget.reset();
+  }
 
   return (
     <form
-      onSubmit={searchQuery?.mutate}
+      onSubmit={handleFormSubmit}
       className={`w-[70%] h-full bg-slate-900 rounded-full flex gap-0`}
     >
       <input

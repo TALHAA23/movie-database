@@ -4,6 +4,8 @@ const router = express.Router();
 
 router.get("/movie/:id", movieController.movieById);
 
+router.get("/cast/:id", movieController.castById);
+
 router.get("/movie/:id/reviews", movieController.movieReviews);
 
 router.post(

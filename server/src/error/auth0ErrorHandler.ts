@@ -14,7 +14,7 @@ export default function auth0ErrorHandler(err: Error, res: Response) {
     else if (errWithBody.code)
       [status, message] = [errWithBody.statusCode, errWithBody.code];
     return res.status(status).send(message);
-  } catch (e) {
+  } catch (err) {
     res.status(500).send("Something went wrong while attemping authintication");
   }
 }
