@@ -11,7 +11,7 @@ export default function Avatar() {
      
     `}
     >
-      <img src="../../../../public/user-solid.svg" alt="" />
+      <img src="/user-solid.svg" alt="profile" />
     </Link>
   );
 }

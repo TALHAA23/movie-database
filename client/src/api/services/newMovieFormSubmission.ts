@@ -19,7 +19,6 @@ export default async function upload(event: FormEvent<HTMLFormElement>) {
       url: await readFile(file).then((res) => res),
     },
   };
-  console.log(resolvedData);
   try {
     const result = await createMovie(resolvedData);
     return result;

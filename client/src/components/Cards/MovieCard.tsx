@@ -13,7 +13,7 @@ export default function MovieCard({
   title,
   ratings = 0,
   id,
-  bannerURL = testImages.noImage,
+  bannerURL = "/vite.svg",
 }: Props) {
   return (
     <div className="relative shrink-0 group border border-white/10 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-[13.66%] flex flex-col gap-0 rounded">

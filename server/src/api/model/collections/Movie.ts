@@ -30,7 +30,7 @@ interface MovieInterface {
   hasMore: boolean;
 }
 
-const MovieSchema = new Schema({
+export const MovieSchema = new Schema({
   title: { type: String, required: true },
   desc: { type: String, required: true },
   genre: { type: [String], required: true },

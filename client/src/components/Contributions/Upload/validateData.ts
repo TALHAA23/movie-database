@@ -17,12 +17,11 @@ const validateData = (key: Key, value: any): string | true => {
     return `Run time is out of range .i.e 10-200 minutes`;
   else return true;
 };
-const MAX_SIZE_IN_BYTES = 3000000;
+const MAX_SIZE_IN_BYTES = 3000000; //3MB
 const validateFile = (event: ChangeEvent<HTMLInputElement>): string | true => {
   const files = event.target.files;
   if (!files?.length) return "File not selected";
   const file = files[0];
-  console.log(file);
   if (file.type != "image/jpeg") {
     event.target.value = "";
     return "Banner should be of type .jpeg";

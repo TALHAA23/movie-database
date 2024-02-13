@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const ActorSchema = new Schema({
   name: { type: String, required: true },
-  about: { type: String, required: true },
+  about: String,
   DOB: Date,
   achievments: [String],
   knownFor: [{ type: Schema.Types.ObjectId, ref: "movie" }],

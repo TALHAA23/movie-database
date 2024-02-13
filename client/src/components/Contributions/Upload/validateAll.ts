@@ -1,4 +1,4 @@
-import { DataInterface, DataValidationInterface } from "./DataInterface";
+import { DataValidationInterface } from "./DataInterface";
 export default function validateAll(
   data: DataValidationInterface
 ): false | string {
@@ -27,26 +27,4 @@ export default function validateAll(
   }
 
   return false; //no error
-  // if (!data.title) {
-  //   return "Title is required.";
-  // }
-  // if (!data.desc) {
-  //   return "Description is required.";
-  // }
-  // if (!data.cast || data.cast.length < 3) {
-  //   return "Cast should be at least 3 elements long.";
-  // }
-  // if (!data.genre || data.genre.length < 3) {
-  //   return "Genre should be at least 3 elements long.";
-  // }
-  // if (
-  //   data.releaseYear &&
-  //   (data.releaseYear < 1900 || data.releaseYear > 2050)
-  // ) {
-  //   return "Release year should be between 1900 and 2050.";
-  // }
-  // if (data.runTime && (data.runTime < 10 || data.runTime > 200)) {
-  //   return "Run time should be between 10 and 200.";
-  // }
-  // return false; //no error
 }

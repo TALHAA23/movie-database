@@ -10,7 +10,6 @@ export default async function castToCastRef(casts: string[]) {
       const currentCastId = await Actor.findOne({ name: nameRefExp })
         .select("_id")
         .exec();
-      console.log(currentCastId);
       if (currentCastId) docRef = currentCastId._id;
       else {
         const newActor = await new Actor({ name: cast }).save();
@@ -20,6 +19,5 @@ export default async function castToCastRef(casts: string[]) {
       actorRefs.push(docRef);
     })
   );
-  console.log(actorRefs);
   return actorRefs;
 }

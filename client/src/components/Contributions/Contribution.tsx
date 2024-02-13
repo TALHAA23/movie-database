@@ -3,12 +3,12 @@ const navigations = [
   {
     title: "My contributions",
     link: "./my-contributions",
-    bg: "../../../public/Animation-fish.gif",
+    bg: "/Animation-fish.gif",
   },
   {
     title: "Upload new movie",
     link: "./new",
-    bg: "../../../public/Animation-upload.gif",
+    bg: "/Animation-upload.gif",
   },
   {
     title: "Fill the holes",

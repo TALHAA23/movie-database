@@ -9,6 +9,7 @@ import { router as searchRoutes } from "./api/routes/find.js";
 import { router as movieRoutes } from "./api/routes/movie.js";
 import { router as authRoutes } from "./api/routes/auth";
 import { router as reviewRoutes } from "./api/routes/review";
+import { router as contributionRoutes } from "./api/routes/contributions";
 import { config } from "dotenv";
 import User, { UserSchema } from "./api/model/collections/User";
 config();
@@ -30,6 +31,7 @@ app.use("/api/movies", movieRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/find", searchRoutes);
 app.use("/api/review", reviewRoutes);
+app.use("/api/protected/contribution", contributionRoutes);
 app.use(Error); //always at bottom
 
 app.get("/", (req, res) => {

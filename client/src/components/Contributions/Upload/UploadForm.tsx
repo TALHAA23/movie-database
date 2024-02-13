@@ -295,7 +295,7 @@ export default function UploadForm() {
       <button
         type="submit"
         className="peer relative col-span-full fancy disabled:cursor-no-drop"
-        // disabled={!Object.values(dataValidation).every((el) => el == true)}
+        disabled={!Object.values(dataValidation).every((el) => el == true)}
       >
         <span className="top-key"></span>
         <span className="text">submit</span>

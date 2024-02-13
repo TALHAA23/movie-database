@@ -3,37 +3,37 @@ import shrinkorExpandNavigations from "./profileAnimation";
 import { useLocation, NavLink } from "react-router-dom";
 const navigations = [
   {
-    icon: "../../../public/gear-solid.svg",
+    icon: "/gear-solid.svg",
     title: "settings",
     link: "./settings",
   },
   {
-    icon: "../../../public/bookmark-solid.svg",
+    icon: "/bookmark-solid.svg",
     title: "watch list",
     link: "./my-watchlist",
   },
   {
-    icon: "../../../public/eye-regular.svg",
+    icon: "/eye-regular.svg",
     title: "watched",
     link: "./watched",
   },
   {
-    icon: "../../../public/pen-solid.svg",
+    icon: "/pen-solid.svg",
     title: "my reviews",
     link: "./settings",
   },
   {
-    icon: "../../../public/star-solid.svg",
+    icon: "/star-solid.svg",
     title: "favorite list",
     link: "./my-favorites",
   },
   {
-    icon: "../../../public/handshake-angle-solid.svg",
+    icon: "/handshake-angle-solid.svg",
     title: "contributions",
     link: "/contribution",
   },
   {
-    icon: "../../../public/arrow-left-solid.svg",
+    icon: "/arrow-left-solid.svg",
     title: "Back",
     link: "/profile",
   },
@@ -72,7 +72,11 @@ export default function ProfileNavigations() {
             ${isTitleShown ? "last:hidden" : "last:visible"}
           `}
           >
-            <img className="h-[80%] aspect-square" src={el.icon} alt="" />
+            <img
+              className="h-[80%] aspect-square"
+              src={el.icon}
+              alt={el.title}
+            />
             <span
               className={`${
                 isTitleShown ? "inline" : "hidden"
