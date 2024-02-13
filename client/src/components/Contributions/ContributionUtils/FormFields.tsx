@@ -2,9 +2,9 @@ import awardsList from "../../../utils/awardsList";
 import genresList from "../../../utils/genresList";
 import { validateFile } from "../Upload/validateData";
 
-const FormFeilds = [
+const FormFields = [
   {
-    feildName: "title",
+    fieldName: "title",
     element: () => (
       <label className="col-span-full">
         <input type="text" name="title" className="input" />
@@ -13,7 +13,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "desc",
+    fieldName: "desc",
     element: () => (
       <label className=" col-span-full">
         <textarea
@@ -26,7 +26,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "cast",
+    fieldName: "cast",
     element: () => (
       <label className="col-span-3">
         <input placeholder="" name="cast" className="peer input" />
@@ -35,7 +35,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "genre",
+    fieldName: "genre",
     element: () => (
       <label className="relative col-span-3">
         <select name="genre" id="genre" className="input peer">
@@ -50,7 +50,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "banner",
+    fieldName: "banner",
     element: () => (
       <label className="col-span-full">
         <input
@@ -68,7 +68,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "awards",
+    fieldName: "awards",
     element: () => (
       <label className=" relative col-span-full">
         <select name="awards" id="awards" className="input peer">
@@ -83,7 +83,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "releaseYear",
+    fieldName: "releaseYear",
     element: () => (
       <label className="col-span-3">
         <input
@@ -99,7 +99,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "releaseDate",
+    fieldName: "releaseDate",
     element: () => (
       <label className="col-span-3">
         <input
@@ -115,7 +115,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "runTime",
+    fieldName: "runTime",
     element: () => (
       <label className="col-span-2 text-xs">
         <input
@@ -130,7 +130,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "tagline",
+    fieldName: "tagline",
     element: () => (
       <label className="col-span-2 text-xs">
         <input type="text" max={100} className="input" name="tagline" />
@@ -139,7 +139,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "creator",
+    fieldName: "creator",
     element: () => (
       <label className="col-span-2 text-xs">
         <input type="string" max={50} className="input" name="creator" />
@@ -148,7 +148,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "language",
+    fieldName: "language",
     element: () => (
       <label className="col-span-3">
         <input type="text" className="input" name="language" />
@@ -157,7 +157,7 @@ const FormFeilds = [
     ),
   },
   {
-    feildName: "countryOfOrigin",
+    fieldName: "countryOfOrigin",
     element: () => (
       <label className="col-span-3">
         <input type="text" className="input" name="countryOfOrigin" />
@@ -166,4 +166,4 @@ const FormFeilds = [
     ),
   },
 ];
-export default FormFeilds;
+export default FormFields;

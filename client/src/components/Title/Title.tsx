@@ -9,14 +9,13 @@ import PageLoader from "../Loaders/PageLoader";
 import NotFound from "../NotFound/NotFound";
 import movieListApi from "../../api/movieListApi";
 import MovieList from "../Home/Others/MovieList";
-import testImages from "../../testimages";
 import Awards from "./Awards";
 import Tagline from "./Tagline";
 import Details from "./Details";
 import ReviewWriter from "./ReviewWriter";
 import Information from "../Information/Information";
-import RatingStars from "../Review/RatingStars";
 import RatingAndReview from "./RatingAndReview";
+import CallToContributionButton from "../Contributions/ContributionUtils/CallToContributionButtons";
 export default function Title() {
   const { id } = useParams();
   if (!id) return <h1>Something went wrong</h1>;
@@ -42,7 +41,7 @@ export default function Title() {
   console.log(data);
 
   return (
-    <section className="w-full h-auto bg-black text-white">
+    <div className="w-full h-auto bg-black text-white pb-4">
       <Information />
       <ReviewWriter movieRef={data._id as string} />
       <TitleHead
@@ -73,6 +72,7 @@ export default function Title() {
           numberofReviews={data.numberofReviews}
         />
       )}
-    </section>
+      <CallToContributionButton movieRef={data._id} />
+    </div>
   );
 }

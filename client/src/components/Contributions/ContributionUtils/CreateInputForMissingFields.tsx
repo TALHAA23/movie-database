@@ -1,15 +1,15 @@
 import { ReactElement } from "react";
 import { MovieInterface } from "../../../api/model/Interfaces";
-import FormFeilds from "./FormFeilds";
+import FormFields from "./FormFields";
 
-export default function CreateInputForMissingFeilds(movie: MovieInterface) {
+export default function CreateInputForMissingFields(movie: MovieInterface) {
   const keyOfMissingInformation: ReactElement[] = [];
-  FormFeilds.map((feild) => {
-    const feildValue = movie[feild.feildName as keyof MovieInterface];
+  FormFields.map((field) => {
+    const feildValue = movie[field.fieldName as keyof MovieInterface];
     const isFeildInvalid = validateFeildValue(feildValue);
     if (feildValue && isFeildInvalid)
-      keyOfMissingInformation.push(feild.element());
-    else if (!feildValue) keyOfMissingInformation.push(feild.element()); //feild not exist
+      keyOfMissingInformation.push(field.element());
+    else if (!feildValue) keyOfMissingInformation.push(field.element()); //feild not exist
   });
 
   return keyOfMissingInformation;

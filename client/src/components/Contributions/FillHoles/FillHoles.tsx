@@ -1,22 +1,22 @@
+// TODO:genre awards are not handled
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useSearchParams } from "react-router-dom";
 import movieByIdApi from "../../../api/movieByIdApi";
 import PageLoader from "../../Loaders/PageLoader";
 import { MovieInterface } from "../../../api/model/Interfaces";
-import CreateInputForMissingFeilds from "../ContributionUtils/CreateInputForMissingFeilds.tsx";
+import CreateInputForMissingFields from "../ContributionUtils/CreateInputForMissingFields.tsx";
 import "../../../../public/form.css";
 import fillHolesFormSubmission from "../../../api/services/fillHolesFormSubmission.ts";
 import { useEffect } from "react";
-
+import NoContributionRequired from "../ContributionUtils/NoContributionRequired.tsx";
 export default function FillHoles() {
   const id = useSearchParams()[0].get("of");
   if (!id) throw new Error("Id not provided");
   const queryClient = useQueryClient();
-  const { isPending, isSuccess, isError, error, data } =
-    useQuery<MovieInterface>({
-      queryKey: [id],
-      queryFn: () => movieByIdApi(id),
-    });
+  const { isPending, isError, error, data } = useQuery<MovieInterface>({
+    queryKey: [id],
+    queryFn: () => movieByIdApi(id),
+  });
 
   const uploadFormMutation = useMutation({
     mutationKey: ["fill-holes-upload"],
@@ -30,6 +30,10 @@ export default function FillHoles() {
 
   if (isPending) return <PageLoader />;
   else if (isError) return <h1>{error.message}</h1>;
+
+  const InputForMissingFields = CreateInputForMissingFields(data);
+  if (!InputForMissingFields.length) return <NoContributionRequired />;
+
   return (
     <form
       onSubmit={uploadFormMutation.mutate}
@@ -46,7 +50,8 @@ export default function FillHoles() {
           {uploadFormMutation.error.message}
         </small>
       )}
-      {CreateInputForMissingFeilds(data)}
+      {InputForMissingFields}
+
       <input hidden type="text" name="_id" value={id} />
       <button
         type="submit"
