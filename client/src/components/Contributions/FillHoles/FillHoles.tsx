@@ -36,7 +36,7 @@ export default function FillHoles() {
       className="contribution-new-form"
     >
       <h1 className=" col-span-full text-center font-semibold text-gray-600 text-2xl">
-        "{data.title}" lack the following information
+        "{data.title}" lack the following information ------
       </h1>
       {uploadFormMutation.isPending && (
         <small className="text-center">Please wait</small>
