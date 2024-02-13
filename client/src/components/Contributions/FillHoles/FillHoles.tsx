@@ -7,56 +7,18 @@ import CreateInputForMissingFeilds from "../ContributionUtils/CreateInputForMiss
 import "../../../../public/form.css";
 import fillHolesFormSubmission from "../../../api/services/fillHolesFormSubmission.ts";
 import { useEffect } from "react";
+import FillHolesofMovie from "./FillHolesofMovie.tsx";
+import FillHolesofActor from "./FillHolesofActor.tsx";
 
 export default function FillHoles() {
-  const id = useSearchParams()[0].get("of");
-  if (!id) throw new Error("Id not provided");
-  const queryClient = useQueryClient();
-  const { isPending, isSuccess, isError, error, data } =
-    useQuery<MovieInterface>({
-      queryKey: [id],
-      queryFn: () => movieByIdApi(id),
-    });
+  const searchParam = useSearchParams()[0];
+  const id = searchParam.get("of");
+  const type = searchParam.get("type") as "actor" | "movie";
+  if (!id || !type) throw new Error("Id or Type not provided");
 
-  const uploadFormMutation = useMutation({
-    mutationKey: ["fill-holes-upload"],
-    mutationFn: fillHolesFormSubmission,
-  });
-
-  useEffect(() => {
-    if (uploadFormMutation.isSuccess)
-      queryClient.invalidateQueries({ queryKey: [id] });
-  }, [uploadFormMutation.isSuccess]);
-
-  if (isPending) return <PageLoader />;
-  else if (isError) return <h1>{error.message}</h1>;
-  return (
-    <form
-      onSubmit={uploadFormMutation.mutate}
-      className="contribution-new-form"
-    >
-      <h1 className=" col-span-full text-center font-semibold text-gray-600 text-2xl">
-        "{data.title}" lack the following information ------
-      </h1>
-      {uploadFormMutation.isPending && (
-        <small className="text-center">Please wait</small>
-      )}
-      {uploadFormMutation.isError && (
-        <small className="text-center">
-          {uploadFormMutation.error.message}
-        </small>
-      )}
-      {CreateInputForMissingFeilds(data)}
-      <input hidden type="text" name="_id" value={id} />
-      <button
-        type="submit"
-        className="peer relative col-span-full fancy disabled:cursor-no-drop"
-      >
-        <span className="top-key"></span>
-        <span className="text">submit</span>
-        <span className="bottom-key-1"></span>
-        <span className="bottom-key-2"></span>
-      </button>
-    </form>
+  return type == "movie" ? (
+    <FillHolesofMovie id={id} />
+  ) : (
+    <FillHolesofActor id={id} />
   );
 }
