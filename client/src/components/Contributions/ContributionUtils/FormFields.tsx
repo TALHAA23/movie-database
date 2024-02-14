@@ -165,5 +165,86 @@ const FormFields = [
       </label>
     ),
   },
+  // for actor
+  {
+    fieldName: "name",
+    element: () => (
+      <label className="col-span-full">
+        <input type="text" name="name" className="input" />
+        <span>name</span>
+      </label>
+    ),
+  },
+  {
+    fieldName: "about",
+    element: () => (
+      <label className=" col-span-full">
+        <textarea
+          maxLength={350}
+          placeholder=""
+          className="input resize-none "
+          name="about"
+        ></textarea>
+        <span className="">about</span>
+      </label>
+    ),
+  },
+  {
+    fieldName: "DOB",
+    element: () => (
+      <label className="col-span-3">
+        <input
+          type="date"
+          max={new Date().getFullYear()}
+          placeholder=""
+          name="DOB"
+          className="peer input"
+        />
+        <span>Date of birth</span>
+      </label>
+    ),
+  },
+  {
+    fieldName: "achievments",
+    element: () => (
+      <label className=" relative col-span-full">
+        <select name="achievments" id="achievments" className="input peer">
+          <option value="" selected disabled hidden>
+            Achievments
+          </option>
+          {awardsList.map((award) => (
+            <option value={award}>{award}</option>
+          ))}
+        </select>
+      </label>
+    ),
+  },
+  {
+    fieldName: "knownFor",
+    element: () => (
+      <label className="col-span-3">
+        <input placeholder="" name="knownFor" className="peer input" />
+        <span>Movies Title for which the actor is know seperated by comma</span>
+      </label>
+    ),
+  },
+  {
+    fieldName: "previousMovies",
+    element: () => (
+      <label className="col-span-3">
+        <input placeholder="" name="previousMovies" className="peer input" />
+        <span>Movies that the actor has worked in know seperated by comma</span>
+      </label>
+    ),
+  },
+  {
+    fieldName: "upcoming",
+    element: () => (
+      <label className="col-span-3">
+        <input placeholder="" name="upcoming" className="peer input" />
+        <span>Upcoming Movies Title seperated by comma</span>
+      </label>
+    ),
+  },
 ];
 export default FormFields;
