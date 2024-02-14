@@ -1,8 +1,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import movieByIdApi from "../../../api/movieByIdApi";
 import PageLoader from "../../Loaders/PageLoader";
-import { ActorInterface, MovieInterface } from "../../../api/model/Interfaces";
-import CreateInputForMissingFeilds from "../ContributionUtils/CreateInputForMissingFeilds.tsx";
+import { ActorInterface } from "../../../api/model/Interfaces";
+import CreateInputForMissingFeilds from "../ContributionUtils/CreateInputForMissingFields.tsx";
 import "../../../../public/form.css";
 import fillHolesFormSubmission from "../../../api/services/fillHolesFormSubmission.ts";
 import { useEffect } from "react";
@@ -10,11 +9,10 @@ import castByIdApi from "../../../api/castByIdaApi.ts";
 
 export default function FillHolesofActor({ id }: { id: string }) {
   const queryClient = useQueryClient();
-  const { isPending, isSuccess, isError, error, data } =
-    useQuery<ActorInterface>({
-      queryKey: [id],
-      queryFn: () => castByIdApi(id),
-    });
+  const { isPending, isError, error, data } = useQuery<ActorInterface>({
+    queryKey: [id],
+    queryFn: () => castByIdApi(id),
+  });
 
   const uploadFormMutation = useMutation({
     mutationKey: ["fill-holes-actor"],
