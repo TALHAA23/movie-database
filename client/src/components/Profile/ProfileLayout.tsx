@@ -1,4 +1,4 @@
-import { useIsUserLoggedIn, useUserInfo } from "../../Contexts/UserProvider";
+import { useUserInfo } from "../../Contexts/UserProvider";
 import SectionError from "../Error/SectionError";
 import SignupAppeal from "../Information/SiginupAppeal";
 import PageLoader from "../Loaders/PageLoader";
@@ -24,7 +24,7 @@ export default function ProfileLayout() {
   return (
     <div className="h-[calc(100vh-60px)] flex gap-0 flex-col sm:flex-row">
       <About user={user?.data} />
-      <div className="relative w-full flex">
+      <div className="relative flex">
         <ProfileNavigations />
         <Outlet />
       </div>

@@ -1,6 +1,8 @@
 import { MovieInterface } from "./model/Interfaces";
 
-export default async function fillMovieHolesApi(data: Partial<MovieInterface>) {
+export default async function sendfillHolesDataApi(
+  data: Partial<MovieInterface>
+) {
   let d = data;
   try {
     const response = await fetch(

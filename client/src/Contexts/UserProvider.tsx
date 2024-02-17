@@ -10,6 +10,8 @@ interface UserContext {
 const UserContext = createContext<null | UserContext>(null);
 
 export const useUserInfo = () => useContext(UserContext)?.userInfoQuery;
+export const userUserId = () =>
+  useContext(UserContext)?.userInfoQuery.data?.sub;
 export const useIsUserLoggedIn = () =>
   useContext(UserContext)?.userInfoQuery.data ? true : false;
 

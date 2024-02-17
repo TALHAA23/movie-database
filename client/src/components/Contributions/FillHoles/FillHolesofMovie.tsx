@@ -2,18 +2,17 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import movieByIdApi from "../../../api/movieByIdApi";
 import PageLoader from "../../Loaders/PageLoader";
 import { MovieInterface } from "../../../api/model/Interfaces";
-import CreateInputForMissingFeilds from "../ContributionUtils/CreateInputForMissingFeilds.tsx";
+import CreateInputForMissingFeilds from "../ContributionUtils/CreateInputForMissingFields.tsx";
 import "../../../../public/form.css";
 import fillHolesFormSubmission from "../../../api/services/fillHolesFormSubmission.ts";
 import { useEffect } from "react";
 
 export default function FillHolesofMovie({ id }: { id: string }) {
   const queryClient = useQueryClient();
-  const { isPending, isSuccess, isError, error, data } =
-    useQuery<MovieInterface>({
-      queryKey: [id],
-      queryFn: () => movieByIdApi(id),
-    });
+  const { isPending, isError, error, data } = useQuery<MovieInterface>({
+    queryKey: [id],
+    queryFn: () => movieByIdApi(id),
+  });
 
   const uploadFormMutation = useMutation({
     mutationKey: ["fill-holes-movie"],
@@ -45,6 +44,7 @@ export default function FillHolesofMovie({ id }: { id: string }) {
       )}
       {CreateInputForMissingFeilds(data)}
       <input hidden type="text" name="_id" value={id} />
+      <input hidden type="text" name="actionOn" value="movie" />
       <button
         type="submit"
         className="peer relative col-span-full fancy disabled:cursor-no-drop"

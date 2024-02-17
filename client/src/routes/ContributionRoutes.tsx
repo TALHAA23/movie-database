@@ -3,6 +3,7 @@ import ContributionLayout from "../components/Contributions/ContributionLayout";
 import UploadForm from "../components/Contributions/Upload/UploadForm";
 import Contribution from "../components/Contributions/Contribution";
 import FillHoles from "../components/Contributions/FillHoles/FillHoles";
+import MyContributions from "../components/Profile/MyContributions/MyContributions";
 
 export default function ContributionRoutes() {
   return useRoutes([
@@ -21,6 +22,10 @@ export default function ContributionRoutes() {
         {
           path: "fill-the-holes",
           element: <FillHoles />,
+        },
+        {
+          path: "my-contributions",
+          element: <MyContributions />,
         },
       ],
     },

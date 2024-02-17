@@ -21,7 +21,7 @@ export default function NameMovies({
   );
 }
 const createFrame = (title: string, list: MovieInterface[]) =>
-  list.length ? (
+  list.length > 0 ? (
     <Frame frameTitle={title}>
       {list.map((movie) => (
         <MovieCard id={movie._id} title={movie.title} ratings={4} />

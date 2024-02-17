@@ -11,6 +11,7 @@ import awardsList from "../../../utils/awardsList";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useMessageUpdater } from "../../../Contexts/MessageProvider";
+import { useUserInfo, userUserId } from "../../../Contexts/UserProvider";
 
 const DEBOUNCE_TIME = 200;
 const MIN_GENRE_CAST_AWARDS = 3;
@@ -43,6 +44,7 @@ const initDataValidation = (): DataValidationInterface => ({
 });
 
 export default function UploadForm() {
+  const userId = userUserId();
   const updateMessage = useMessageUpdater();
   const timeoutId = useRef<undefined | number>();
   const navigate = useNavigate();
@@ -283,7 +285,6 @@ export default function UploadForm() {
           placeholder=""
           type="file"
           name="banner"
-          // required
           className={`input text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
          file:text-sm file:font-semibold file:bg-yellow-50 file:text-yellow-700
        hover:file:bg-yellow-100`}
@@ -292,6 +293,8 @@ export default function UploadForm() {
       {Array.from(Object.entries(genreCastAwards)).map(([key, value]) => (
         <input type="text" name={key} value={JSON.stringify(value)} hidden />
       ))}
+      {/* hidden field */}
+      <input hidden type="text" name="userId" value={userId} />
       <button
         type="submit"
         className="peer relative col-span-full fancy disabled:cursor-no-drop"

@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import fillMovieHolesApi from "../fillMovieHolesApi";
+import sendfillHolesDataApi from "../sendfillHolesDataApi";
 import readFile from "../../components/Contributions/Upload/readFile";
 
 export default async function fillHolesFormSubmission(
@@ -9,13 +9,13 @@ export default async function fillHolesFormSubmission(
   const formData = new FormData(event.target);
   removeUnChangedFeild(formData);
   const entries = [...formData.entries()];
-  if (entries.length == 1 /*id only*/)
+  if (entries.length == 2 /*if id and actionOn only*/)
     throw new Error("Add atleast one information!");
   const data = Object.fromEntries(entries);
   await changeTypeOfCastAndCreateDataURLForBanner(data);
 
   try {
-    const result = fillMovieHolesApi(data);
+    const result = sendfillHolesDataApi(data);
     return result;
   } catch (err) {
     throw err;

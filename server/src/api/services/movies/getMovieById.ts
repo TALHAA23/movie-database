@@ -7,7 +7,7 @@ export async function getMovieById(id: Types.ObjectId) {
   ];
   try {
     const movie = await Movie.findById(id)
-      .populate("cast", "_id name")
+      .populate("cast", "_id name banner")
       .populate("reviews.reviewedBy", "_id userInfo.username")
       .populate("ratings.rateBy", "_id userInfo.username")
       .exec();

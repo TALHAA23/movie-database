@@ -33,7 +33,7 @@ export default function FillHolesofActor({ id }: { id: string }) {
       className="contribution-new-form"
     >
       <h1 className=" col-span-full text-center font-semibold text-gray-600 text-2xl">
-        "{data.name}" lack the following information ------
+        "{data.name}" lack the following information
       </h1>
       {uploadFormMutation.isPending && (
         <small className="text-center">Please wait</small>
@@ -45,6 +45,8 @@ export default function FillHolesofActor({ id }: { id: string }) {
       )}
       {CreateInputForMissingFeilds(data)}
       <input hidden type="text" name="_id" value={id} />
+      <input hidden type="text" name="actionOn" value="actor" />
+
       <button
         type="submit"
         className="peer relative col-span-full fancy disabled:cursor-no-drop"

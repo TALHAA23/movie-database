@@ -33,7 +33,7 @@ export default function FindResult() {
           className=" border-b-2 h-[3.5cm] flex items-center"
         >
           <img
-            src={testImages.protrait}
+            src={movie.banner || testImages.noImage}
             alt=""
             className=" w-1/4 max-w-[3cm] h-full object-cover"
           />
@@ -51,18 +51,23 @@ export default function FindResult() {
 interface MovieInformation {
   title: string;
   releaseYear: number;
-  casts: { name: string }[];
+  casts: Partial<Interfaces.ActorInterface>[];
 }
 
 function Information({ title, releaseYear, casts }: MovieInformation) {
-  const castNames = casts.length
-    ? casts.map((cast) => cast.name).toString()
-    : "";
   return (
     <div className=" leading-tight">
       <h1 className="font-semibold">{title}</h1>
       <p className=" text-sm">{releaseYear}</p>
-      {castNames && <p className="text-sm font-light">{castNames}</p>}
+      {casts.length > 0 &&
+        casts.map((cast) => (
+          <Link
+            to={`/name/${cast._id}`}
+            className="text-sm font-light [&:not(:last-child)]:after:content-[','] hover:underline hover:text-blue-500 "
+          >
+            {cast.name}
+          </Link>
+        ))}
     </div>
   );
 }

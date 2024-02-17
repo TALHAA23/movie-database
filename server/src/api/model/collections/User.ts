@@ -1,5 +1,6 @@
 // File: model/collection/User.ts
-import mongoose, { Types } from "mongoose";
+import mongoose from "mongoose";
+import { MovieInterface } from "../../../../../shared/shared.interfaces";
 const { Schema } = mongoose;
 
 export const UserSchema = new Schema({
@@ -12,7 +13,15 @@ export const UserSchema = new Schema({
   watchList: [{ type: Schema.Types.ObjectId, ref: "movie" }],
   favoriteList: [{ type: Schema.Types.ObjectId, ref: "movie" }],
   watched: [{ type: Schema.Types.ObjectId, ref: "movie" }],
-  // myReviewsRef: [{ type: Schema.Types.ObjectId, ref: "Review" }],
+  contributions: {
+    uploads: [{ type: Schema.Types.ObjectId, ref: "movie" }],
+    addOns: [
+      {
+        ref: { type: Schema.Types.ObjectId, ref: "movie" },
+        additionalProps: { type: [String], default: [] },
+      },
+    ],
+  },
 });
 
 export default mongoose.model("user", UserSchema);

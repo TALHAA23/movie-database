@@ -12,6 +12,7 @@ import { router as reviewRoutes } from "./api/routes/review";
 import { router as contributionRoutes } from "./api/routes/contributions";
 import { config } from "dotenv";
 import User, { UserSchema } from "./api/model/collections/User";
+import bodyParser from "body-parser";
 config();
 const corsOptions = {
   origin: "http://localhost:5173",
@@ -21,6 +22,8 @@ const corsOptions = {
 
 const app = express();
 app.use(cors(corsOptions)); //always on top
+app.use(bodyParser.json({ limit: "50mb" })); //increase payload limit
+app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(jwtCheckMiddleware);
 app.use(express.json());

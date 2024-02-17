@@ -2,8 +2,9 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const ActorSchema = new Schema({
+export const ActorSchema = new Schema({
   name: { type: String, required: true },
+  banner: { type: String, default: null },
   about: { type: String, default: "" },
   DOB: { type: Date, default: null },
   achievments: [String],

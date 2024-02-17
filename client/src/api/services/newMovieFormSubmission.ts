@@ -4,7 +4,8 @@ import readFile from "../../components/Contributions/Upload/readFile";
 
 export default async function upload(event: FormEvent<HTMLFormElement>) {
   event.preventDefault();
-  const formData = new FormData(event.target);
+  const formData = new FormData(event.target as HTMLFormElement);
+  if (!formData.get("userId")) throw new Error("User Id not binded");
   const entries = [...formData.entries()];
   const data = Object.fromEntries(entries);
   const file = data.banner as File;

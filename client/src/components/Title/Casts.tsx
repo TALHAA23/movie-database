@@ -12,7 +12,6 @@ export default function Casts({ casts }: { casts: ActorInterface[] }) {
       </Frame>
     );
   }
-
   return (
     <Frame frameTitle="Actor" frameHight="20vh">
       {casts.map((cast) => (
@@ -21,9 +20,9 @@ export default function Casts({ casts }: { casts: ActorInterface[] }) {
           className="w-1/3 sm:w-1/4 md:w-1/5 xl:w-1/7 h-full flex flex-col items-center"
         >
           <img
-            src={testImages.protrait}
-            alt=""
-            className="h-[80%] aspect-square rounded-full"
+            src={cast.banner || testImages.protrait}
+            alt={cast.name}
+            className="h-[80%] aspect-square rounded-full object-cover"
           />
           <p className="text-white text-center font-bold text-lg">
             {cast.name}

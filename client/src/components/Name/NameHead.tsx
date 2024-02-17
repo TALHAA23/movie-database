@@ -1,21 +1,23 @@
 import testImages from "../../testimages";
 import calculateAge from "../../utils/calculateAge";
 import dateMonthYearFormattedDate from "../../utils/dateMonthYearFormattedDate";
+import CallToContributionSectionCall from "../Contributions/ContributionUtils/CallToContributionSectionCall";
 
 interface Props {
+  id: string;
   name: string;
   banner?: string;
   DOB: Date;
   about: string;
 }
 
-export default function NameHead({ name, banner, DOB, about }: Props) {
+export default function NameHead({ id, name, banner, DOB, about }: Props) {
   const DOBtoContructor = new Date(DOB);
   return (
     <section className="relative w-full h-auto md:h-screen pb-28 pt-3 px-2">
       <div className=" relative  flex flex-col sm:flex-row items-center">
         <img
-          className=" w-64 aspect-square rounded-full"
+          className=" w-64 aspect-square rounded-full object-contain"
           src={banner || testImages.noImage}
           alt=""
         />
@@ -29,7 +31,16 @@ export default function NameHead({ name, banner, DOB, about }: Props) {
             {name}
           </h1>
           <small>
-            {dateMonthYearFormattedDate(DOB)} ({calculateAge(DOBtoContructor)}
+            {DOB ? (
+              <CallToContributionSectionCall
+                id={id}
+                contributionFor="actor"
+                infoTitle="Date of birth"
+              />
+            ) : (
+              dateMonthYearFormattedDate(DOB)
+            )}{" "}
+            ({calculateAge(DOBtoContructor)}
             Year Old)
           </small>
         </div>
@@ -40,7 +51,15 @@ export default function NameHead({ name, banner, DOB, about }: Props) {
           src="../../../public/arrow-right.png"
           alt=""
         />
-        <p className="  translate-y-6">{about}</p>
+        <p className="  translate-y-6">
+          {about || (
+            <CallToContributionSectionCall
+              id={id}
+              infoTitle="about"
+              contributionFor="actor"
+            />
+          )}
+        </p>
       </div>
     </section>
   );

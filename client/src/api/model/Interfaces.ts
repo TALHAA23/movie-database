@@ -31,8 +31,9 @@ interface Review {
 }
 
 interface ActorInterface {
-  _id?: string;
+  _id: string;
   name: string;
+  banner: string;
   about: string;
   DOB: Date;
   achievments: string[];

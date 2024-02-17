@@ -54,7 +54,7 @@ export default function Title() {
       <Casts casts={data.cast} />
       <MovieList title="Related" query={relatedMoviesQuery} />
       {data.awards?.length && data.awards?.length > 0 && (
-        // TODO: disable 0 form being displayed
+        // TODO: disable 0 from being displayed
         <Awards awards={data.awards} />
       )}
       <Details
@@ -72,7 +72,7 @@ export default function Title() {
           numberofReviews={data.numberofReviews}
         />
       )}
-      <CallToContributionButton movieRef={data._id} />
+      <CallToContributionButton id={data._id} contributionOn="movie" />
     </div>
   );
 }

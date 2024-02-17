@@ -1,28 +1,22 @@
-import { Types } from "mongoose";
 import Movie from "../../model/collections/Movie";
 import addMovieRefToCorrospondingActor from "./addMovieRefToCorrospondingActor";
+import User from "../../model/collections/User";
+import { MovieInterface } from "../../../../../shared/shared.interfaces";
 
-interface MovieInterface {
-  title: string;
-  desc: string;
-  cast: Types.ObjectId[];
-  genre: string[] | [];
-  banner?: File;
-  awards?: string[] | [];
-  releaseYear?: number;
-  releaseDate?: Date;
-  runTime: number;
-  tagline?: string;
-  creator?: string;
-  language?: string;
-  countryOfOrigin?: string;
+interface Data extends MovieInterface {
+  userId: string;
 }
 
-export default async function addNewMovie(data: MovieInterface) {
+export default async function addNewMovie(data: Data) {
   const doc = new Movie(data);
   try {
     const result = await doc.save();
     await addMovieRefToCorrospondingActor(result._id, data.cast);
+    await User.findByIdAndUpdate(data.userId, {
+      $set: {
+        "contributions.uploads": doc.id,
+      },
+    });
     return result;
   } catch (err) {
     throw err;

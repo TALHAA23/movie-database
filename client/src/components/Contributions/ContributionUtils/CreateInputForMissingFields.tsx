@@ -12,10 +12,14 @@ export default function CreateInputForMissingFeilds(
     const isFeildInvalid = validateFeildValue(feildValue);
     if (feildValue && isFeildInvalid && field.fieldName in movie)
       keyOfMissingInformation.push(field.element());
-    else if (!feildValue && "title" in movie)
-      //?feild not exist, For movie doc only
+    else if (!feildValue && field.fieldName in movie)
+      // TODO: code need to be  resolved to add missing field
+      keyOfMissingInformation.push(field.element());
+    // ? Might Change the logic
+    if (field.fieldName == "banner" && !("banner" in movie))
       keyOfMissingInformation.push(field.element());
   });
+  return keyOfMissingInformation;
 }
 const validateFeildValue = (value: any) => {
   if (value instanceof Array && value.length === 0) return true;
