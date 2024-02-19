@@ -7,6 +7,7 @@ import HttpError from "../../../../shared/httpErrorsEnum";
 import manageUserMovies from "../services/users/manageUserMovies";
 import { error } from "console";
 import getMyProfileMovies from "../services/users/getMyProfileMovies";
+import getUserContributions from "../services/users/getUserContributions";
 
 const recommendations: Middleware = async (req, res, next) => {
   try {
@@ -62,4 +63,22 @@ const myProfileMovies: Middleware = async (req, res, next) => {
   }
 };
 
-export { recommendations, userInfo, manageMyMovies, myProfileMovies };
+const myContributions: Middleware = async (req, res, next) => {
+  const { user_id } = req.cookies;
+  try {
+    if (!user_id)
+      throw errorThrower("UserId not provided", HttpError.BadRequest);
+    const result = await getUserContributions(user_id);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export {
+  recommendations,
+  userInfo,
+  manageMyMovies,
+  myProfileMovies,
+  myContributions,
+};

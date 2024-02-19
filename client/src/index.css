@@ -7,6 +7,8 @@
 body {
   font-family: "Outfit", "inter";
   box-sizing: border-box;
+  background-color: black;
+  color: white;
 }
 
 

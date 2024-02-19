@@ -8,7 +8,7 @@ export default function handleMongooseError(mongooseError: mongoose.Error) {
       name: "MongooseError",
     },
     CastError: {
-      message: "The value provided for the field is invalid.",
+      message: "The value or Id provided for the field is invalid.",
       statusCode: 400,
       name: "CastError",
     },
@@ -58,7 +58,7 @@ export default function handleMongooseError(mongooseError: mongoose.Error) {
       name: "TimeoutError",
     },
   };
-
+  console.log("reached");
   const errorInfo =
     MongooseErrors[mongooseError.name as keyof typeof MongooseErrors];
   if (!errorInfo) return MongooseErrors.defaultError;

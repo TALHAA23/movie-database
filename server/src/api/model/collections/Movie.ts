@@ -56,7 +56,7 @@ export const MovieSchema = new Schema({
       reviewedBy: { type: String, ref: "user", require: true },
       featured: { type: Boolean, require: false },
       title: { type: String, required: true, maxLength: 50 },
-      review: { type: String, required: true, maxLength: 500 },
+      review: { type: String, required: true, maxLength: 800 },
       reviewDate: { type: Date, default: new Date() },
       helpful: { type: Number, default: 0 },
       unhelpful: { type: Number, default: 0 },
@@ -73,3 +73,4 @@ export const MovieSchema = new Schema({
 });
 
 export default mongoose.model("movie", MovieSchema);
+export type { MovieInterface };

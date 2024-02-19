@@ -11,7 +11,7 @@ import awardsList from "../../../utils/awardsList";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useMessageUpdater } from "../../../Contexts/MessageProvider";
-import { useUserInfo, userUserId } from "../../../Contexts/UserProvider";
+import { useUserInfo, useUserId } from "../../../Contexts/UserProvider";
 
 const DEBOUNCE_TIME = 200;
 const MIN_GENRE_CAST_AWARDS = 3;
@@ -44,7 +44,7 @@ const initDataValidation = (): DataValidationInterface => ({
 });
 
 export default function UploadForm() {
-  const userId = userUserId();
+  const userId = useUserId();
   const updateMessage = useMessageUpdater();
   const timeoutId = useRef<undefined | number>();
   const navigate = useNavigate();

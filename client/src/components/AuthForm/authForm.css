@@ -35,6 +35,7 @@
   outline: 0;
   border: 1px solid rgba(105, 105, 105, 0.397);
   border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.323);
 }
 
 .form .input:focus {
@@ -147,7 +148,6 @@
   transition: all 0.3s ease-in-out;
   text-transform: lowercase;
   text-decoration: none;
-  color: #818181;
   transform: translateX(30%);
 }
 

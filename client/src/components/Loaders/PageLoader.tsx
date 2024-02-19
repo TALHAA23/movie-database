@@ -14,7 +14,7 @@ export default function PageLoader() {
           className="svgIcon"
         >
           <circle
-            stroke-width="7"
+            strokeWidth="7"
             stroke="black"
             transform="rotate(36.0692 46.1726 46.1727)"
             r="29.5497"
@@ -22,7 +22,7 @@ export default function PageLoader() {
             cx="46.1726"
           ></circle>
           <line
-            stroke-width="7"
+            strokeWidth="7"
             stroke="black"
             y2="111.784"
             x2="97.7088"

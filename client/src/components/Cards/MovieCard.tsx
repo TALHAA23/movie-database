@@ -4,14 +4,14 @@ import CardUtils from "./CardUtils";
 
 interface Props {
   title: string;
-  ratings?: number;
+  ratings?: string;
   id: string;
   bannerURL?: string;
 }
 
 export default function MovieCard({
   title,
-  ratings = 0,
+  ratings = "0",
   id,
   bannerURL = "/vite.svg",
 }: Props) {
@@ -34,7 +34,7 @@ const Image = ({ bannerURL }: { bannerURL: string }) => (
 
 interface MovieCardInformationInterface {
   title: string;
-  rating: number;
+  rating: string;
   id: string;
 }
 

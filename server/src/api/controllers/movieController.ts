@@ -18,8 +18,8 @@ import { error } from "console";
 import getCastById from "../services/movies/getCastById";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
-  const mongodbObjectId = new Types.ObjectId(id);
   try {
+    const mongodbObjectId = new Types.ObjectId(id);
     const result = await getMovieById(mongodbObjectId);
     res.json(result);
   } catch (err) {

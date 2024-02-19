@@ -6,6 +6,7 @@ const List = ({ movies }: { movies: MovieInterface[] }) => (
     {movies.map((movie, index) => {
       return (
         <Link
+          key={movie._id}
           to={`/title/${movie._id}`}
           className={`${
             index == 0

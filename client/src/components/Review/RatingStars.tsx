@@ -85,8 +85,9 @@ const RatingStars = ({
         onMouseEnter={() => setShowTempRataing(true)}
         className="flex items-center"
       >
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map(() => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((index) => (
           <img
+            key={index}
             onMouseEnter={changeColor}
             onClick={() => setCapturedRating(rating)}
             src="../../../public/star_dark_md.png"
@@ -109,7 +110,7 @@ const RatingStars = ({
                 state: { redirect: location.pathname },
               });
         }}
-        className={`border text-xs active:scale-95 rounded bg-yellow-400 disabled:opacity-40 px-2 py-1 font-semibold scale-0 transition-all duration-100 ${
+        className={`text-xs active:scale-95 rounded bg-yellow-400 text-black disabled:opacity-40 px-2 py-1 font-semibold scale-0 transition-all duration-100 ${
           capturedRating && "scale-100"
         }`}
       >

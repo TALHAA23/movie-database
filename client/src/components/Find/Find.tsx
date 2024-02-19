@@ -1,7 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import FindResult from "./FindResult";
 export default function Find() {
-  const [searchParam, setSearchParam] = useSearchParams();
+  const searchParam = useSearchParams()[0];
 
   return (
     <section>

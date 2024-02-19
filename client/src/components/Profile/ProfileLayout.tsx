@@ -24,7 +24,7 @@ export default function ProfileLayout() {
   return (
     <div className="h-[calc(100vh-60px)] flex gap-0 flex-col sm:flex-row">
       <About user={user?.data} />
-      <div className="relative flex">
+      <div className="relative flex sm:pl-11">
         <ProfileNavigations />
         <Outlet />
       </div>

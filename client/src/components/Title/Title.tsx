@@ -16,6 +16,7 @@ import ReviewWriter from "./ReviewWriter";
 import Information from "../Information/Information";
 import RatingAndReview from "./RatingAndReview";
 import CallToContributionButton from "../Contributions/ContributionUtils/CallToContributionButtons";
+import PageError from "../Error/PageError";
 export default function Title() {
   const { id } = useParams();
   if (!id) return <h1>Something went wrong</h1>;
@@ -36,9 +37,8 @@ export default function Title() {
   });
 
   if (isPending) return <PageLoader />;
-  if (isError) return <h1>{error.message}</h1>;
+  if (isError) return <PageError error={error} />;
   if (!data) return <NotFound />;
-  console.log(data);
 
   return (
     <div className="w-full h-auto bg-black text-white pb-4">
@@ -51,7 +51,7 @@ export default function Title() {
       />
       {data.tagline && <Tagline tagline={data.tagline} />}
       <RatingAndReview />
-      <Casts casts={data.cast} />
+      {data.cast && <Casts casts={data.cast} />}
       <MovieList title="Related" query={relatedMoviesQuery} />
       {data.awards?.length && data.awards?.length > 0 && (
         // TODO: disable 0 from being displayed

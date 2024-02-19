@@ -16,6 +16,7 @@ export default function Casts({ casts }: { casts: ActorInterface[] }) {
     <Frame frameTitle="Actor" frameHight="20vh">
       {casts.map((cast) => (
         <Link
+          key={cast._id}
           to={`/name/${cast._id}`}
           className="w-1/3 sm:w-1/4 md:w-1/5 xl:w-1/7 h-full flex flex-col items-center"
         >

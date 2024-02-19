@@ -4,11 +4,11 @@ import testImages from "../../testimages";
 import { useQuery } from "@tanstack/react-query";
 import searchApi from "../../api/SearchApi";
 import PageLoader from "../Loaders/PageLoader";
-
+import NotFound from "../NotFound/NotFound";
+import PageError from "../Error/PageError";
 export default function FindResult() {
   const query = useSearchParams()[0].get("q");
-  console.log(query);
-  if (!query) throw new Error("Something went wrong");
+  if (!query) return <PageError error={new Error("Query not provided")} />;
   const { isPending, isError, error, data } = useQuery<
     Interfaces.MovieInterface[],
     Error
@@ -17,7 +17,12 @@ export default function FindResult() {
     queryFn: () => searchApi(query),
   });
   if (isPending) return <PageLoader />;
-  else if (isError) return <h1>{error.message}</h1>;
+  else if (isError)
+    return error.name == "NotFound" ? (
+      <NotFound />
+    ) : (
+      <PageError error={error} />
+    );
   else if (!data?.length)
     return (
       <h1 className=" text-4xl font-semibold m-7">
@@ -29,6 +34,7 @@ export default function FindResult() {
     <div className=" max-w-[1200px] mx-auto rounded border flex flex-col gap-1 p-2">
       {data.map((movie) => (
         <Link
+          key={movie._id}
           to={`/title/${movie._id}`}
           className=" border-b-2 h-[3.5cm] flex items-center"
         >
@@ -62,6 +68,7 @@ function Information({ title, releaseYear, casts }: MovieInformation) {
       {casts.length > 0 &&
         casts.map((cast) => (
           <Link
+            key={cast._id}
             to={`/name/${cast._id}`}
             className="text-sm font-light [&:not(:last-child)]:after:content-[','] hover:underline hover:text-blue-500 "
           >

@@ -1,12 +1,9 @@
-import { useUserInfo } from "../../Contexts/UserProvider";
 import { UserInfo } from "../../api/model/Interfaces";
 import testImages from "../../testimages";
-import SectionError from "../Error/SectionError";
-import SectionLoader from "../Loaders/SectionLoader";
 
 export default function About({ user }: { user: UserInfo }) {
   return (
-    <div className="sticky w-full h-1/3 sm:h-full sm:w-1/3 px-6 flex sm:flex-col gap-0 rounded bg-gradient-to-b from-[#fada3aaf] via-[#fada3add] to-[#d8b712]">
+    <div className="sticky w-full h-1/3 sm:h-full sm:w-1/3 px-6 flex sm:flex-col gap-0 rounded text-black bg-gradient-to-b from-[#fada3aaf] via-[#fada3add] to-[#d8b712]">
       {/* <h1>hello</h1> */}
       <div className="h-[60%] sm:h-1/3 flex flex-col items-center">
         <img

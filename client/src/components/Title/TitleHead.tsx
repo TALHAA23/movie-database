@@ -43,7 +43,7 @@ export default function TitleHead({
       />
       <div className="grow relative  flex flex-col p-6">
         <Title
-          title={title}
+          title={title || "Unknown Title"}
           releaseYear={releaseYear}
           runTime={runTime}
           language={language}
@@ -53,7 +53,6 @@ export default function TitleHead({
         <p className="w-full text-sm mb-10 sm:mb-0 lg:text-lg md:w-[70%]">
           {desc}
         </p>
-        {/* <Table /> */}
         <Highlights ratings={ratings} numberofReviews={numberofReviews} />
       </div>
     </div>
@@ -84,7 +83,10 @@ function Title({
         {["Movie", releaseYear, runTime, language, countryOfOrigin].map(
           (el) =>
             el && (
-              <small className=" relative last:after:bg-transparent after:absolute after:w-2 after:h-2 after:bg-fuchsia-600 after:rounded-full after:top-1/2 after:-translate-y-1/2 after:ml-1">
+              <small
+                key={el}
+                className=" relative last:after:bg-transparent after:absolute after:w-2 after:h-2 after:bg-fuchsia-600 after:rounded-full after:top-1/2 after:-translate-y-1/2 after:ml-1"
+              >
                 {el}
               </small>
             )
@@ -98,7 +100,10 @@ function Genres({ genres }: { genres: string[] }) {
   return (
     <div className="flex my-2">
       {genres.map((genre) => (
-        <div className="px-2 lg:px-4 py-1 font-light  text-xs lg:text-sm rounded-full border-2 border-[#FDE047] text-white hover:text-black hover:bg-[#FDE047] transition-all duration-200 select-none">
+        <div
+          key={genre}
+          className="px-2 lg:px-4 py-1 font-light  text-xs lg:text-sm rounded-full border-2 border-[#FDE047] text-white hover:text-black hover:bg-[#FDE047] transition-all duration-200 select-none"
+        >
           {genre}
         </div>
       ))}
@@ -112,7 +117,7 @@ interface HighlightsData {
 }
 function Highlights({ ratings, numberofReviews }: HighlightsData) {
   return (
-    <div className="relative my-2 md:absolute md:bottom-2 md:right-2 grid grid-cols-3 md:grid-cols-1 gap-1 w-full md:w-[6cm] text-sm sm:text-base text-black lg:font-bold">
+    <div className="relative my-2 md:absolute md:bottom-2 md:right-2 flex md:flex-col w-full md:w-[6cm] text-sm sm:text-base text-black lg:font-bold">
       <div className="bg-[#FDE047] hover:bg-[#fddf47e0] leading-tight w-full rounded sm:px-4 lg:px-9 sm:py-1 text-center">
         <p className=" font-semibold">
           {takeAvg(ratings)}{" "}

@@ -6,5 +6,5 @@ export default function customErrorhandler(err: Error, res: Response) {
   if (status) {
     const message = err.message;
     return res.status(status).send(message);
-  }
+  } else return res.status(HttpError.UnprocessableEntity).send(err.message);
 }

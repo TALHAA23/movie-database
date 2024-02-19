@@ -77,7 +77,7 @@ const ReviewBody = ({
 }: ReviewBodyInterface) => (
   <div className="rounded my-2 p-3  overflow-y-hidden transition-all duration-100">
     <div className=" flex justify-between items-center mt-2 mb-4">
-      <b className=" bg-yellow-500 rounded px-2">FEATURED REVIEW</b>
+      <b className=" bg-yellow-500 text-black rounded px-2">FEATURED REVIEW</b>
       <p className=" tracking-widest flex w-fit items-center">
         <img src="../../../public/star-solid-sm.svg" alt="" />
         <span>{rating}/</span>

@@ -65,6 +65,18 @@ interface RatingPayload {
   rating: number;
 }
 
+type addOn = {
+  ref: Partial<MovieInterface>;
+  additionalProps: string[];
+}[];
+
+interface Contributions {
+  contributions: {
+    uploads: MovieInterface[];
+    addOns: addOn;
+  };
+}
+
 export type {
   MovieInterface,
   Review,
@@ -74,4 +86,6 @@ export type {
   MovieStatus,
   MyMoviesType,
   UserInfo,
+  addOn,
+  Contributions,
 };

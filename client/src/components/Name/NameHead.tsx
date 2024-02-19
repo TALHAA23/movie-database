@@ -14,7 +14,7 @@ interface Props {
 export default function NameHead({ id, name, banner, DOB, about }: Props) {
   const DOBtoContructor = new Date(DOB);
   return (
-    <section className="relative w-full h-auto md:h-screen pb-28 pt-3 px-2">
+    <section className="relative w-full h-auto bg-white/60 text-black  md:h-screen pb-28 pt-3 px-2">
       <div className=" relative  flex flex-col sm:flex-row items-center">
         <img
           className=" w-64 aspect-square rounded-full object-contain"
@@ -28,20 +28,19 @@ export default function NameHead({ id, name, banner, DOB, about }: Props) {
         />
         <div>
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold ">
-            {name}
+            {name || "Unkown Name"}
           </h1>
           <small>
-            {DOB ? (
+            {DOB == undefined || DOB == null ? (
               <CallToContributionSectionCall
                 id={id}
                 contributionFor="actor"
                 infoTitle="Date of birth"
               />
             ) : (
-              dateMonthYearFormattedDate(DOB)
-            )}{" "}
-            ({calculateAge(DOBtoContructor)}
-            Year Old)
+              `${dateMonthYearFormattedDate(DOB)}
+              ${calculateAge(DOBtoContructor)} Year Old`
+            )}
           </small>
         </div>
       </div>
@@ -51,7 +50,7 @@ export default function NameHead({ id, name, banner, DOB, about }: Props) {
           src="../../../public/arrow-right.png"
           alt=""
         />
-        <p className="  translate-y-6">
+        <p className=" max-w-[600px]  translate-y-6">
           {about || (
             <CallToContributionSectionCall
               id={id}

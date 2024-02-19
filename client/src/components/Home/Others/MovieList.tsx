@@ -32,6 +32,7 @@ export default function MovieList({
     <Frame frameTitle={title}>
       {query.data.map((movie) => (
         <MovieCard
+          key={movie._id}
           title={movie.title}
           bannerURL={movie.banner}
           ratings={movie.ratings?.[0]?.rating}

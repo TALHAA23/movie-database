@@ -8,6 +8,7 @@ import PageLoader from "../Loaders/PageLoader";
 import SectionError from "../Error/SectionError";
 import Awards from "../Title/Awards";
 import CallToContributionButton from "../Contributions/ContributionUtils/CallToContributionButtons";
+import PageError from "../Error/PageError";
 
 export default function Name() {
   const { id } = useParams();
@@ -18,10 +19,9 @@ export default function Name() {
   });
 
   if (isPending) return <PageLoader />;
-  else if (isError) return <SectionError error={error} />;
-  console.log(data);
+  else if (isError) return <PageError error={error} />;
   return (
-    <div className=" bg-black/30 pb-2 ">
+    <div className="bg-black/95 text-white pb-2 flex flex-col gap-0 ">
       <NameHead
         id={data._id}
         name={data.name}

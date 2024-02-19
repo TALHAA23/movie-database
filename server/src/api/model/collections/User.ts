@@ -1,6 +1,5 @@
 // File: model/collection/User.ts
 import mongoose from "mongoose";
-import { MovieInterface } from "../../../../../shared/shared.interfaces";
 const { Schema } = mongoose;
 
 export const UserSchema = new Schema({

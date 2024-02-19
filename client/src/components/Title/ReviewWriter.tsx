@@ -62,19 +62,20 @@ export default function ReviewWriter({ movieRef }: { movieRef: string }) {
             <input
               type="text"
               name="title"
+              maxLength={50}
               required
               placeholder="Title of review"
               className="w-full rounded bg-slate-700 p-3 focus:outline-none"
             />
             <textarea
-              maxLength={700}
+              maxLength={800}
               required
               placeholder="Type Here..."
               name="review"
               rows={5}
               className=" resize-none bg-slate-700 p-3"
             ></textarea>
-            <input type="text" name="to" hidden value={movieRef} />
+            <input type="text" name="to" hidden readOnly value={movieRef} />
           </div>
           <button className="border w-full rounded py-2 font-semibold hover:bg-slate-500 transition-all duration-150 active:scale-95">
             Done

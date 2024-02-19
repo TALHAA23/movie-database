@@ -58,14 +58,14 @@ export default function ProfileNavigations() {
     <>
       <ul
         ref={listRef}
-        className="relative sm:absolute w-1/3 max-w-[300px] z-20 bg-white space-y-1  top-1/2 left-1/2 "
+        className="relative sm:absolute w-1/3 max-w-[300px] z-20 space-y-1  top-1/2 left-1/2 "
       >
         {navigations.map((el) => (
           <NavLink
             end
             to={el.link}
             className={({ isActive }) => `
-            h-12 border-2 border-yellow-800/70 rounded px-2 py-2 flex items-center text-slate-700 ring-4 ring-transparent
+            h-12 rounded px-2 py-2 flex items-center bg-gray-400 text-black ring-4 ring-transparent
           hover:ring-yellow-800/45 hover:bg-yellow-700/80 hover:text-white transition-all
             duration-100
             ${isActive && "shadow-md shadow-black/50 skew-y-6"} 

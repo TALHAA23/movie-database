@@ -6,10 +6,10 @@ export default function MovieCardsm({ props }: { props: MovieInterface }) {
   return (
     <Link
       to={`/title/${props._id}`}
-      className="group flex relative flex-col hover:col-span-2 rounded shadow-md shadow-slate-900/30"
+      className="group flex border border-white/20 relative flex-col hover:col-span-2 rounded shadow-md shadow-slate-900/30"
     >
       <img
-        className="h-[80%] object-cover"
+        className="h-[80%] object-cover rounded-t"
         src={props.banner || testImages.noImage}
         alt="no-image"
       />

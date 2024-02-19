@@ -121,8 +121,11 @@ export default function AuthForm() {
   }
 
   return (
-    <form className="form absolute" onSubmit={loginMutation.mutate}>
-      <h1 className=" text-center font-semibold text-gray-600 text-2xl">
+    <form
+      className="form absolute bg-white/30  text-white"
+      onSubmit={loginMutation.mutate}
+    >
+      <h1 className=" text-center font-semibold text-2xl">
         {isSignupPage() ? "Signup" : "Login"}
       </h1>
       <small className="text-center">
@@ -218,7 +221,7 @@ export default function AuthForm() {
       )}
       <button
         type="submit"
-        className="fancy disabled:cursor-no-drop"
+        className="fancy disabled:cursor-no-drop text-white"
         disabled={
           loginMutation.isPending || isSignupPage()
             ? !(
@@ -231,7 +234,7 @@ export default function AuthForm() {
         }
       >
         <span className="top-key"></span>
-        <span className="text">submit</span>
+        <span className="text font-semibold">submit</span>
         <span className="bottom-key-1"></span>
         <span className="bottom-key-2"></span>
       </button>
@@ -246,7 +249,7 @@ export default function AuthForm() {
         ) : (
           <small>
             Don't have account{" "}
-            <Link to="../signup" className=" underline text-blue-900">
+            <Link to="../signup" className=" underline text-blue-400">
               Signup
             </Link>{" "}
             now{" "}

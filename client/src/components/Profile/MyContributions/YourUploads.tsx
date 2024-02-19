@@ -1,10 +1,25 @@
-import Frame2 from "../Frame2";
+import { MovieInterface } from "../../../api/model/Interfaces";
+import takeAvg from "../../../utils/takeAvg";
+import MovieCard from "../../Cards/MovieCard";
+import Frame from "../../Home/Others/Frame";
 
-export default function YourUploads() {
+interface Props {
+  myUpload: MovieInterface[];
+}
+export default function YourUploads({ myUpload }: Props) {
   return (
-    <div>
-      <h1>Your Uploads</h1>
-      {/* <Frame2 frameTitle="Your Uploads"></Frame2> */}
-    </div>
+    <Frame
+      frameTitle="Thank you for the contributions"
+      frameSubTitle="you upload the following movies"
+    >
+      {myUpload.map(({ _id, title, ratings, banner }) => (
+        <MovieCard
+          id={_id}
+          title={title}
+          ratings={takeAvg(ratings.map((rating) => rating.rating))}
+          bannerURL={banner}
+        />
+      ))}
+    </Frame>
   );
 }
