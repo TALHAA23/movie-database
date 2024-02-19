@@ -11,7 +11,6 @@ import { router as authRoutes } from "./api/routes/auth";
 import { router as reviewRoutes } from "./api/routes/review";
 import { router as contributionRoutes } from "./api/routes/contributions";
 import { config } from "dotenv";
-import User, { UserSchema } from "./api/model/collections/User";
 import bodyParser from "body-parser";
 config();
 const corsOptions = {
@@ -19,7 +18,6 @@ const corsOptions = {
   credentials: true,
   optionSuccessStatus: 200,
 };
-
 const app = express();
 app.use(cors(corsOptions)); //always on top
 app.use(bodyParser.json({ limit: "50mb" })); //increase payload limit

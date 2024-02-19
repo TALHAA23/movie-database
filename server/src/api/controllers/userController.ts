@@ -8,6 +8,7 @@ import manageUserMovies from "../services/users/manageUserMovies";
 import { error } from "console";
 import getMyProfileMovies from "../services/users/getMyProfileMovies";
 import getUserContributions from "../services/users/getUserContributions";
+import getUserReviews from "../services/users/getUserReviews";
 
 const recommendations: Middleware = async (req, res, next) => {
   try {

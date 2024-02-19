@@ -20,7 +20,7 @@ const navigations = [
   {
     icon: "/pen-solid.svg",
     title: "my reviews",
-    link: "./settings",
+    link: "./my-reviews",
   },
   {
     icon: "/star-solid.svg",

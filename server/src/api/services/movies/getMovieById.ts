@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import Movie from "../../model/collections/Movie";
+import getUsersFavrtList from "../../../db/getUserFavrtList";
 
 export async function getMovieById(id: Types.ObjectId) {
   const featureBasedOn = ["number_of_ratings", "highest_rating", "newest"][

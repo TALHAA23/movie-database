@@ -29,10 +29,7 @@ export default function ReviewWriter({ movieRef }: { movieRef: string }) {
     if (!uploadReviewMutation.isSuccess) return;
     dialogRef.current?.close();
     queryClient.invalidateQueries({ queryKey: [movieRef] });
-    updateMessage(
-      `Review added to "${uploadReviewMutation.data.addedTo}"`,
-      "general"
-    );
+    updateMessage(uploadReviewMutation.data.response, "general");
   }, [uploadReviewMutation.isSuccess]);
 
   return (

@@ -69,7 +69,11 @@ export const MovieSchema = new Schema({
     },
   ],
   numberofReviews: { type: Number, require: false },
-  hasMore: { type: Boolean, require: false },
+  // others: {
+  //   isSaved: { type: Boolean, require: false },
+  //   isWatched: { type: Boolean, require: false },
+  //   isInWatchlist: { type: Boolean, require: false },
+  // },
 });
 
 export default mongoose.model("movie", MovieSchema);

@@ -18,7 +18,7 @@ export default function PaginationButton(props: Props) {
     <button
       value={props.diraction}
       onClick={move}
-      className={`group absolute z-50 bg-white/40 px-4 py-2 rounded ${
+      className={`group absolute z-30 bg-white/40 px-4 py-2 rounded ${
         isPrev(props.diraction)
           ? "left-3 rounded-l-full "
           : "right-3 rounded-r-full"

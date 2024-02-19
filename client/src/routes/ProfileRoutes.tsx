@@ -1,6 +1,7 @@
 import { useRoutes } from "react-router-dom";
 import ProfileLayout from "../components/Profile/ProfileLayout";
 import MyMovies from "../components/Profile/MyMovies";
+import UserReviews from "../components/User/UserReviews";
 export default function ProfileRoutes() {
   return useRoutes([
     {
@@ -22,6 +23,10 @@ export default function ProfileRoutes() {
         {
           path: "watched",
           element: <MyMovies show="watched" />,
+        },
+        {
+          path: "my-reviews",
+          element: <UserReviews userId="auth0|65bdec2364e342f6d6ac92fc" />,
         },
       ],
     },

@@ -7,7 +7,7 @@ export default function PageError({ error }: { error: Error }) {
       <h1 className="relative font-bold text-3xl sm:text-5xl text-red-700 text-center">
         {error.message}
         {status && (
-          <small className=" absolute -top-5 left-0 px-4 bg-black rounded font-semibold text-lg sm:-translate-y-2">
+          <small className=" absolute -top-5 left-0 px-4 bg-white rounded font-semibold text-lg sm:-translate-y-2">
             {status}
           </small>
         )}

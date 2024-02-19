@@ -8,7 +8,7 @@ interface SlideChanger {
 }
 
 const Paginator = (options: SlideChanger) => (
-  <div className="absolute z-40 bottom-4 left-1/2 -translate-x-1/2 bg-white/50 flex  w-[200px] h-[50px]  rounded-full">
+  <div className="absolute z-30 bottom-4 left-1/2 -translate-x-1/2 bg-white/50 flex  w-[200px] h-[50px]  rounded-full">
     {["left", "right"].map((dir) => (
       <button
         key={dir}

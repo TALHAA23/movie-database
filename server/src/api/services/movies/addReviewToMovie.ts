@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
-import { getMovieById } from "./getMovieById";
+import addReviewRefToUserDoc from "../users/addReviewRefToUserDoc";
+import Movie from "../../model/collections/Movie";
 
 interface Review {
   userId: string;
@@ -9,19 +10,25 @@ interface Review {
 }
 export default async function (review: Review) {
   try {
-    const movieRef = new Types.ObjectId(review.to);
-    const movieDoc = await getMovieById(movieRef);
+    const reviewId = new Types.ObjectId();
     const reviewToPush = {
+      _id: reviewId,
       reviewedBy: review.userId,
       title: review.title,
       review: review.review,
     };
-    await movieDoc?.updateOne({
-      $push: {
-        reviews: reviewToPush,
-      },
-    });
-    return { addedTo: movieDoc?.title };
+
+    const update = await Movie.updateOne(
+      { _id: review.to },
+      {
+        $addToSet: {
+          reviews: reviewToPush,
+        },
+      }
+    );
+
+    await addReviewRefToUserDoc(review.userId, review.to, reviewId);
+    return { response: `${update.modifiedCount} doc's updated` };
   } catch (err) {
     throw err;
   }

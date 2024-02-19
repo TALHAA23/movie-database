@@ -1,5 +1,5 @@
 // File: getRecommandationsForUser.ts
-import Movie from "../../model/collections/Movie";
+import Movie, { MovieInterface } from "../../model/collections/Movie";
 import getUsersFavrtList from "../../../db/getUserFavrtList";
 import extractGener from "../../../db/extractGener";
 import { getRandomMovies } from "../movies/getRandomMovies";
