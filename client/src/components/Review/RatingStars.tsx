@@ -8,12 +8,14 @@ import { Action } from "../../api/model/Interfaces";
 const RatingStars = ({
   action,
   reviewRef,
+  movieRef = null,
 }: {
   reviewRef?: string;
+  movieRef?: string | null;
   action: Action;
 }) => {
-  const { id } = useParams();
-  if (!id) throw new Error("The Movie doesn't have Id");
+  const id = movieRef || useParams().id;
+  if (!id) throw new Error("can't find movie id in the url");
   if (action == "publish-rating-on-review" && !reviewRef)
     throw new Error("Review Id is required");
 

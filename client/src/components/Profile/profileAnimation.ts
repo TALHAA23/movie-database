@@ -2,14 +2,16 @@ type Action = "shrink" | "expand";
 function shrinkorExpandNavigations(action: Action, el: HTMLUListElement) {
   const props: Keyframe[] = [
     {
+      flexDirection: "column", //sm screen
       width: "33.33%",
-      top: "50%",
-      left: "50%",
-      transform: "translate(-50%, -50%)",
+      justifyContent: "center",
+      transform: "translate(100%, -50%)",
     },
     {
+      flexDirection: "row", //sm screen
+      justifyContent: "start",
       width: "auto",
-      top: "0%",
+      top: "0",
       left: "0",
       transform: "translate(-0%, -0%)",
     },

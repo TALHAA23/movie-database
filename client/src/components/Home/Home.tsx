@@ -1,4 +1,3 @@
-import HomeDataProvider from "../../Contexts/HomeDataProvider";
 import Information from "../Information/Information";
 import Hero from "./Hero/Hero";
 import Others from "./Others/Others";

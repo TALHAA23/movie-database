@@ -58,7 +58,7 @@ export default function ProfileNavigations() {
     <>
       <ul
         ref={listRef}
-        className="relative sm:absolute w-1/3 max-w-[300px] z-20 space-y-1  top-1/2 left-1/2 "
+        className="py-2 sticky md:block sm:top-1/2 sm:-translate-y-1/2 flex items-center flex-col gap-0  h-fit w-1/3 max-w-[300px] z-10 space-y-1  "
       >
         {navigations.map((el) => (
           <NavLink

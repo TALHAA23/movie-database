@@ -1,6 +1,10 @@
-import errorThrower from "../../../shared/errorThrower";
-
-type RequestFor = "recommendations" | "top-rated" | "related" | "my-favrts";
+type RequestFor =
+  | "recommendations"
+  | "top-rated"
+  | "related"
+  | "my-favrts"
+  | "by-random-year"
+  | "recent-uploads";
 
 const createUrl = (requestFor: RequestFor, id?: string): string => {
   let url: string;
@@ -12,6 +16,8 @@ const createUrl = (requestFor: RequestFor, id?: string): string => {
     url = "http://localhost:3000/api/movies/top-rated?rating=4";
   else if (requestFor == "related")
     url = `http://localhost:3000/api/movies/related/${id}`;
+  else if (requestFor == "by-random-year" || requestFor == "recent-uploads")
+    url = `http://localhost:3000/api/movies/${requestFor}`;
   else throw new Error("Something went wrong");
 
   return url;

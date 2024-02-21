@@ -1,4 +1,3 @@
-import * as Interfaces from "../api/model/Interfaces";
 import { ReactNode, createContext, useContext } from "react";
 import {
   UseMutationResult,
@@ -6,21 +5,21 @@ import {
   useQuery,
 } from "@tanstack/react-query";
 import movieListApi from "../api/movieListApi";
-// perPersonalized Recommendations
-// Trending Now
-// New Releases
-// Genres
-// Community Reviews
-// Top Rated
+import {
+  FeaturedMoviesInterface,
+  MovieInterface,
+} from "../api/model/Interfaces";
 
 const testData = () => new Promise((res) => setTimeout(() => res(2 + 2), 5000));
 
 type QueryResult<T> = UseQueryResult<T>;
-type MutatationResult = UseMutationResult<[Interfaces.MovieInterface]>;
+type MutatationResult = UseMutationResult<[MovieInterface]>;
 
 interface DataContextType {
-  recommendations: QueryResult<[Interfaces.MovieInterface]>;
-  topRated: QueryResult<[Interfaces.MovieInterface]>;
+  recommendations: QueryResult<MovieInterface[]>;
+  topRated: QueryResult<MovieInterface[]>;
+  recentUploads: QueryResult<MovieInterface[]>;
+  randomYear: QueryResult<FeaturedMoviesInterface>;
 }
 
 const DataContext = createContext<DataContextType | null>(null);
@@ -28,16 +27,17 @@ const DataContext = createContext<DataContextType | null>(null);
 export const useRecommendations = () =>
   useContext(DataContext)?.recommendations;
 export const useTopRated = () => useContext(DataContext)?.topRated;
+export const useMovieByRandomYear = () => useContext(DataContext)?.randomYear;
+export const useRecentUploads = () => useContext(DataContext)?.recentUploads;
 
 interface Children {
   children: ReactNode;
 }
 export default function HomeDataProvider({ children }: Children) {
-  const recommendationsQuery = useQuery<[Interfaces.MovieInterface], Error>({
+  const recommendationsQuery = useQuery<MovieInterface[], Error>({
     staleTime: 1000 * 60 * 60,
     queryKey: ["recommendations"],
     queryFn: () => movieListApi("recommendations"),
-    // queryFn: testData,
     retry: 1,
   });
 
@@ -45,8 +45,19 @@ export default function HomeDataProvider({ children }: Children) {
     staleTime: 1000 * 60 * 60,
     queryKey: ["top-rated"],
     queryFn: () => movieListApi("top-rated"),
-    // queryFn: testData,
     retry: 1,
+  });
+
+  const movieByRandomYearQuery = useQuery({
+    staleTime: 1000 * 60 * 60,
+    queryKey: ["by-random-year"],
+    queryFn: () => movieListApi("by-random-year"),
+  });
+
+  const recentUploadsQuery = useQuery({
+    staleTime: 1000 * 60 * 60,
+    queryKey: ["recent-uploads"],
+    queryFn: () => movieListApi("recent-uploads"),
   });
 
   return (
@@ -54,6 +65,8 @@ export default function HomeDataProvider({ children }: Children) {
       value={{
         recommendations: recommendationsQuery,
         topRated: topRatedQuery,
+        recentUploads: recentUploadsQuery,
+        randomYear: movieByRandomYearQuery,
       }}
     >
       {children}

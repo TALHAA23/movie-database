@@ -37,24 +37,7 @@ export default async function getUserReviews(userId: string) {
       },
     ]);
 
-    return doc;
-
-    // const reviewIdToObjectId = new Types.ObjectId(reviewId);
-    // const doc = await User.findById(userId, "myReviews").populate(
-    //   "movieRef",
-    //   "title"
-    // );
-
-    // const docc = await User.aggregate([
-    //   {
-    //     $unwind: "$myReviews",
-    //   },
-    //   {
-    //     $match: { "$myReview._id": reviewIdToObjectId },
-    //   },
-    // ]);
-
-    // return doc;
+    return doc[0].myReviews;
   } catch (err) {
     throw err;
   }

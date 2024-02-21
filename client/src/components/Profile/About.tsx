@@ -3,8 +3,7 @@ import testImages from "../../testimages";
 
 export default function About({ user }: { user: UserInfo }) {
   return (
-    <div className="sticky w-full h-1/3 sm:h-full sm:w-1/3 px-6 flex sm:flex-col gap-0 rounded text-black bg-gradient-to-b from-[#fada3aaf] via-[#fada3add] to-[#d8b712]">
-      {/* <h1>hello</h1> */}
+    <div className="sticky z-20 top-0 w-full h-1/3 sm:h-[calc(100vh-60px)] sm:w-1/3 px-6 flex sm:flex-col gap-0 rounded text-black bg-gradient-to-b from-[#fada3aaf] via-[#fada3add] to-[#d8b712]">
       <div className="h-[60%] sm:h-1/3 flex flex-col items-center">
         <img
           className="grow aspect-square rounded-full"

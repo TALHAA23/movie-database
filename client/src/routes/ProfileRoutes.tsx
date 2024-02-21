@@ -26,7 +26,7 @@ export default function ProfileRoutes() {
         },
         {
           path: "my-reviews",
-          element: <UserReviews userId="auth0|65bdec2364e342f6d6ac92fc" />,
+          element: <UserReviews />,
         },
       ],
     },

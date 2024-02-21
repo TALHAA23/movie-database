@@ -9,7 +9,7 @@ export default function NavBar() {
 
   return (
     <nav
-      className={`sticky bg-black h-[60px] z-50 text-white top-0 flex justify-between items-center p-2`}
+      className={`sticky top-0 bg-black h-[60px] z-50 text-white flex justify-between items-center p-2`}
     >
       <Logo />
       <SearchBar />

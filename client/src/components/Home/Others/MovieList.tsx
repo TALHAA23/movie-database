@@ -1,8 +1,4 @@
 import { UseQueryResult } from "@tanstack/react-query";
-import {
-  useRecommendations,
-  useTopRated,
-} from "../../../Contexts/HomeDataProvider";
 import MovieCard from "../../Cards/MovieCard";
 import ErrorCard from "../../Error/SectionError";
 import SectionLoader from "../../Loaders/SectionLoader";

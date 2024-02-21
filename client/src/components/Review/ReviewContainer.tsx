@@ -1,16 +1,28 @@
 import RatingStars from "./RatingStars";
 import { Review } from "../../api/model/Interfaces";
 import takeAvg from "../../utils/takeAvg";
+import { Link } from "react-router-dom";
+
+interface Props extends Review {
+  movieRef?: string;
+  movietitle?: string;
+}
+
 export default function ReviewContainer({
+  movieRef,
+  movietitle,
   _id,
   title,
   review,
   ratings,
   reviewDate,
   reviewedBy,
-}: Review) {
+}: Props) {
   return (
     <div className="w-full  max-w-[800px] rounded-md mx-auto my-4 py-3 px-2 border-2">
+      {movietitle && movieRef && (
+        <ReviewHead _id={movieRef} title={movietitle} />
+      )}
       <ReviewBody
         title={title}
         review={review}
@@ -24,11 +36,32 @@ export default function ReviewContainer({
             {reviewedBy?.userInfo?.username || "anonymous"}
           </span>
         </div>
-        <RatingStars action="publish-rating-on-review" reviewRef={_id} />
+        <RatingStars
+          action="publish-rating-on-review"
+          reviewRef={_id}
+          movieRef={movieRef}
+        />
       </div>
     </div>
   );
 }
+
+interface ReviewHeadProps {
+  _id: string;
+  title: string;
+}
+
+const ReviewHead = ({ _id, title }: ReviewHeadProps) => (
+  <div>
+    <small>Reviewed On:</small>{" "}
+    <Link
+      className=" font-semibold underline hover:text-blue-600"
+      to={`/title/${_id}`}
+    >
+      {title}
+    </Link>
+  </div>
+);
 
 interface ReviewBodyInterface {
   avg: string; //? .fixed return string

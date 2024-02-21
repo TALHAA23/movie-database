@@ -17,6 +17,10 @@ router.get("/top-rated", movieController.topRatedMovies);
 
 router.get("/random", movieController.randomMovies);
 
+router.get("/by-random-year", movieController.movieByRandomYear);
+
+router.get("/recent-uploads", movieController.recentUploads);
+
 router.get("/new-releases", movieController.newReleases);
 
 router.get("/related/:id", movieController.related);

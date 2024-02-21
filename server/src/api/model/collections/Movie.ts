@@ -38,6 +38,7 @@ export const MovieSchema = new Schema({
   banner: { type: String, required: true },
   releaseYear: { type: Number, required: true },
   releaseDate: { type: Date, required: false },
+  uploadDate: { type: Date, default: new Date() },
   runTime: { type: Number, required: false },
   tagline: { type: String, required: false },
   creator: { type: String, required: false },

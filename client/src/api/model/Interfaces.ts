@@ -77,6 +77,15 @@ interface Contributions {
   };
 }
 
+interface FeaturedMoviesInterface {
+  featured: string;
+  featuredMovies: {
+    _id: string;
+    banner?: string;
+    title: string;
+  }[];
+}
+
 export type {
   MovieInterface,
   Review,
@@ -88,4 +97,5 @@ export type {
   UserInfo,
   addOn,
   Contributions,
+  FeaturedMoviesInterface,
 };

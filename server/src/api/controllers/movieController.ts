@@ -16,6 +16,8 @@ import addReviewToMovie from "../services/movies/addReviewToMovie";
 import addMovieRating from "../services/movies/addMovieRating";
 import { error } from "console";
 import getCastById from "../services/movies/getCastById";
+import getRecentUploads from "../services/movies/getRecentUploads";
+import getByRandomYear from "../services/movies/getByRandomYear";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -127,6 +129,24 @@ const publishRating: Middleware = async (req, res, next) => {
   }
 };
 
+const movieByRandomYear: Middleware = async (req, res, next) => {
+  try {
+    const result = await getByRandomYear();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+const recentUploads: Middleware = async (req, res, next) => {
+  try {
+    const result = await getRecentUploads();
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export {
   movieById,
   castById,
@@ -137,4 +157,6 @@ export {
   newMovie,
   movieReviews,
   publishRating,
+  recentUploads,
+  movieByRandomYear,
 };
