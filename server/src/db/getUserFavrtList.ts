@@ -5,6 +5,7 @@ export default async function getUsersFavrtList(userId: string) {
     const document = await User.findById(userId, "favoriteList")
       .populate("favoriteList")
       .exec();
+
     return document?.favoriteList;
   } catch (err) {
     throw err;

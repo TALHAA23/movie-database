@@ -23,6 +23,8 @@ router.get("/recent-uploads", movieController.recentUploads);
 
 router.get("/new-releases", movieController.newReleases);
 
+router.get("/by-genre", movieController.movieByGenre);
+
 router.get("/related/:id", movieController.related);
 
 router.post("/protected/new", movieController.newMovie);

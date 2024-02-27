@@ -9,6 +9,7 @@ import {
   FeaturedMoviesInterface,
   MovieInterface,
 } from "../api/model/Interfaces";
+import myFavoriteMoviesGenre from "../api/myFavriouteMoviesGenre";
 
 const testData = () => new Promise((res) => setTimeout(() => res(2 + 2), 5000));
 
@@ -20,6 +21,7 @@ interface DataContextType {
   topRated: QueryResult<MovieInterface[]>;
   recentUploads: QueryResult<MovieInterface[]>;
   randomYear: QueryResult<FeaturedMoviesInterface>;
+  favriouteGenres: QueryResult<String[]>;
 }
 
 const DataContext = createContext<DataContextType | null>(null);
@@ -29,6 +31,8 @@ export const useRecommendations = () =>
 export const useTopRated = () => useContext(DataContext)?.topRated;
 export const useMovieByRandomYear = () => useContext(DataContext)?.randomYear;
 export const useRecentUploads = () => useContext(DataContext)?.recentUploads;
+export const useFavriouteGenres = () =>
+  useContext(DataContext)?.favriouteGenres;
 
 interface Children {
   children: ReactNode;
@@ -60,6 +64,12 @@ export default function HomeDataProvider({ children }: Children) {
     queryFn: () => movieListApi("recent-uploads"),
   });
 
+  const favriouteGenresQuery = useQuery({
+    staleTime: 1000 * 60 * 60,
+    queryKey: ["favriote-genres"],
+    queryFn: () => myFavoriteMoviesGenre(),
+  });
+
   return (
     <DataContext.Provider
       value={{
@@ -67,6 +77,7 @@ export default function HomeDataProvider({ children }: Children) {
         topRated: topRatedQuery,
         recentUploads: recentUploadsQuery,
         randomYear: movieByRandomYearQuery,
+        favriouteGenres: favriouteGenresQuery,
       }}
     >
       {children}

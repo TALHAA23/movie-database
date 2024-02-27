@@ -24,6 +24,23 @@ const genresList = [
   "War",
   "Western",
   "Zombie",
+  "Cyberpunk",
+  "Psychological Thriller",
+  "Fantasy Adventure",
+  "Historical Fiction",
+  "Satire",
+  "Musical Comedy ",
+  " Film Noir",
+  "Psychological Horror",
+  "Historical Drama",
+  "Science Fantasy",
+  "Dark Comedy",
+  "Cyberpunk",
+  "Neo-Noir",
+  "Space Opera",
+  "Surreal",
+  "Steampunk",
+  "Magical Realism",
 ];
 
 export default genresList;

@@ -22,7 +22,7 @@ export default function FeaturedCard({
         ))}
       </div>
       <div className="bg-black/80 text-white">
-        <h1 className=" font-semibold bg-white/30 px-2 rounded text-black">
+        <h1 className=" font-semibold bg-white/30 px-2 rounded-b">
           {props.featured}
         </h1>
       </div>

@@ -6,6 +6,7 @@ import Title from "../components/Title/Title";
 import Reviews from "../components/Review/Reviews";
 import ProfileRoutes from "./ProfileRoutes";
 import Name from "../components/Name/Name";
+import Genre from "../components/Genre/Genre";
 
 export default function HomeRoutes() {
   return useRoutes([
@@ -20,6 +21,10 @@ export default function HomeRoutes() {
         {
           path: "find",
           element: <Find />,
+        },
+        {
+          path: "genre",
+          element: <Genre />,
         },
         {
           path: "title/:id",

@@ -9,6 +9,8 @@ import { error } from "console";
 import getMyProfileMovies from "../services/users/getMyProfileMovies";
 import getUserContributions from "../services/users/getUserContributions";
 import getUserReviews from "../services/users/getUserReviews";
+import extractGener from "../../db/extractGener";
+import getUsersFavrtList from "../../db/getUserFavrtList";
 
 const recommendations: Middleware = async (req, res, next) => {
   try {
@@ -76,10 +78,26 @@ const myContributions: Middleware = async (req, res, next) => {
   }
 };
 
+const genreFromMyfavorites: Middleware = async (req, res, next) => {
+  const { user_id } = req.cookies;
+  try {
+    if (!user_id) throw errorThrower("Unauthorized", HttpError.Unauthorized);
+    const myFavoriteList = await getUsersFavrtList(user_id);
+    if (!myFavoriteList?.length) res.json([]);
+    else {
+      const genres = await extractGener(myFavoriteList);
+      res.json(genres);
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 export {
   recommendations,
   userInfo,
   manageMyMovies,
   myProfileMovies,
   myContributions,
+  genreFromMyfavorites,
 };

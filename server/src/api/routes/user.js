@@ -8,4 +8,5 @@ router.get("/protected/userinfo", userControllers.userInfo);
 router.post("/protected/my-movies", userControllers.manageMyMovies);
 router.get("/protected/my-movies/:type", userControllers.myProfileMovies);
 router.get("/protected/my-contributions", userControllers.myContributions);
+router.get("/protected/my-favrt-genres", userControllers.genreFromMyfavorites);
 export { router };

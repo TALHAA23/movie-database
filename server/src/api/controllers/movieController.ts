@@ -18,6 +18,7 @@ import { error } from "console";
 import getCastById from "../services/movies/getCastById";
 import getRecentUploads from "../services/movies/getRecentUploads";
 import getByRandomYear from "../services/movies/getByRandomYear";
+import getMovieByGenre from "../services/movies/getMovieByGenre";
 const movieById: Middleware = async (req, res, next) => {
   const id = req.params.id;
   try {
@@ -147,6 +148,17 @@ const recentUploads: Middleware = async (req, res, next) => {
   }
 };
 
+const movieByGenre: Middleware = async (req, res, next) => {
+  try {
+    const { q } = req.query;
+    if (!q) throw errorThrower("Query not provided", HttpError.BadRequest);
+    const result = await getMovieByGenre(q.toString());
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
 export {
   movieById,
   castById,
@@ -159,4 +171,5 @@ export {
   publishRating,
   recentUploads,
   movieByRandomYear,
+  movieByGenre,
 };
