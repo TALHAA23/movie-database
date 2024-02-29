@@ -81,6 +81,7 @@ const myContributions: Middleware = async (req, res, next) => {
 const genreFromMyfavorites: Middleware = async (req, res, next) => {
   const { user_id } = req.cookies;
   try {
+    console.log(user_id);
     if (!user_id) throw errorThrower("Unauthorized", HttpError.Unauthorized);
     const myFavoriteList = await getUsersFavrtList(user_id);
     if (!myFavoriteList?.length) res.json([]);

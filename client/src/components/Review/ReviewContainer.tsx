@@ -19,7 +19,7 @@ export default function ReviewContainer({
   reviewedBy,
 }: Props) {
   return (
-    <div className="w-full  max-w-[800px] rounded-md mx-auto my-4 py-3 px-2 border-2">
+    <div className="w-full max-w-[800px] bg-white/5 rounded-md mx-auto my-4 py-3 px-2 border-2">
       {movietitle && movieRef && (
         <ReviewHead _id={movieRef} title={movietitle} />
       )}
@@ -77,8 +77,8 @@ const ReviewBody = ({
   avg,
 }: ReviewBodyInterface) => (
   <div className="rounded my-2 p-3  overflow-y-hidden transition-all duration-100">
-    <div className="flex justify-between">
-      <h1 className=" font-bold text-xl uppercase">{title}</h1>
+    <div className="flex flex-col items-center md:flex-row md:justify-between">
+      <h1 className=" font-bold text-lg sm:text-xl uppercase">{title}</h1>
       <p className="tracking-widest flex w-fit items-center text-sm">
         <img src="../../../public/star-solid-sm.svg" alt="" />
         <span>{avg}/</span>

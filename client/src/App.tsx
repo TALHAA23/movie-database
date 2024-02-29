@@ -3,6 +3,7 @@ import "./index.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import MessageProvider from "./Contexts/MessageProvider";
 import UserProvider from "./Contexts/UserProvider";
+import Information from "./components/Information/Information";
 
 const client = new QueryClient();
 export default function App() {
@@ -10,6 +11,7 @@ export default function App() {
     <QueryClientProvider client={client}>
       <MessageProvider>
         <UserProvider>
+          <Information />
           <Routes />
         </UserProvider>
       </MessageProvider>

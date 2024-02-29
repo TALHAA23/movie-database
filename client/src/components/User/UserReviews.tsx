@@ -24,7 +24,6 @@ export default function UserReviews() {
   if (isPending) return <SectionLoader />;
   else if (isError) return <PageError error={error} />;
   else if (!data.length) return <NotFound />;
-
   return (
     <div>
       {data?.map((review) => (

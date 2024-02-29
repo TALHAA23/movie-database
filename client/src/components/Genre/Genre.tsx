@@ -7,6 +7,7 @@ import PageLoader from "../Loaders/PageLoader";
 import NotFound from "../NotFound/NotFound";
 import PageError from "../Error/PageError";
 import movieByGenreApi from "../../api/movieByGenreApi";
+import SectionError from "../Error/SectionError";
 export default function Genre() {
   const query = useSearchParams()[0].get("q");
   if (!query) return <PageError error={new Error("Query not provided")} />;
@@ -17,12 +18,13 @@ export default function Genre() {
     queryKey: [`genre-${query}`],
     queryFn: () => movieByGenreApi(query),
   });
+  if (isError) console.log(error);
   if (isPending) return <PageLoader />;
   else if (isError)
     return error.name == "NotFound" ? (
       <NotFound />
     ) : (
-      <PageError error={error} />
+      <SectionError error={error} />
     );
   else if (!data?.length)
     return (
