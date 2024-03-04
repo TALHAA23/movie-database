@@ -11,7 +11,7 @@ import awardsList from "../../../utils/awardsList";
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useMessageUpdater } from "../../../Contexts/MessageProvider";
-import { useUserInfo, useUserId } from "../../../Contexts/UserProvider";
+import { useUserId } from "../../../Contexts/UserProvider";
 
 const DEBOUNCE_TIME = 200;
 const MIN_GENRE_CAST_AWARDS = 3;
@@ -139,7 +139,7 @@ export default function UploadForm() {
       onSubmit={uploadMutation.mutate}
       className="contribution-new-form grid grid-cols-6"
     >
-      <h1 className=" col-span-full text-center font-semibold text-gray-600 text-2xl">
+      <h1 className=" col-span-full text-center font-semibold text-2xl">
         Upload New Movie
       </h1>
       {(error || uploadMutation.isError || uploadMutation.isPending) && (
