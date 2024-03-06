@@ -3,12 +3,10 @@ import ProfileNavigations from "./ProfileNavigations";
 
 export default function ProfileLayout() {
   return (
-    <div className="min-h-[calc(100vh-60px)] flex gap-0 flex-col sm:flex-row">
-      <About user={user?.data} />
-      <div className="relative flex flex-col md:flex-row pr-2  items-center md:items-start">
-        <ProfileNavigations />
-        <Outlet />
-      </div>
+    <div className="min-h-[calc(100vh-60px)]">
+      <ProfileNavigations />
+      <BackButton />
+      <Outlet />
     </div>
   );
 }
