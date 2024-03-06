@@ -1,5 +1,4 @@
-import { Link } from "react-router-dom";
-import Profile from "../../Profile/Profile";
+import ProfileBadge from "../../Profile/ProfileBadge";
 import { useState } from "react";
 
 export default function Avatar() {
@@ -15,7 +14,7 @@ export default function Avatar() {
     `}
     >
       <img src="/user-solid.svg" alt="profile" />
-      <Profile open={isProfileOpen} />
+      <ProfileBadge open={isProfileOpen} />
     </button>
   );
 }

@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import MovieCardsm from "../Cards/MovieCardsm";
 import Frame2 from "./Frame2";
-import SectionLoader from "../Loaders/SectionLoader";
-import SectionError from "../Error/SectionError";
 import Empty from "../Cards/Empty";
 import { MovieInterface, MyMoviesType } from "../../api/model/Interfaces";
 import myProfileMovies from "../../api/myProfileMoviesApi";
+import PageLoader from "../Loaders/PageLoader";
+import PageError from "../Error/PageError";
 
 interface MyMoviesQuery {
   watchList?: MovieInterface[];
@@ -20,8 +20,8 @@ export default function MyMovies({ show }: { show: MyMoviesType }) {
     queryKey: [show],
     queryFn: () => myProfileMovies(show),
   });
-  if (isPending) return <SectionLoader />;
-  else if (isError) return <SectionError error={error} />;
+  if (isPending) return <PageLoader />;
+  else if (isError) return <PageError error={error} />;
   else if (!data[show]?.length) return <Empty message={`Nothing in ${show}`} />;
   return (
     <Frame2 frameTitle={`My ${show}`}>

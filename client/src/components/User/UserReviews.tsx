@@ -4,8 +4,8 @@ import { Review } from "../../api/model/Interfaces";
 import ReviewContainer from "../Review/ReviewContainer";
 import PageError from "../Error/PageError";
 import NotFound from "../NotFound/NotFound";
-import SectionLoader from "../Loaders/SectionLoader";
 import { useUserId } from "../../Contexts/UserProvider";
+import PageLoader from "../Loaders/PageLoader";
 
 interface MyReviews {
   movieRef: string;
@@ -21,7 +21,7 @@ export default function UserReviews() {
     queryFn: () => userReviewsApi(userId),
   });
 
-  if (isPending) return <SectionLoader />;
+  if (isPending) return <PageLoader />;
   else if (isError) return <PageError error={error} />;
   else if (!data.length) return <NotFound />;
 
