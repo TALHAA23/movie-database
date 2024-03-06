@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import ProfileBadge from "../../Profile/ProfileBadge";
+import { useState } from "react";
 
 export default function Avatar() {
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   return (
-    <Link
-      to="./profile"
+    <button
+      onClick={() => setIsProfileOpen((prevState) => !prevState)}
       className={`relative w-fit 
      before:content-['your_account'] before:bg-slate-900 before:absolute
      before:rounded before:px-2 before:py-1 before:text-xs before:opacity-0
@@ -12,6 +14,7 @@ export default function Avatar() {
     `}
     >
       <img src="/user-solid.svg" alt="profile" />
-    </Link>
+      <ProfileBadge open={isProfileOpen} />
+    </button>
   );
 }

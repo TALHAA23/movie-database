@@ -5,10 +5,11 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    background-color: #fff;
+    background-color: rgba(0, 0, 0, 0.709);
     padding: 20px;
     border-radius: 10px;
     border: 2px solid gray;
+    @apply bg-white/30 text-white
 }
 
 .message {
@@ -29,6 +30,7 @@ textarea {
     outline: 0;
     border: 1px solid rgba(105, 105, 105, 0.397);
     border-radius: 5px;
+    background-color: rgba(0, 0, 0, 0.323);
 }
 
 .contribution-new-form label {
