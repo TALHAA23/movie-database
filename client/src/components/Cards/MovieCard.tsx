@@ -4,14 +4,14 @@ import CardUtils from "./CardUtils";
 
 interface Props {
   title: string;
-  ratings?: string;
+  rating?: string;
   id: string;
   bannerURL?: string;
 }
 
 export default function MovieCard({
   title,
-  ratings = "0",
+  rating = "0",
   id,
   bannerURL = "/vite.svg",
 }: Props) {
@@ -19,7 +19,7 @@ export default function MovieCard({
     <div className="relative shrink-0 group border border-white/10 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/6 xl:w-[13.66%] flex flex-col gap-0 rounded">
       <CardUtils movieId={id} />
       <Image bannerURL={bannerURL} />
-      <MovieCardInformation title={title} rating={ratings} id={id} />
+      <MovieCardInformation title={title} rating={rating} id={id} />
     </div>
   );
 }

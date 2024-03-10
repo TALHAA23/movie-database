@@ -24,7 +24,8 @@ const createFrame = (title: string, list: MovieInterface[]) =>
   list.length > 0 ? (
     <Frame frameTitle={title}>
       {list.map((movie) => (
-        <MovieCard id={movie._id} title={movie.title} ratings={4} />
+        <MovieCard id={movie._id} title={movie.title} rating="4" />
+        //! rating is random/solid
       ))}
     </Frame>
   ) : (

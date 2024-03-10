@@ -1,9 +1,5 @@
 import { ReactNode, createContext, useContext } from "react";
-import {
-  UseMutationResult,
-  UseQueryResult,
-  useQuery,
-} from "@tanstack/react-query";
+import { UseQueryResult, useQuery } from "@tanstack/react-query";
 import movieListApi from "../api/movieListApi";
 import {
   FeaturedMoviesInterface,
@@ -11,17 +7,14 @@ import {
 } from "../api/model/Interfaces";
 import myFavoriteMoviesGenre from "../api/myFavriouteMoviesGenre";
 
-const testData = () => new Promise((res) => setTimeout(() => res(2 + 2), 5000));
-
 type QueryResult<T> = UseQueryResult<T>;
-type MutatationResult = UseMutationResult<[MovieInterface]>;
 
 interface DataContextType {
   recommendations: QueryResult<MovieInterface[]>;
   topRated: QueryResult<MovieInterface[]>;
   recentUploads: QueryResult<MovieInterface[]>;
   randomYear: QueryResult<FeaturedMoviesInterface>;
-  favriouteGenres: QueryResult<String[]>;
+  favriouteGenres: QueryResult<string[]>;
 }
 
 const DataContext = createContext<DataContextType | null>(null);

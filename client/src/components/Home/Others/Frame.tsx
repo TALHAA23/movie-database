@@ -1,5 +1,6 @@
 import { ReactNode, useEffect, useRef } from "react";
 import PaginationButton from "../../PaginationButton";
+import { Diraction } from "../../../api/model/Interfaces";
 
 interface Children {
   children: ReactNode;
@@ -44,7 +45,11 @@ export default function Frame({
         <div>
           {hasPagination &&
             ["next", "prev"].map((dir) => (
-              <PaginationButton key={dir} for={frameTitle} diraction={dir} />
+              <PaginationButton
+                key={dir}
+                for={frameTitle}
+                diraction={dir as Diraction}
+              />
             ))}
         </div>
         <div

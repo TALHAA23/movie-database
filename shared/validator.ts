@@ -2,7 +2,6 @@ import errorThrower from "./errorThrower";
 import HttpError from "./httpErrorsEnum";
 function passwordValidator(password: string | null) {
   // Check if password is empty
-  return true;
   if (!password) {
     //custom error
     console.log("Password cannot be empty");

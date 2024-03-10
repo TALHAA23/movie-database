@@ -7,7 +7,7 @@ export default async function authFormSubmission(
   event: FormEvent<HTMLFormElement>
 ) {
   event.preventDefault();
-  const formData = new FormData(event.target);
+  const formData = new FormData(event.target as HTMLFormElement);
   const password = formData.get("password") as string;
   const email = formData.get("email") as string;
   const username = formData.get("username") as string;

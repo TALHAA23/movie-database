@@ -1,0 +1,71 @@
+var HttpError;
+(function (HttpError) {
+    // 1xx Informational
+    HttpError[HttpError["Continue"] = 100] = "Continue";
+    HttpError[HttpError["SwitchingProtocols"] = 101] = "SwitchingProtocols";
+    HttpError[HttpError["Processing"] = 102] = "Processing";
+    HttpError[HttpError["EarlyHints"] = 103] = "EarlyHints";
+    // 2xx Success
+    HttpError[HttpError["OK"] = 200] = "OK";
+    HttpError[HttpError["Created"] = 201] = "Created";
+    HttpError[HttpError["Accepted"] = 202] = "Accepted";
+    HttpError[HttpError["NonAuthoritativeInformation"] = 203] = "NonAuthoritativeInformation";
+    HttpError[HttpError["NoContent"] = 204] = "NoContent";
+    HttpError[HttpError["ResetContent"] = 205] = "ResetContent";
+    HttpError[HttpError["PartialContent"] = 206] = "PartialContent";
+    HttpError[HttpError["MultiStatus"] = 207] = "MultiStatus";
+    HttpError[HttpError["AlreadyReported"] = 208] = "AlreadyReported";
+    HttpError[HttpError["IMUsed"] = 226] = "IMUsed";
+    // 3xx Redirection
+    HttpError[HttpError["MultipleChoices"] = 300] = "MultipleChoices";
+    HttpError[HttpError["MovedPermanently"] = 301] = "MovedPermanently";
+    HttpError[HttpError["Found"] = 302] = "Found";
+    HttpError[HttpError["SeeOther"] = 303] = "SeeOther";
+    HttpError[HttpError["NotModified"] = 304] = "NotModified";
+    HttpError[HttpError["UseProxy"] = 305] = "UseProxy";
+    HttpError[HttpError["TemporaryRedirect"] = 307] = "TemporaryRedirect";
+    HttpError[HttpError["PermanentRedirect"] = 308] = "PermanentRedirect";
+    // 4xx Client errors
+    HttpError[HttpError["BadRequest"] = 400] = "BadRequest";
+    HttpError[HttpError["Unauthorized"] = 401] = "Unauthorized";
+    HttpError[HttpError["PaymentRequired"] = 402] = "PaymentRequired";
+    HttpError[HttpError["Forbidden"] = 403] = "Forbidden";
+    HttpError[HttpError["NotFound"] = 404] = "NotFound";
+    HttpError[HttpError["MethodNotAllowed"] = 405] = "MethodNotAllowed";
+    HttpError[HttpError["NotAcceptable"] = 406] = "NotAcceptable";
+    HttpError[HttpError["ProxyAuthenticationRequired"] = 407] = "ProxyAuthenticationRequired";
+    HttpError[HttpError["RequestTimeout"] = 408] = "RequestTimeout";
+    HttpError[HttpError["Conflict"] = 409] = "Conflict";
+    HttpError[HttpError["Gone"] = 410] = "Gone";
+    HttpError[HttpError["LengthRequired"] = 411] = "LengthRequired";
+    HttpError[HttpError["PreconditionFailed"] = 412] = "PreconditionFailed";
+    HttpError[HttpError["PayloadTooLarge"] = 413] = "PayloadTooLarge";
+    HttpError[HttpError["URITooLong"] = 414] = "URITooLong";
+    HttpError[HttpError["UnsupportedMediaType"] = 415] = "UnsupportedMediaType";
+    HttpError[HttpError["RangeNotSatisfiable"] = 416] = "RangeNotSatisfiable";
+    HttpError[HttpError["ExpectationFailed"] = 417] = "ExpectationFailed";
+    HttpError[HttpError["ImATeapot"] = 418] = "ImATeapot";
+    HttpError[HttpError["MisdirectedRequest"] = 421] = "MisdirectedRequest";
+    HttpError[HttpError["UnprocessableEntity"] = 422] = "UnprocessableEntity";
+    HttpError[HttpError["Locked"] = 423] = "Locked";
+    HttpError[HttpError["FailedDependency"] = 424] = "FailedDependency";
+    HttpError[HttpError["TooEarly"] = 425] = "TooEarly";
+    HttpError[HttpError["UpgradeRequired"] = 426] = "UpgradeRequired";
+    HttpError[HttpError["PreconditionRequired"] = 428] = "PreconditionRequired";
+    HttpError[HttpError["TooManyRequests"] = 429] = "TooManyRequests";
+    HttpError[HttpError["RequestHeaderFieldsTooLarge"] = 431] = "RequestHeaderFieldsTooLarge";
+    HttpError[HttpError["UnavailableForLegalReasons"] = 451] = "UnavailableForLegalReasons";
+    // 5xx Server errors
+    HttpError[HttpError["InternalServerError"] = 500] = "InternalServerError";
+    HttpError[HttpError["NotImplemented"] = 501] = "NotImplemented";
+    HttpError[HttpError["BadGateway"] = 502] = "BadGateway";
+    HttpError[HttpError["ServiceUnavailable"] = 503] = "ServiceUnavailable";
+    HttpError[HttpError["GatewayTimeout"] = 504] = "GatewayTimeout";
+    HttpError[HttpError["HTTPVersionNotSupported"] = 505] = "HTTPVersionNotSupported";
+    HttpError[HttpError["VariantAlsoNegotiates"] = 506] = "VariantAlsoNegotiates";
+    HttpError[HttpError["InsufficientStorage"] = 507] = "InsufficientStorage";
+    HttpError[HttpError["LoopDetected"] = 508] = "LoopDetected";
+    HttpError[HttpError["NotExtended"] = 510] = "NotExtended";
+    HttpError[HttpError["NetworkAuthenticationRequired"] = 511] = "NetworkAuthenticationRequired";
+})(HttpError || (HttpError = {}));
+export default HttpError;

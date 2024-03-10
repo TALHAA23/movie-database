@@ -2,7 +2,6 @@ import * as Interfaces from "../../api/model/Interfaces";
 import { Link, useSearchParams } from "react-router-dom";
 import testImages from "../../testimages";
 import { useQuery } from "@tanstack/react-query";
-import searchApi from "../../api/SearchApi";
 import PageLoader from "../Loaders/PageLoader";
 import NotFound from "../NotFound/NotFound";
 import PageError from "../Error/PageError";

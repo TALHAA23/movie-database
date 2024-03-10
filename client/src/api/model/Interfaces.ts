@@ -1,3 +1,8 @@
+type Diraction = "prev" | "next";
+interface PaginationButtonProp {
+  for: string;
+  diraction: Diraction;
+}
 interface MovieInterface {
   _id: string;
   title: string;
@@ -87,6 +92,8 @@ interface FeaturedMoviesInterface {
 }
 
 export type {
+  Diraction,
+  PaginationButtonProp,
   MovieInterface,
   Review,
   ActorInterface,

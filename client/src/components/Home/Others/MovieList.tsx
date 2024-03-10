@@ -5,6 +5,7 @@ import SectionLoader from "../../Loaders/SectionLoader";
 import Frame from "./Frame";
 import { MovieInterface } from "../../../api/model/Interfaces";
 import SignupAppeal from "../../Information/SiginupAppeal";
+import takeAvg from "../../../utils/takeAvg";
 
 export default function MovieList({
   title,
@@ -31,7 +32,10 @@ export default function MovieList({
           key={movie._id}
           title={movie.title}
           bannerURL={movie.banner}
-          ratings={movie.ratings?.[0]?.rating}
+          rating={
+            takeAvg(movie.ratings.map((rating) => rating.rating)) ||
+            movie.rating?.toString()
+          }
           id={movie._id}
         />
       ))}

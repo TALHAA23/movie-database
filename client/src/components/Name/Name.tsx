@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import { ActorInterface } from "../../api/model/Interfaces";
 import castByIdApi from "../../api/castByIdaApi";
 import PageLoader from "../Loaders/PageLoader";
-import SectionError from "../Error/SectionError";
 import Awards from "../Title/Awards";
 import CallToContributionButton from "../Contributions/ContributionUtils/CallToContributionButtons";
 import PageError from "../Error/PageError";

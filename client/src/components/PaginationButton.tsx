@@ -1,10 +1,7 @@
 import { MouseEvent } from "react";
-type Diraction = "prev" | "next";
-interface Props {
-  for: string;
-  diraction: Diraction;
-}
-export default function PaginationButton(props: Props) {
+import { Diraction, PaginationButtonProp } from "../api/model/Interfaces";
+
+export default function PaginationButton(props: PaginationButtonProp) {
   function move(event: MouseEvent<HTMLButtonElement>) {
     const scrollableArea = document.getElementById(props.for);
     if (!scrollableArea) return;

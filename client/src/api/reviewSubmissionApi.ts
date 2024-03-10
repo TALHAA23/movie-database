@@ -1,10 +1,4 @@
-interface Review {
-  to: string;
-  title: string;
-  review: string;
-}
-export default async function reviewSubmissionApi(review: Review) {
-  console.log(review);
+export default async function reviewSubmissionApi(review: object) {
   const response = await fetch(
     "http://localhost:3000/api/review/protected/new",
     {

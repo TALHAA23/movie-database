@@ -10,7 +10,6 @@ export default function Featured() {
       <h1 className="relative text-white font-semibold">Featured Today</h1>
       <div className="grow flex">
         {hasRandomYearMovies && <FeaturedCard props={randomYearMovies.data} />}
-        {/* <FeaturedCard /> */}
       </div>
     </div>
   );

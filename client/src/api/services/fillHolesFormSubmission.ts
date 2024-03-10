@@ -6,7 +6,7 @@ export default async function fillHolesFormSubmission(
   event: FormEvent<HTMLFormElement>
 ) {
   event.preventDefault();
-  const formData = new FormData(event.target);
+  const formData = new FormData(event.target as HTMLFormElement);
   removeUnChangedFeild(formData);
   const entries = [...formData.entries()];
   if (entries.length == 2 /*if id and actionOn only*/)

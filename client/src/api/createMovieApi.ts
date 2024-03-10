@@ -1,5 +1,4 @@
 import errorThrower from "../../../shared/errorThrower";
-import { MovieInterface } from "./model/Interfaces";
 
 export default async function createMovie(creds: {}) {
   const response = await fetch(

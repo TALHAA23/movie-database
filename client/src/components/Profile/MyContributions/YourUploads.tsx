@@ -16,7 +16,7 @@ export default function YourUploads({ myUpload }: Props) {
         <MovieCard
           id={_id}
           title={title}
-          ratings={takeAvg(ratings.map((rating) => rating.rating))}
+          rating={takeAvg(ratings.map((rating) => rating.rating))}
           bannerURL={banner}
         />
       ))}

@@ -21,8 +21,8 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           clientId={auth0ClientId}
           authorizationParams={{
             redirect_uri: window.location.origin,
-            scope: { auth0Scope },
-            audience: { auth0Audience },
+            scope: auth0Scope,
+            audience: auth0Audience,
           }}
         >
           <App />
