@@ -31,8 +31,6 @@ interface Review {
   review: string;
   ratings: [{ rateBy: string; rating: number }];
   reviewDate: Date;
-  helpful: number;
-  unhelpful: number;
 }
 
 interface ActorInterface {

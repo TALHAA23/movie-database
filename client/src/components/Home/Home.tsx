@@ -1,4 +1,5 @@
 import Information from "../Information/Information";
+import Footer from "./Footer";
 import Hero from "./Hero/Hero";
 import Others from "./Others/Others";
 export default function Home() {
@@ -9,7 +10,7 @@ export default function Home() {
       <Information />
       <Hero />
       <Others />
-      <h1 className="border-4  border-black">footer</h1>
+      <Footer />
     </div>
   );
 }

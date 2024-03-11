@@ -1,14 +1,19 @@
 // File: model/collection/Movie.ts
 import mongoose, { Types } from "mongoose";
 const { Schema } = mongoose;
+interface Rating {
+  rateBy: { type: String; ref: "user"; require: true } | string | null;
+  rating: number | null;
+}
 interface Review {
-  featured: boolean;
   title: string;
   review: string;
-  rating: number;
   reviewDate: Date;
+  ratings: Types.DocumentArray<Rating>;
   helpful: number;
   unhelpful: number;
+  reviewedBy?: string;
+  featured?: boolean;
 }
 interface MovieInterface {
   _id?: string;
@@ -29,7 +34,6 @@ interface MovieInterface {
   reviews: Review[];
   hasMore: boolean;
 }
-
 export const MovieSchema = new Schema({
   title: { type: String, required: true },
   desc: { type: String, required: true },
@@ -70,12 +74,7 @@ export const MovieSchema = new Schema({
     },
   ],
   numberofReviews: { type: Number, require: false },
-  // others: {
-  //   isSaved: { type: Boolean, require: false },
-  //   isWatched: { type: Boolean, require: false },
-  //   isInWatchlist: { type: Boolean, require: false },
-  // },
 });
 
 export default mongoose.model("movie", MovieSchema);
-export type { MovieInterface };
+export type { MovieInterface, Review };

@@ -13,13 +13,6 @@ export default async function authFormSubmission(
   const username = formData.get("username") as string;
 
   try {
-    validator.emailValidator(email);
-    validator.passwordValidator(password);
-  } catch (err) {
-    throw err;
-  }
-
-  try {
     const response = username
       ? await signupApi({ username, password, email })
       : await loginApi({ password, username: email });

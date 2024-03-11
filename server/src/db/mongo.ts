@@ -1,23 +1,11 @@
-// q6c2NxAIFFAUz0Yv
-import { config } from "dotenv";
-config();
 import { Request, Response, NextFunction } from "express";
-import { MongoClient, Collection, Db } from "mongodb";
+import { MongoClient, Collection } from "mongodb";
 import mongoose from "mongoose";
 
 const uri =
   "mongodb+srv://moviedb:q6c2NxAIFFAUz0Yv@atlascluster.wbs3s6w.mongodb.net/?retryWrites=true&w=majority";
 
-interface Database {
-  isConnected: 0 | 1;
-  client: Db | null;
-}
 const DATABASE_NAME = "moviedb";
-const db: Database = {
-  client: null,
-  isConnected: 0,
-};
-
 const client = new MongoClient(uri);
 export const connectDatabase = async (
   req: Request,
@@ -47,5 +35,5 @@ export function getCollection(collectionName: string): Collection {
 }
 
 export function closeDatabase() {
-  if (db.isConnected) client.close();
+  if (mongoose.ConnectionStates.connected) client.close();
 }

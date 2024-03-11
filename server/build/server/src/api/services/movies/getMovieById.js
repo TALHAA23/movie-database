@@ -24,7 +24,12 @@ export async function getMovieById(id) {
             selectedReview = movie.reviews.reduce((prev, current) => prev.reviewDate > current.reviewDate ? prev : current);
         }
         movie.numberofReviews = movie.reviews.length;
-        movie.reviews = selectedReview ? [selectedReview] : [movie.reviews?.[0]];
+        //! We are using a type assertion to 'unknown' to bypass TypeScript's type checking.
+        //! This is because TypeScript is not aware that the 'populate' method in Mongoose replaces ObjectIds with actual documents.
+        //! So, we first assert to 'unknown', which can be assigned to any type.
+        movie.reviews = selectedReview
+            ? [selectedReview]
+            : [movie.reviews?.[0]];
         return movie;
     }
     catch (err) {
@@ -32,5 +37,5 @@ export async function getMovieById(id) {
     }
 }
 function averageRating(ratings) {
-    return ratings.reduce((a, b) => a + b.rating, 0) / ratings.length;
+    return (ratings.reduce((a, b) => a + (b.rating || 0), 0) / (ratings.length || 1));
 }

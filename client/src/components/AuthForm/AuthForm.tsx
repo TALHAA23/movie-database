@@ -22,7 +22,8 @@ const isEmail = (name: string) => name == "email";
 const isSignupPage = () => location.pathname.split("/").pop() == "signup";
 
 export default function AuthForm() {
-  const location = useLocation()?.state;
+  const location = useLocation();
+  const state = location?.state;
   const updateHomeMessage = useMessageUpdater();
   const navigate = useNavigate();
   const queryClient = useQueryClient();
@@ -40,10 +41,20 @@ export default function AuthForm() {
   });
 
   useEffect(() => {
+    const isSiginng = isSignupPage();
+    if (!isSiginng) setError(false);
+    setAuthState((prevState) => ({
+      ...prevState,
+      isValidPassword: isSiginng ? false : true,
+      isValidEmail: isSiginng ? false : true,
+    }));
+  }, [location]);
+
+  useEffect(() => {
     if (!loginMutation.isSuccess) return;
     queryClient.invalidateQueries({ queryKey: ["userinfo"] });
     updateHomeMessage(`Logged in as ${loginMutation.data.nickname}`, "success");
-    navigate(location?.redirect || "/");
+    navigate(state?.redirect || "/");
   }, [loginMutation.isSuccess]);
 
   function changeAuthState(key: AuthStates, value: boolean) {
@@ -64,6 +75,8 @@ export default function AuthForm() {
   }
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
+    if (!isSignupPage()) return;
+
     clearTimeout(timeoutId.current);
     const { value, name } = event.target;
 

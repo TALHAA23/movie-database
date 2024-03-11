@@ -27,7 +27,6 @@ const signupUser: Middleware = async (req, res, next) => {
 };
 const loginUser: Middleware = async (req, res, next) => {
   const creds = req.body;
-  console.log(creds);
   try {
     const token = await getAccessToken(creds);
     const userInfo = await getUserInfo(token);
@@ -48,7 +47,6 @@ const loginUser: Middleware = async (req, res, next) => {
 const refreshToken: Middleware = async (req, res, next) => {
   try {
     const refreshedToken = await getRefreshToken();
-    console.log(refreshedToken);
     res.json({ refreshToken: refreshedToken });
   } catch (err) {
     next(err);

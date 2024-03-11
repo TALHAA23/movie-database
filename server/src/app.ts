@@ -12,8 +12,6 @@ import { router as reviewRoutes } from "./api/routes/review";
 import { router as contributionRoutes } from "./api/routes/contributions";
 import { config } from "dotenv";
 import bodyParser from "body-parser";
-import getRecentReleases from "./api/services/movies/getRecentReleases";
-import getRecentUploads from "./api/services/movies/getRecentUploads";
 import getByRandomYear from "./api/services/movies/getByRandomYear";
 config();
 const corsOptions = {

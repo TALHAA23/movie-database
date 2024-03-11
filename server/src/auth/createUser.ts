@@ -1,4 +1,5 @@
 import { ManagementClient } from "auth0";
+import * as secret from "./secret";
 import * as validator from "../../../shared/validator";
 interface Creds {
   readonly username: string;
@@ -7,26 +8,20 @@ interface Creds {
 }
 
 const managment = new ManagementClient({
-  domain: "dev-n1afgdpjriklak3u.us.auth0.com",
-  clientId: "mUyYWMPtAU8fQMyLSTzjnHDAnGBrlOgh",
-  clientSecret:
-    "4VyJOTxtRK37uEPSdDjwW7RVqkCJACoqw9YCt4eDczkQfoXpXQHyuE3psd4eGNzg",
+  domain: secret.default.domain as string,
+  clientId: secret.default.clientId as string,
+  clientSecret: secret.default.clientSecret as string,
 });
-
-export default async function createUser({ username, email, password }: Creds) {
-  console.log("creating user");
+export default async function createUser(creds: Creds) {
   try {
-    // validator.emailValidator(email);
-    // validator.passwordValidator(password);
+    validator.emailValidator(creds.email);
+    validator.passwordValidator(creds.password);
     const user = await managment.users.create({
       connection: "Username-Password-Authentication",
-      email,
-      password,
-      username,
+      ...creds,
     });
     return user.data;
   } catch (err) {
-    console.log(err);
     throw err;
   }
 }

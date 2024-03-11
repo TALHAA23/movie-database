@@ -1,14 +1,11 @@
 import { Middleware } from "../../utils/ReqResNextType";
 import getUserInfo from "../../auth/userInfo";
 import { getRecommandationsForUser } from "../services/users/getRecommandations";
-import { MovieStatus } from "../../../../shared/shared.interfaces";
 import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";
 import manageUserMovies from "../services/users/manageUserMovies";
-import { error } from "console";
 import getMyProfileMovies from "../services/users/getMyProfileMovies";
 import getUserContributions from "../services/users/getUserContributions";
-import getUserReviews from "../services/users/getUserReviews";
 import extractGener from "../../db/extractGener";
 import getUsersFavrtList from "../../db/getUserFavrtList";
 

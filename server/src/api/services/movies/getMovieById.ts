@@ -1,6 +1,5 @@
 import { Types } from "mongoose";
-import Movie from "../../model/collections/Movie";
-import getUsersFavrtList from "../../../db/getUserFavrtList";
+import Movie, { Review } from "../../model/collections/Movie";
 
 export async function getMovieById(id: Types.ObjectId) {
   const featureBasedOn = ["number_of_ratings", "highest_rating", "newest"][
@@ -32,13 +31,26 @@ export async function getMovieById(id: Types.ObjectId) {
     }
 
     movie.numberofReviews = movie.reviews.length;
-    movie.reviews = selectedReview ? [selectedReview] : [movie.reviews?.[0]];
+    //! We are using a type assertion to 'unknown' to bypass TypeScript's type checking.
+    //! This is because TypeScript is not aware that the 'populate' method in Mongoose replaces ObjectIds with actual documents.
+    //! So, we first assert to 'unknown', which can be assigned to any type.
+    (movie.reviews as unknown) = selectedReview
+      ? [selectedReview]
+      : [movie.reviews?.[0]];
+
     return movie;
   } catch (err) {
     throw err;
   }
 }
 
-function averageRating(ratings: { user: Types.ObjectId; rating: number }[]) {
-  return ratings.reduce((a, b) => a + b.rating, 0) / ratings.length;
+function averageRating(
+  ratings: {
+    rating?: number | null | undefined;
+    rateBy?: string | null | undefined;
+  }[]
+) {
+  return (
+    ratings.reduce((a, b) => a + (b.rating || 0), 0) / (ratings.length || 1)
+  );
 }

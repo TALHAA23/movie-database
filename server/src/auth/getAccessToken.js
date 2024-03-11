@@ -43,7 +43,5 @@ export async function getRefreshToken() {
     },
     body: JSON.stringify(data),
   }).then((res) => res.json());
-  console.log(response);
-
   return response.data.access_token;
 }

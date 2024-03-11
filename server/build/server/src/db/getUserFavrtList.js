@@ -4,7 +4,7 @@ export default async function getUsersFavrtList(userId) {
         const document = await User.findById(userId, "favoriteList")
             .populate("favoriteList")
             .exec();
-        return document?.favoriteList;
+        return document?.favoriteList || undefined;
     }
     catch (err) {
         throw err;

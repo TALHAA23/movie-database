@@ -14,14 +14,6 @@ const navigations = [
     title: "Fill the holes",
     link: "./fill-the-holes",
   },
-  {
-    title: "Publish about an Actor",
-    link: "./",
-  },
-  {
-    title: "Change a movie information",
-    link: "./",
-  },
 ];
 export default function Contribution() {
   return (
