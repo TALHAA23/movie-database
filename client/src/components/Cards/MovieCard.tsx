@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import testImages from "../../testimages";
 import CardUtils from "./CardUtils";
+import noImage from "../../assets/noImage";
 
 interface Props {
   title: string;
@@ -27,7 +27,7 @@ export default function MovieCard({
 const Image = ({ bannerURL }: { bannerURL: string }) => (
   <img
     className="h-[60%] object-cover rounded-t"
-    src={bannerURL || testImages.noImage}
+    src={bannerURL || noImage()}
     alt="banner"
   />
 );

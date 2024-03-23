@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from "express";
 import createUser from "../../auth/createUser";
 import { getAccessToken, getRefreshToken } from "../../auth/getAccessToken";
-import getUserInfo from "../../auth/userInfo";
+import getUserInfo from "../../auth/getUserInfo";
 import addUserToDb from "../services/users/addUserToDb";
 type Middleware = (
   req: Request,

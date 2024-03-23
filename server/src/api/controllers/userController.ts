@@ -1,5 +1,5 @@
 import { Middleware } from "../../utils/ReqResNextType";
-import getUserInfo from "../../auth/userInfo";
+import getUserInfo from "../../auth/getUserInfo";
 import { getRecommandationsForUser } from "../services/users/getRecommandations";
 import errorThrower from "../../../../shared/errorThrower";
 import HttpError from "../../../../shared/httpErrorsEnum";

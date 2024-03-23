@@ -35,7 +35,8 @@ export default function Footer() {
         <li className=" relative">
           <img
             src={key}
-            alt="img"
+            loading="lazy"
+            alt="credit"
             className="peer w-9 sm:w-14 hover:opacity-50 hover:translate-y-2"
           />
           <p className="absolute w-[200px] -top-10 -left-full text-center bg-slate-900 text-xs rounded px-2 py-1 scale-0 peer-hover:scale-100 transition-all duration-100">

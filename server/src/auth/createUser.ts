@@ -12,6 +12,7 @@ const managment = new ManagementClient({
   clientId: secret.default.clientId as string,
   clientSecret: secret.default.clientSecret as string,
 });
+
 export default async function createUser(creds: Creds) {
   try {
     validator.emailValidator(creds.email);

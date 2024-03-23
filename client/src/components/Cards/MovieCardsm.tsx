@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { MovieInterface } from "../../api/model/Interfaces";
-import testImages from "../../testimages";
+import noImage from "../../assets/noImage";
 
 export default function MovieCardsm({ props }: { props: MovieInterface }) {
   return (
@@ -10,7 +10,7 @@ export default function MovieCardsm({ props }: { props: MovieInterface }) {
     >
       <img
         className="h-[80%] object-cover rounded-t"
-        src={props.banner || testImages.noImage}
+        src={props.banner || noImage()}
         alt="no-image"
       />
       <Information

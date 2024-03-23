@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 export default function handleMongooseError(mongooseError: mongoose.Error) {
   const MongooseErrors = {
     defaultError: {
-      message: mongooseError.message,
+      message: "Database Error, Please Try Later ",
       statusCode: 500,
       name: "MongooseError",
     },
@@ -58,7 +58,6 @@ export default function handleMongooseError(mongooseError: mongoose.Error) {
       name: "TimeoutError",
     },
   };
-  console.log("reached");
   const errorInfo =
     MongooseErrors[mongooseError.name as keyof typeof MongooseErrors];
   if (!errorInfo) return MongooseErrors.defaultError;
