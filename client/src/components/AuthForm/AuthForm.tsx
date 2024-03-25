@@ -100,9 +100,6 @@ export default function AuthForm() {
     const passwordField: HTMLInputElement | null = document.querySelector(
       ".form input[name='password']"
     );
-
-    console.log(confirmPasswordFeild?.value, passwordField?.value);
-
     if (!passwordField || !confirmPasswordFeild)
       throw new Error("Either password or confirm password feild do not exist");
     if (

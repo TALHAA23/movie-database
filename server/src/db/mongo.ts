@@ -20,7 +20,8 @@ export const connectDatabase = async (
         dbName: "moviedb",
       });
     } catch (err) {
-      console.log(err);
+      return res.status(500).send("Internal server error");
+      // next(err);
     }
   }
 

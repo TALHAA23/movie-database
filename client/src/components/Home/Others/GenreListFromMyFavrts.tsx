@@ -4,6 +4,7 @@ import SectionLoader from "../../Loaders/SectionLoader";
 import SectionError from "../../Error/SectionError";
 import { Link } from "react-router-dom";
 import SectionMessage from "../../Information/SectionMessage";
+import SignupAppeal from "../../Information/SiginupAppeal";
 
 export default function GenreListFromMyFavrts({
   query,
@@ -11,7 +12,16 @@ export default function GenreListFromMyFavrts({
   query: UseQueryResult<string[]> | undefined;
 }) {
   if (query?.isPending) return <SectionLoader />;
-  else if (query?.isError) return <SectionError error={query?.error} />;
+  else if (query?.isError) {
+    return query.error.message == "unauthorized" ? (
+      <SignupAppeal
+        text="Your Favorite Genre"
+        subtext="Sign In to see more from your favorite genres"
+      />
+    ) : (
+      <SectionError error={query.error} />
+    );
+  }
 
   return (
     <Frame

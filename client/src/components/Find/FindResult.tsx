@@ -15,6 +15,7 @@ export default function FindResult() {
   >({
     queryKey: [query],
     queryFn: () => searchApi(query),
+    retry: 1,
   });
   if (isPending) return <PageLoader />;
   else if (isError)

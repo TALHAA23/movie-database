@@ -11,13 +11,14 @@ export default function Error(
   next: NextFunction
 ) {
   console.log("ERROR HANDLING_____________");
-  console.log(err);
+  console.log(err.message);
   try {
     if (err instanceof mongoose.Error) return mongooseErroHandler(err, res);
     else if (err.hasOwnProperty("body") || err.hasOwnProperty("code"))
       return auth0ErrorHandler(err, res);
     else return customErrorhandler(err, res);
   } catch (err) {
+    console.log("500 reason:", err);
     console.log("RESPONSE WITH 500");
     res.status(500).send("Internal Server Error");
   }

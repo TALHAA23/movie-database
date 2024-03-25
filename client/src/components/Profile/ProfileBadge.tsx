@@ -2,9 +2,17 @@ import { Link } from "react-router-dom";
 import { useUserInfo } from "../../Contexts/UserProvider";
 import SectionLoader from "../Loaders/SectionLoader";
 import SectionError from "../Error/SectionError";
+import { useMutation } from "@tanstack/react-query";
+import logoutApi from "../../api/logoutApi";
 
 export default function ProfileBadge({ open }: { open: boolean }) {
   const user = useUserInfo();
+
+  const logoutMutation = useMutation({
+    mutationKey: [`${user?.data?.email}:logout`],
+    mutationFn: () => logoutApi(),
+  });
+
   if (user?.isPending) return <SectionLoader />;
   else if (user?.isError) return <SectionError error={user.error} />;
 
@@ -22,19 +30,19 @@ export default function ProfileBadge({ open }: { open: boolean }) {
       />
       <p className=" text-xl">Hi, {user?.data.nickname}!</p>
       <div className="w-full flex">
-        {[
-          ["My Profile", "/profile"],
-          ["Signout", "/"],
-        ].map(([title, href], index) => (
-          <Link
-            to={href}
-            className={`grow text-center py-4 bg-black/30 hover:opacity-85 ${
-              index == 0 ? " rounded-l-full" : " rounded-r-full"
-            }`}
-          >
-            {title}
-          </Link>
-        ))}
+        <Link
+          to="/profile"
+          className={`grow text-center py-4 bg-black/30 hover:opacity-85  rounded-l-full`}
+        >
+          Profile
+        </Link>
+
+        <button
+          onClick={logoutMutation.mutate}
+          className={`grow text-center py-4 bg-black/30 hover:opacity-85 rounded-r-full`}
+        >
+          Signout
+        </button>
       </div>
       <p className="  text-sm text-white/60 before:content-['last_update_at'] before:block">
         2024-02-29T12:22:31.619Z

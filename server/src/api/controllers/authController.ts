@@ -3,6 +3,9 @@ import createUser from "../../auth/createUser";
 import { getAccessToken, getRefreshToken } from "../../auth/getAccessToken";
 import getUserInfo from "../../auth/getUserInfo";
 import addUserToDb from "../services/users/addUserToDb";
+import signout from "../../auth/signout";
+import errorThrower from "../../../../shared/errorThrower";
+import HttpError from "../../../../shared/httpErrorsEnum";
 type Middleware = (
   req: Request,
   res: Response,
@@ -27,6 +30,7 @@ const signupUser: Middleware = async (req, res, next) => {
 };
 const loginUser: Middleware = async (req, res, next) => {
   const creds = req.body;
+  console.log(creds);
   try {
     const token = await getAccessToken(creds);
     const userInfo = await getUserInfo(token);
@@ -63,4 +67,16 @@ const userInfo: Middleware = async (req, res, next) => {
   }
 };
 
-export { signupUser, loginUser, userInfo, refreshToken };
+const logoutUser: Middleware = async (req, res, next) => {
+  const token = req.cookies.access_token;
+  console.log(">", token);
+  try {
+    if (!token) throw errorThrower("unauthorized", HttpError.Unauthorized);
+    const result = await signout(token);
+    res.json(result);
+  } catch (err) {
+    next(err);
+  }
+};
+
+export { signupUser, loginUser, logoutUser, userInfo, refreshToken };

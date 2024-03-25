@@ -1,4 +1,4 @@
-import errorThrower from "../../../shared/errorThrower";
+import handleUnOkResponse from "../assets/notResponseOk";
 
 interface Creds {
   username: string;
@@ -13,10 +13,7 @@ export default async function loginApi(creds: Creds) {
     credentials: "include",
     body: JSON.stringify(creds),
   });
-  if (!response.ok) {
-    const message = await response.text().then((text) => text);
-    throw errorThrower(message, response.status);
-  }
+  await handleUnOkResponse(response);
   const data = await response.json(); //access_token
   return data;
 }

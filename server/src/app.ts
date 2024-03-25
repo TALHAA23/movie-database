@@ -21,8 +21,8 @@ const corsOptions = {
 };
 const app = express();
 app.use(cors(corsOptions)); //always on top
-app.use(bodyParser.json({ limit: "50mb" })); //increase payload limit
-app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "10mb" })); //increase payload limit
+app.use(bodyParser.urlencoded({ limit: "10mb", extended: true }));
 app.use(cookieParser());
 app.use(jwtCheckMiddleware);
 app.use(express.json());

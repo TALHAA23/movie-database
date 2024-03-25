@@ -19,7 +19,7 @@ export default function Others() {
       {recentUploads?.data && recentUploads?.data?.length > 0 && (
         <MovieList title="Recent Uploads" query={recentUploads} />
       )}
-      <GenreListFromMyFavrts query={favrioteGenres} />
+      {/* <GenreListFromMyFavrts query={favrioteGenres} /> */}
     </section>
   );
 }

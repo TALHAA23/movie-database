@@ -1,5 +1,4 @@
 import HttpError from "../../../../shared/httpErrorsEnum";
-
 export default function PageError({ error }: { error: Error }) {
   const status = HttpError[+error.name]; //type casting
   return (

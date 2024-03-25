@@ -5,7 +5,7 @@ import {
   FeaturedMoviesInterface,
   MovieInterface,
 } from "../api/model/Interfaces";
-import myFavoriteMoviesGenre from "../api/myFavriouteMoviesGenre";
+import myFavoriteMoviesGenre from "../api/myFavriouteMoviesGenreApi";
 
 type QueryResult<T> = UseQueryResult<T>;
 
@@ -48,18 +48,21 @@ export default function HomeDataProvider({ children }: Children) {
   const movieByRandomYearQuery = useQuery({
     staleTime: 1000 * 60 * 60,
     queryKey: ["by-random-year"],
+    retry: 1,
     queryFn: () => movieListApi("by-random-year"),
   });
 
   const recentUploadsQuery = useQuery({
     staleTime: 1000 * 60 * 60,
     queryKey: ["recent-uploads"],
+    retry: 1,
     queryFn: () => movieListApi("recent-uploads"),
   });
 
   const favriouteGenresQuery = useQuery({
     staleTime: 1000 * 60 * 60,
     queryKey: ["favriote-genres"],
+    retry: 1,
     queryFn: () => myFavoriteMoviesGenre(),
   });
 

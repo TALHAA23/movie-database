@@ -14,6 +14,7 @@ const auth0 = new AuthenticationClient({
 });
 
 export async function getAccessToken({ username, password }) {
+  console.log(username, password);
   try {
     const data = await auth0.oauth.passwordGrant({
       username,
